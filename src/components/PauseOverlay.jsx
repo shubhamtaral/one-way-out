@@ -1,6 +1,6 @@
 export function PauseOverlay({ onResume, onQuit }) {
   return (
-    <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-[9999]">
+    <div className="fixed inset-0 flex items-center justify-center z-[9999]">
       <div className="flex flex-col items-center gap-6 bg-[#111] border-4 border-[var(--color-bone)] p-12 rounded-lg max-w-sm">
         <h2 className="text-4xl md:text-5xl font-bold text-[var(--color-bone)] tracking-widest">
           PAUSED

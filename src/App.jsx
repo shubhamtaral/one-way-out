@@ -44,7 +44,6 @@ function App() {
     handleType,
     startGame,
     startDailyChallenge,
-    startSurvivalMode,
     startEndlessMode,
     activePowerUps,
     currentLevelPowerUp,
@@ -119,7 +118,6 @@ function App() {
         <StartScreen 
           onStart={startGame} 
           onStartDaily={startDailyChallenge}
-          onStartSurvival={startSurvivalMode}
           onStartEndless={startEndlessMode}
           stats={stats}
           user={user}

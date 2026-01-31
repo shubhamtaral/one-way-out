@@ -76,8 +76,8 @@ export function GameScreen({
     const handleKeyDown = (e) => {
       if (isGameOver) return;
       
-      // Space or P to pause/resume
-      if (e.code === 'Space' || e.key === 'p' || e.key === 'P') {
+      // ESC to pause/resume
+      if (e.key === 'Escape') {
         e.preventDefault();
         onTogglePause?.();
       }
@@ -174,7 +174,7 @@ export function GameScreen({
         <button
           onClick={onTogglePause}
           className="absolute top-4 right-4 px-4 py-2 bg-[var(--color-bone)]/10 hover:bg-[var(--color-bone)]/20 text-[var(--color-bone)] border border-[var(--color-bone)]/30 rounded text-sm tracking-wider z-30 transition-colors"
-          title="Press SPACE or P to pause"
+          title="Press ESC to pause"
         >
           ⏸ PAUSE
         </button>

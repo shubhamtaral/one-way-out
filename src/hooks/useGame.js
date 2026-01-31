@@ -199,20 +199,6 @@ export function useGame(soundHooks = {}) {
     }
   }, [timeLeft, gameState, totalMistakes, level, difficulty, gameMode, maxMistakes, wpm, clearTimer, startTimer, playError, playGameOver, updateHeartbeat, stopHeartbeat]);
 
-  // Track time survived in survival mode
-  useEffect(() => {
-    if (gameMode !== 'survival' || gameState !== 'playing') return;
-    
-    const interval = setInterval(() => {
-      if (survivalStartTimeRef.current) {
-        const elapsed = Math.floor((Date.now() - survivalStartTimeRef.current) / 1000);
-        setTimeSurvived(elapsed);
-      }
-    }, 100);
-    
-    return () => clearInterval(interval);
-  }, [gameMode, gameState]);
-
   // Handle active power-ups
   useEffect(() => {
     if (activePowerUps.length === 0) return;
@@ -292,45 +278,12 @@ export function useGame(soundHooks = {}) {
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
 
-  const startSurvivalMode = useCallback((selectedDifficulty = 'normal') => {
-    setGameMode('survival');
-    setDifficulty(selectedDifficulty);
-    sentencePoolRef.current = null;
-    setLevel(1);
-    setTotalMistakes(0);
-    setTyped('');
-    setCombo(0);
-    setMaxCombo(0);
-    setWpm(0);
-    setPerfectStreak(0);
-    setActivePowerUps([]);
-    setCurrentLevelPowerUp(null);
-    setStreakMultiplier(1);
-    setTimeSurvived(0);
-    mistakesThisLevelRef.current = 0;
-    wpmStartRef.current = null;
-    totalCharsRef.current = 0;
-    lastSentenceTextRef.current = null;
-    shieldActiveRef.current = false;
-    survivalStartTimeRef.current = Date.now();
-    setGameState('playing');
-    
-    const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0);
-    lastSentenceTextRef.current = sentence.text;
-    setCurrentSentence(sentence.text);
-    const powerUp = generateRandomPowerUp();
-    setCurrentLevelPowerUp(powerUp);
-    const duration = getTimerDuration(1, selectedDifficulty);
-    startTimer(duration);
-    startHeartbeat?.(0);
-  }, [startTimer, startHeartbeat]);
-
   const startEndlessMode = useCallback((selectedDifficulty = 'normal') => {
     setGameMode('endless');
     setDifficulty(selectedDifficulty);
     sentencePoolRef.current = null;
     setLevel(1);
-    setEndlessLives(5);
+    setEndlessLives(10);
     setTyped('');
     setCombo(0);
     setMaxCombo(0);
@@ -339,14 +292,12 @@ export function useGame(soundHooks = {}) {
     setActivePowerUps([]);
     setCurrentLevelPowerUp(null);
     setStreakMultiplier(1);
-    setTimeSurvived(0);
     setTotalMistakes(0);
     mistakesThisLevelRef.current = 0;
     wpmStartRef.current = null;
     totalCharsRef.current = 0;
     lastSentenceTextRef.current = null;
     shieldActiveRef.current = false;
-    survivalStartTimeRef.current = Date.now();
     setIsPaused(false);
     setGameState('playing');
     
@@ -423,9 +374,6 @@ export function useGame(soundHooks = {}) {
         // Handle timer based on mode
         if (gameMode === 'endless') {
           // No timer for endless mode
-        } else if (gameMode === 'survival') {
-          // In survival mode, timer decreases continuously
-          startTimer(getTimerDuration(newLevel, difficulty));
         } else if (gameMode === 'daily') {
           startTimer(12);
         } else {
@@ -523,7 +471,6 @@ export function useGame(soundHooks = {}) {
     handleType,
     startGame,
     startDailyChallenge,
-    startSurvivalMode,
     startEndlessMode,
     // New: Power-ups & Multiplier
     activePowerUps,

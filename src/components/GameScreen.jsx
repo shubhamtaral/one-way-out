@@ -3,6 +3,7 @@ import { SentenceDisplay } from './SentenceDisplay';
 import { StatsBar } from './StatsBar';
 import { Creature } from './Creature';
 import { PowerUpsUI } from './PowerUpsUI';
+import { PauseOverlay } from './PauseOverlay';
 
 export function GameScreen({ 
   level, 
@@ -25,6 +26,10 @@ export function GameScreen({
   gameMode,
   activePowerUps,
   currentLevelPowerUp,
+  isPaused,
+  onTogglePause,
+  onQuitGame,
+  endlessLives,
 }) {
   const inputRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -59,12 +64,28 @@ export function GameScreen({
 
   // Prevent losing focus
   const handleBlur = () => {
-    if (!isGameOver) {
+    if (!isGameOver && !isPaused) {
       setTimeout(() => {
         inputRef.current?.focus();
       }, 10);
     }
   };
+
+  // Handle pause keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (isGameOver) return;
+      
+      // Space or P to pause/resume
+      if (e.code === 'Space' || e.key === 'p' || e.key === 'P') {
+        e.preventDefault();
+        onTogglePause?.();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isGameOver, onTogglePause]);
 
   // Visual decay based on mistakes
   const decayOpacity = 1 - (mistakes * 0.06);
@@ -72,11 +93,11 @@ export function GameScreen({
 
   return (
     <div 
-      className={`min-h-screen flex flex-col p-4 md:p-12 cursor-text ${isFlashing ? 'flash-mistake' : ''}`}
+      className={`min-h-screen flex flex-col p-4 md:p-12 cursor-text ${isFlashing ? 'flash-mistake' : ''} ${isPaused ? 'opacity-40' : ''}`}
       onClick={handleClick}
       style={{ 
         opacity: decayOpacity,
-        filter: isGameOver ? 'none' : decayFilter,
+        filter: isGameOver ? 'none' : (isPaused ? 'blur(5px)' : decayFilter),
       }}
     >
       {/* Creature component */}
@@ -122,6 +143,7 @@ export function GameScreen({
           streakMultiplier={streakMultiplier}
           timeSurvived={timeSurvived}
           gameMode={gameMode}
+          endlessLives={endlessLives}
         />
         <PowerUpsUI 
           activePowerUps={activePowerUps}
@@ -145,6 +167,25 @@ export function GameScreen({
         <div className="text-center text-[var(--color-bone)]/30 text-xs pb-16 relative z-20">
           tap the input below to type
         </div>
+      )}
+
+      {/* Pause button */}
+      {!isGameOver && (
+        <button
+          onClick={onTogglePause}
+          className="absolute top-4 right-4 px-4 py-2 bg-[var(--color-bone)]/10 hover:bg-[var(--color-bone)]/20 text-[var(--color-bone)] border border-[var(--color-bone)]/30 rounded text-sm tracking-wider z-30 transition-colors"
+          title="Press SPACE or P to pause"
+        >
+          ⏸ PAUSE
+        </button>
+      )}
+
+      {/* Pause overlay */}
+      {isPaused && (
+        <PauseOverlay 
+          onResume={onTogglePause}
+          onQuit={onQuitGame}
+        />
       )}
     </div>
   );

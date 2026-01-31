@@ -45,12 +45,16 @@ function App() {
     startGame,
     startDailyChallenge,
     startSurvivalMode,
+    startEndlessMode,
     activePowerUps,
     currentLevelPowerUp,
     streakMultiplier,
     timeSurvived,
     selectedTheme,
     setSelectedTheme,
+    isPaused,
+    togglePause,
+    endlessLives,
   } = useGame(sound);
 
   // Record game stats when game ends
@@ -97,9 +101,16 @@ function App() {
   const handleRestart = (selectedDifficulty) => {
     if (selectedDifficulty === null) {
       window.location.reload();
+    } else if (gameMode === 'endless') {
+      startEndlessMode(selectedDifficulty);
     } else {
       startGame(selectedDifficulty);
     }
+  };
+
+  // Handle quit from pause
+  const handleQuitGame = () => {
+    window.location.reload();
   };
 
   if (gameState === 'idle') {
@@ -109,6 +120,7 @@ function App() {
           onStart={startGame} 
           onStartDaily={startDailyChallenge}
           onStartSurvival={startSurvivalMode}
+          onStartEndless={startEndlessMode}
           stats={stats}
           user={user}
           onSignIn={signInWithGoogle}
@@ -149,6 +161,10 @@ function App() {
           gameMode={gameMode}
           activePowerUps={activePowerUps}
           currentLevelPowerUp={currentLevelPowerUp}
+          isPaused={isPaused}
+          onTogglePause={togglePause}
+          onQuitGame={handleQuitGame}
+          endlessLives={endlessLives}
         />
       );
     }
@@ -164,6 +180,8 @@ function App() {
           gameMode={gameMode}
           onRestart={handleRestart}
           user={user}
+          timeSurvived={timeSurvived}
+          perfectStreak={perfectStreak}
         />
         <AchievementPopup 
           achievements={newAchievements} 
@@ -196,6 +214,10 @@ function App() {
         gameMode={gameMode}
         activePowerUps={activePowerUps}
         currentLevelPowerUp={currentLevelPowerUp}
+        isPaused={isPaused}
+        onTogglePause={togglePause}
+        onQuitGame={handleQuitGame}
+        endlessLives={endlessLives}
       />
       <AchievementPopup 
         achievements={newAchievements} 

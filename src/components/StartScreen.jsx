@@ -7,7 +7,7 @@ import { PracticeMode } from './PracticeMode';
 import { StatsDialog } from './StatsDialog';
 import { ACHIEVEMENTS } from '../config/achievements';
 
-export function StartScreen({ onStart, onStartDaily, onStartSurvival, stats, user, onSignIn, onSignOut, authLoading, selectedTheme, onThemeChange }) {
+export function StartScreen({ onStart, onStartDaily, onStartSurvival, onStartEndless, stats, user, onSignIn, onSignOut, authLoading, selectedTheme, onThemeChange }) {
   const [selectedDifficulty, setSelectedDifficulty] = useState('normal');
   const [flicker, setFlicker] = useState(false);
   const [ready, setReady] = useState(false);
@@ -16,6 +16,7 @@ export function StartScreen({ onStart, onStartDaily, onStartSurvival, stats, use
   const [showPractice, setShowPractice] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [selectedSurvivalDifficulty, setSelectedSurvivalDifficulty] = useState('normal');
+  const [selectedEndlessDifficulty, setSelectedEndlessDifficulty] = useState('normal');
 
   const dailyPlayed = hasDailyBeenPlayed();
   const dailyBest = getDailyBest();
@@ -94,6 +95,13 @@ export function StartScreen({ onStart, onStartDaily, onStartSurvival, stats, use
             className="py-4 px-8 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-[var(--color-void)] transition-all font-bold tracking-wider text-lg"
           >
             🔥 SURVIVAL MODE
+          </button>
+
+          <button
+            onClick={() => setShowMode('endless')}
+            className="py-4 px-8 border-2 border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-[var(--color-void)] transition-all font-bold tracking-wider text-lg"
+          >
+            ♾️ ENDLESS MODE
           </button>
 
           <button
@@ -200,6 +208,44 @@ export function StartScreen({ onStart, onStartDaily, onStartSurvival, stats, use
               >
                 <div className="font-bold tracking-wider">{diff.name}</div>
                 <div className="text-xs mt-1 opacity-60">{diff.maxMistakes} lives</div>
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={() => setShowMode('main')}
+            className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)]/60 text-sm"
+          >
+            ← Back
+          </button>
+        </>
+      )}
+
+      {showMode === 'endless' && (
+        <>
+          <div className="mb-6 text-center">
+            <h2 className="text-2xl text-purple-500 font-bold mb-2">ENDLESS MODE</h2>
+            <p className="text-[var(--color-bone)]/50 text-sm">
+              No timer. 5 lives. Type forever.
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row gap-4 mb-8">
+            {Object.values(DIFFICULTIES).map((diff) => (
+              <button
+                key={diff.id}
+                onClick={() => {
+                  setSelectedEndlessDifficulty(diff.id);
+                  if (ready) onStartEndless(diff.id);
+                }}
+                className={`px-6 py-4 border-2 transition-all duration-200 min-w-[140px] ${
+                  selectedEndlessDifficulty === diff.id
+                    ? `border-purple-500 text-purple-500 scale-105`
+                    : 'border-[var(--color-bone)]/20 text-[var(--color-bone)]/40 hover:border-[var(--color-bone)]/40'
+                }`}
+              >
+                <div className="font-bold tracking-wider">{diff.name}</div>
+                <div className="text-xs mt-1 opacity-60">5 lives</div>
               </button>
             ))}
           </div>

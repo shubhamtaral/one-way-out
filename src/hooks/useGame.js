@@ -88,6 +88,12 @@ export function useGame(soundHooks = {}) {
     return localStorage.getItem('oneWayOut_selectedTheme') || 'normal';
   });
 
+  // New: Pause state
+  const [isPaused, setIsPaused] = useState(false);
+  
+  // New: Endless mode lives (separate from mistakes)
+  const [endlessLives, setEndlessLives] = useState(5);
+
   const timerRef = useRef(null);
   const lastTickRef = useRef(0);
   const wpmStartRef = useRef(null);
@@ -98,13 +104,17 @@ export function useGame(soundHooks = {}) {
   const shieldActiveRef = useRef(false);
   const survivalStartTimeRef = useRef(null);
 
-  const maxMistakes = gameMode === 'daily' ? 5 : getMaxMistakes(difficulty);
+  const maxMistakes = gameMode === 'daily' ? 5 : (gameMode === 'endless' ? 5 : getMaxMistakes(difficulty));
 
   const clearTimer = useCallback(() => {
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
     }
+  }, []);
+
+  const togglePause = useCallback(() => {
+    setIsPaused(prev => !prev);
   }, []);
 
   const startTimer = useCallback((duration) => {
@@ -114,6 +124,11 @@ export function useGame(soundHooks = {}) {
     lastTickRef.current = 0;
     
     timerRef.current = setInterval(() => {
+      // Skip timer updates when paused or in endless mode without timer
+      if (isPaused || (gameMode === 'endless')) {
+        return;
+      }
+      
       setTimeLeft(prev => {
         const newTime = prev - 0.1;
         
@@ -131,11 +146,11 @@ export function useGame(soundHooks = {}) {
         return newTime;
       });
     }, 100);
-  }, [clearTimer, playTick, playWarningTick]);
+  }, [clearTimer, playTick, playWarningTick, isPaused, gameMode]);
 
   // Handle timer expiry
   useEffect(() => {
-    if (gameState !== 'playing') return;
+    if (gameState !== 'playing' || gameMode === 'endless') return;
     
     if (timeLeft <= 0) {
       mistakesThisLevelRef.current += 1;
@@ -310,8 +325,43 @@ export function useGame(soundHooks = {}) {
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
 
+  const startEndlessMode = useCallback((selectedDifficulty = 'normal') => {
+    setGameMode('endless');
+    setDifficulty(selectedDifficulty);
+    sentencePoolRef.current = null;
+    setLevel(1);
+    setEndlessLives(5);
+    setTyped('');
+    setCombo(0);
+    setMaxCombo(0);
+    setWpm(0);
+    setPerfectStreak(0);
+    setActivePowerUps([]);
+    setCurrentLevelPowerUp(null);
+    setStreakMultiplier(1);
+    setTimeSurvived(0);
+    setTotalMistakes(0);
+    mistakesThisLevelRef.current = 0;
+    wpmStartRef.current = null;
+    totalCharsRef.current = 0;
+    lastSentenceTextRef.current = null;
+    shieldActiveRef.current = false;
+    survivalStartTimeRef.current = Date.now();
+    setIsPaused(false);
+    setGameState('playing');
+    
+    const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0);
+    lastSentenceTextRef.current = sentence.text;
+    setCurrentSentence(sentence.text);
+    const powerUp = generateRandomPowerUp();
+    setCurrentLevelPowerUp(powerUp);
+    // No timer for endless mode
+    clearTimer();
+    startHeartbeat?.(0);
+  }, [clearTimer, startHeartbeat]);
+
   const handleType = useCallback((input) => {
-    if (gameState !== 'playing') return;
+    if (gameState !== 'playing' || isPaused) return;
 
     const newChar = input.slice(-1);
     const expectedChar = currentSentence[typed.length];
@@ -371,7 +421,9 @@ export function useGame(soundHooks = {}) {
         setCurrentLevelPowerUp(newPowerUp);
         
         // Handle timer based on mode
-        if (gameMode === 'survival') {
+        if (gameMode === 'endless') {
+          // No timer for endless mode
+        } else if (gameMode === 'survival') {
           // In survival mode, timer decreases continuously
           startTimer(getTimerDuration(newLevel, difficulty));
         } else if (gameMode === 'daily') {
@@ -399,29 +451,49 @@ export function useGame(soundHooks = {}) {
       setCombo(0);
       setStreakMultiplier(1);
       setPerfectStreak(0);
-      const newMistakes = totalMistakes + 1;
-      setTotalMistakes(newMistakes);
-      updateHeartbeat?.(newMistakes);
       
-      setIsShaking(true);
-      setIsFlashing(true);
-      setTimeout(() => setIsShaking(false), 150);
-      setTimeout(() => setIsFlashing(false), 200);
+      if (gameMode === 'endless') {
+        // In endless mode, decrease lives instead of mistakes
+        const newLives = endlessLives - 1;
+        setEndlessLives(newLives);
+        updateHeartbeat?.(5 - newLives);
+        
+        setIsShaking(true);
+        setIsFlashing(true);
+        setTimeout(() => setIsShaking(false), 150);
+        setTimeout(() => setIsFlashing(false), 200);
 
-      if (newMistakes >= maxMistakes) {
-        clearTimer();
-        stopHeartbeat?.();
-        playGameOver?.();
-        
-        if (gameMode === 'daily') {
-          markDailyPlayed();
-          saveDailyBest(level);
+        if (newLives <= 0) {
+          clearTimer();
+          stopHeartbeat?.();
+          playGameOver?.();
+          setGameState('gameover');
         }
+      } else {
+        const newMistakes = totalMistakes + 1;
+        setTotalMistakes(newMistakes);
+        updateHeartbeat?.(newMistakes);
         
-        setGameState('gameover');
+        setIsShaking(true);
+        setIsFlashing(true);
+        setTimeout(() => setIsShaking(false), 150);
+        setTimeout(() => setIsFlashing(false), 200);
+
+        if (newMistakes >= maxMistakes) {
+          clearTimer();
+          stopHeartbeat?.();
+          playGameOver?.();
+          
+          if (gameMode === 'daily') {
+            markDailyPlayed();
+            saveDailyBest(level);
+          }
+          
+          setGameState('gameover');
+        }
       }
     }
-  }, [gameState, currentSentence, typed, level, difficulty, gameMode, totalMistakes, combo, maxMistakes, bestScore, wpm, activePowerUps, currentLevelPowerUp, playKeystroke, playError, playSuccess, playGameOver, updateHeartbeat, stopHeartbeat, clearTimer, startTimer]);
+  }, [gameState, currentSentence, typed, level, difficulty, gameMode, totalMistakes, combo, maxMistakes, bestScore, wpm, activePowerUps, currentLevelPowerUp, isPaused, endlessLives, playKeystroke, playError, playSuccess, playGameOver, updateHeartbeat, stopHeartbeat, clearTimer, startTimer]);
 
   useEffect(() => {
     return () => {
@@ -452,6 +524,7 @@ export function useGame(soundHooks = {}) {
     startGame,
     startDailyChallenge,
     startSurvivalMode,
+    startEndlessMode,
     // New: Power-ups & Multiplier
     activePowerUps,
     currentLevelPowerUp,
@@ -459,5 +532,9 @@ export function useGame(soundHooks = {}) {
     timeSurvived,
     selectedTheme,
     setSelectedTheme,
+    // New: Pause & Endless
+    isPaused,
+    togglePause,
+    endlessLives,
   };
 }

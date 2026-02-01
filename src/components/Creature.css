@@ -5,238 +5,287 @@
   right: 0;
   bottom: 0;
   pointer-events: none;
-  z-index: 10;
+  z-index: 5;
   overflow: hidden;
 }
 
-/* Ghost styling */
-.ghost {
+/* ===== BACKGROUND SCARY GHOST ===== */
+.scary-ghost-bg {
   position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(200, 0, 0, 0.3) 0%, rgba(139, 0, 0, 0.1) 40%, transparent 70%);
+  border-radius: 50% 50% 45% 45%;
+  filter: blur(40px);
+  transition: all 0.4s ease-out;
+  z-index: 5;
+}
+
+/* Spooky red glowing eyes - background ghost */
+.scary-ghost-bg .ghost-eye-left,
+.scary-ghost-bg .ghost-eye-right {
+  position: absolute;
+  width: 60px;
+  height: 80px;
+  background: radial-gradient(circle, #ff0000 0%, #8b0000 50%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(8px);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.9), 0 0 80px rgba(255, 0, 0, 0.5);
+  animation: eyeGlow 2s ease-in-out infinite;
+  top: 35%;
+}
+
+.scary-ghost-bg .ghost-eye-left {
+  left: 25%;
+  animation-delay: 0s;
+}
+
+.scary-ghost-bg .ghost-eye-right {
+  right: 25%;
+  animation-delay: 0.3s;
+}
+
+@keyframes eyeGlow {
+  0%, 100% {
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.9), 0 0 80px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(255, 0, 0, 1), 0 0 120px rgba(255, 0, 0, 0.8);
+  }
+}
+
+/* ===== POP-UP GHOSTS (on mistakes) ===== */
+.popup-ghost {
+  position: fixed;
+  top: 50%;
+  width: 150px;
+  height: 200px;
+  z-index: 15;
+  animation: popupAppear 1s ease-out forwards;
+}
+
+.popup-ghost.left {
+  left: -80px;
+  animation: popupLeft 1s ease-out forwards;
+}
+
+.popup-ghost.right {
+  right: -80px;
+  animation: popupRight 1s ease-out forwards;
+}
+
+@keyframes popupLeft {
+  0% {
+    left: -80px;
+    opacity: 0;
+    transform: scaleX(-1) scaleY(0.5);
+  }
+  30% {
+    left: 20%;
+    opacity: 1;
+    transform: scaleX(-1) scaleY(1.1);
+  }
+  70% {
+    left: 30%;
+    opacity: 1;
+  }
+  100% {
+    left: -100px;
+    opacity: 0;
+    transform: scaleX(-1) scaleY(0.5);
+  }
+}
+
+@keyframes popupRight {
+  0% {
+    right: -80px;
+    opacity: 0;
+    transform: scaleX(1) scaleY(0.5);
+  }
+  30% {
+    right: 20%;
+    opacity: 1;
+    transform: scaleX(1) scaleY(1.1);
+  }
+  70% {
+    right: 30%;
+    opacity: 1;
+  }
+  100% {
+    right: -100px;
+    opacity: 0;
+    transform: scaleX(1) scaleY(0.5);
+  }
+}
+
+/* Popup ghost shape - blurred and menacing */
+.popup-ghost-shape {
+  position: absolute;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 120px;
-  height: 140px;
-  transition: bottom 0.3s ease-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Ghost body (head + features) */
-.ghost-body {
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle at 30% 30%, rgba(245, 245, 220, 0.8), rgba(245, 245, 220, 0.4));
-  border-radius: 50% 50% 45% 45%;
+  height: 160px;
+  background: linear-gradient(135deg, rgba(100, 100, 100, 0.4), rgba(50, 50, 50, 0.2));
+  border-radius: 50% 50% 40% 40%;
+  filter: blur(12px);
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
   position: relative;
-  box-shadow: 0 0 30px rgba(245, 245, 220, 0.6);
-  animation: ghostFloat 2s ease-in-out infinite;
 }
 
-.ghost.capturing .ghost-body {
-  animation: ghostCapture 0.6s ease-in;
-  box-shadow: 0 0 50px rgba(220, 20, 60, 0.8), inset 0 0 30px rgba(220, 20, 60, 0.4);
-}
-
-/* Ghost eyes */
-.ghost-eyes {
+/* Popup eyes - BRIGHT RED and menacing */
+.popup-eye {
   position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 25px;
-  width: 60px;
-  justify-content: space-between;
-}
-
-.ghost-eye {
-  width: 16px;
-  height: 20px;
-  background: #0a0a0a;
+  width: 35px;
+  height: 45px;
+  background: radial-gradient(circle, #ff3333 0%, #cc0000 50%, transparent 100%);
   border-radius: 50%;
-  position: relative;
-  animation: ghostBlink 3s ease-in-out infinite;
+  filter: blur(6px);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.95), 0 0 50px rgba(255, 0, 0, 0.6);
+  top: 40%;
+  animation: pupilShift 0.6s ease-in-out;
 }
 
-.ghost-eye::after {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 8px;
-  background: rgba(245, 245, 220, 0.9);
-  border-radius: 50%;
-  top: 3px;
-  left: 3px;
-  animation: ghostLook 2s ease-in-out infinite;
+.popup-eye-left {
+  left: 15%;
 }
 
-/* Ghost mouth */
-.ghost-mouth {
-  position: absolute;
-  bottom: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 15px;
-  border: 2px solid #0a0a0a;
-  border-top: none;
-  border-radius: 0 0 30px 30px;
+.popup-eye-right {
+  right: 15%;
 }
 
-/* Ghost tail waves */
-.ghost-tail {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  width: 100%;
-  height: 30px;
-}
-
-.tail-wave {
-  width: 18px;
-  height: 30px;
-  background: rgba(245, 245, 220, 0.5);
-  border-radius: 50% 50% 50% 0;
-  animation: tailWave 1.5s ease-in-out infinite;
-}
-
-.tail-wave:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.tail-wave:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-/* Animations */
-@keyframes ghostFloat {
-  0%, 100% { transform: translateX(-50%) translateY(0px); }
-  50% { transform: translateX(-50%) translateY(-8px); }
-}
-
-@keyframes ghostCapture {
+@keyframes pupilShift {
   0% {
-    transform: translateX(-50%) scale(1);
+    transform: scale(0.8);
   }
   50% {
-    transform: translateX(-50%) scale(1.15);
+    transform: scale(1.2);
   }
   100% {
-    transform: translateX(-50%) scale(0.8);
+    transform: scale(1);
   }
 }
 
-@keyframes ghostBlink {
-  0%, 90%, 100% { height: 20px; }
-  92%, 98% { height: 4px; }
+/* ===== GAME OVER - FINAL SCARY GHOST ===== */
+.final-ghost {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 600px;
+  z-index: 20;
+  animation: finalGhostAppear 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-@keyframes ghostLook {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(3px, 2px); }
+@keyframes finalGhostAppear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
-@keyframes tailWave {
-  0%, 100% { transform: rotateZ(0deg); }
-  50% { transform: rotateZ(-15deg); }
+.final-ghost-body {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(80, 0, 0, 0.5) 0%, rgba(40, 0, 0, 0.3) 50%, transparent 90%);
+  border-radius: 50% 50% 40% 40%;
+  filter: blur(20px);
+  position: relative;
+  box-shadow: 0 0 100px rgba(255, 0, 0, 0.6), inset 0 0 80px rgba(255, 0, 0, 0.3);
 }
 
-/* Capture effect - red glow overlay */
-.capture-glow {
+/* Final ghost's menacing eyes */
+.final-eye {
+  position: absolute;
+  background: radial-gradient(circle, #ff0000 0%, #cc0000 40%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(10px);
+  box-shadow: 0 0 60px rgba(255, 0, 0, 1), 0 0 100px rgba(255, 0, 0, 0.8);
+  animation: menacingGlow 0.8s ease-in-out infinite;
+  top: 30%;
+}
+
+.final-eye-left {
+  width: 80px;
+  height: 100px;
+  left: 20%;
+}
+
+.final-eye-right {
+  width: 80px;
+  height: 100px;
+  right: 20%;
+}
+
+@keyframes menacingGlow {
+  0%, 100% {
+    box-shadow: 0 0 60px rgba(255, 0, 0, 1), 0 0 100px rgba(255, 0, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 80px rgba(255, 0, 0, 1), 0 0 150px rgba(255, 0, 0, 1);
+  }
+}
+
+/* ===== DEATH OVERLAY ===== */
+.death-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(220, 20, 60, 0.5) 0%, transparent 70%);
-  animation: captureFlash 0.6s ease-out;
-  pointer-events: none;
-  z-index: 11;
+  background: linear-gradient(45deg, rgba(139, 0, 0, 0.3), transparent, rgba(200, 0, 0, 0.2));
+  animation: deathFlash 0.8s ease-out;
+  z-index: 19;
 }
 
-@keyframes captureFlash {
+@keyframes deathFlash {
   0% {
-    background: radial-gradient(circle at 50% 50%, rgba(220, 20, 60, 0) 0%, transparent 70%);
-  }
-  50% {
-    background: radial-gradient(circle at 50% 50%, rgba(220, 20, 60, 0.6) 0%, transparent 70%);
+    background: linear-gradient(45deg, rgba(255, 0, 0, 0.8), transparent, rgba(255, 0, 0, 0.6));
   }
   100% {
-    background: radial-gradient(circle at 50% 50%, rgba(220, 20, 60, 0.3) 0%, transparent 70%);
+    background: linear-gradient(45deg, rgba(139, 0, 0, 0.3), transparent, rgba(200, 0, 0, 0.2));
   }
 }
 
-/* Capture text */
-.capture-text {
+/* ===== DEATH MESSAGE ===== */
+.death-message {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 48px;
+  font-size: 72px;
   font-weight: bold;
-  color: var(--color-blood-bright);
-  text-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
-  animation: captureTextPulse 0.6s ease-out;
-  pointer-events: none;
-  z-index: 12;
+  color: #ff3333;
+  text-shadow: 0 0 30px rgba(255, 0, 0, 0.9), 0 0 60px rgba(255, 0, 0, 0.6);
+  animation: deathMessagePop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  z-index: 21;
   font-family: 'JetBrains Mono', monospace;
-  tracking: 0.2em;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 
-@keyframes captureTextPulse {
+@keyframes deathMessagePop {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.5);
+    transform: translate(-50%, -50%) scale(0.1) rotateZ(-20deg);
   }
   50% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.2);
   }
   100% {
-    opacity: 0.8;
-    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1) rotateZ(0deg);
   }
-}
-
-/* Mistake indicator bar */
-.mistake-indicator {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-}
-
-.mistake-label {
-  font-size: 12px;
-  color: var(--color-bone);
-  opacity: 0.6;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.ghost-progress-bar {
-  width: 100%;
-  height: 6px;
-  background: rgba(245, 245, 220, 0.1);
-  border: 1px solid rgba(245, 245, 220, 0.2);
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-}
-
-.ghost-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, rgba(220, 20, 60, 0.4), rgba(220, 20, 60, 0.8));
-  border-radius: 3px;
-  box-shadow: 0 0 10px rgba(220, 20, 60, 0.6);
-  transition: width 0.3s ease-out;
 }

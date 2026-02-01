@@ -2,67 +2,77 @@ import { useState, useEffect } from 'react';
 import './Creature.css';
 
 export function Creature({ mistakes, maxMistakes, isGameOver }) {
-  const [isCapturing, setIsCapturing] = useState(false);
+  const [popups, setPopups] = useState([]);
+  const [prevMistakes, setPrevMistakes] = useState(0);
 
-  // Calculate ghost position based on mistakes
-  // At 0 mistakes: -100% (far away, off screen bottom)
-  // At maxMistakes: 50% (right in front of player)
-  const ghostProgress = Math.min(mistakes / maxMistakes, 1);
-  const ghostBottom = -100 + (ghostProgress * 150); // -100 to 50
-
+  // Trigger scary pop-ups on new mistakes
   useEffect(() => {
-    if (isGameOver && ghostProgress > 0.8) {
-      setIsCapturing(true);
+    if (mistakes > prevMistakes) {
+      const newPopup = {
+        id: Date.now(),
+        side: Math.random() > 0.5 ? 'left' : 'right',
+        delay: Math.random() * 200,
+      };
+      setPopups(prev => [...prev, newPopup]);
+      
+      // Remove popup after animation
+      setTimeout(() => {
+        setPopups(prev => prev.filter(p => p.id !== newPopup.id));
+      }, 1200);
     }
-  }, [isGameOver, ghostProgress]);
+    setPrevMistakes(mistakes);
+  }, [mistakes, prevMistakes]);
+
+  // Calculate ghost intensity based on mistakes
+  const ghostIntensity = Math.min(mistakes / maxMistakes, 1);
+  const scaleAmount = 1 + ghostIntensity * 0.3;
 
   return (
     <div className="creature-container">
-      {/* Ghost that approaches */}
+      {/* Background scary ghost that grows */}
       <div
-        className={`ghost ${isCapturing ? 'capturing' : ''}`}
+        className="scary-ghost-bg"
         style={{
-          bottom: `${ghostBottom}%`,
-          opacity: ghostProgress < 0.1 ? 0.1 : Math.min(0.3 + ghostProgress * 0.7, 1),
+          opacity: Math.min(ghostIntensity * 0.5, 0.4),
+          filter: `blur(${15 + ghostIntensity * 20}px)`,
+          transform: `scale(${scaleAmount})`,
         }}
       >
-        {/* Ghost head */}
-        <div className="ghost-body">
-          {/* Eyes */}
-          <div className="ghost-eyes">
-            <div className="ghost-eye"></div>
-            <div className="ghost-eye"></div>
-          </div>
-          {/* Mouth */}
-          <div className="ghost-mouth"></div>
-        </div>
-
-        {/* Ghost tail waves */}
-        <div className="ghost-tail">
-          <div className="tail-wave"></div>
-          <div className="tail-wave"></div>
-          <div className="tail-wave"></div>
-        </div>
+        {/* Left eye */}
+        <div className="ghost-eye-left"></div>
+        {/* Right eye */}
+        <div className="ghost-eye-right"></div>
       </div>
 
-      {/* Capture effect */}
-      {isCapturing && (
+      {/* Pop-up scary ghosts on mistakes */}
+      {popups.map(popup => (
+        <div
+          key={popup.id}
+          className={`popup-ghost ${popup.side}`}
+          style={{ animationDelay: `${popup.delay}ms` }}
+        >
+          {/* Blurred ghostly form */}
+          <div className="popup-ghost-shape">
+            {/* Red glowing eyes */}
+            <div className="popup-eye popup-eye-left"></div>
+            <div className="popup-eye popup-eye-right"></div>
+          </div>
+        </div>
+      ))}
+
+      {/* Game over - full screen scary overlay */}
+      {isGameOver && (
         <>
-          <div className="capture-glow"></div>
-          <div className="capture-text">CAPTURED...</div>
+          <div className="final-ghost">
+            <div className="final-ghost-body">
+              <div className="final-eye final-eye-left"></div>
+              <div className="final-eye final-eye-right"></div>
+            </div>
+          </div>
+          <div className="death-overlay"></div>
+          <div className="death-message">CAPTURED</div>
         </>
       )}
-
-      {/* Mistake indicator - how close the ghost is */}
-      <div className="mistake-indicator">
-        <div className="mistake-label">GHOST DISTANCE</div>
-        <div className="ghost-progress-bar">
-          <div
-            className="ghost-progress-fill"
-            style={{ width: `${ghostProgress * 100}%` }}
-          ></div>
-        </div>
-      </div>
     </div>
   );
 }

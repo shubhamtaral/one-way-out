@@ -1,3 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <path fill="#f5f5dc" d="M50 10c-22 0-35 18-35 38 0 15 8 28 20 34v8h30v-8c12-6 20-19 20-34 0-20-13-38-35-38zm-12 35c-4 0-7-3-7-7s3-7 7-7 7 3 7 7-3 7-7 7zm24 0c-4 0-7-3-7-7s3-7 7-7 7 3 7 7-3 7-7 7zm-12 20c-6 0-10-2-10-5h20c0 3-4 5-10 5z"/>
+  <!-- Background -->
+  <rect width="100" height="100" fill="#0a0a0a"/>
+  
+  <!-- OWO Text -->
+  <text 
+    x="50" 
+    y="65" 
+    font-family="monospace, JetBrains Mono" 
+    font-size="48" 
+    font-weight="bold" 
+    fill="#f5f5dc" 
+    text-anchor="middle" 
+    dominant-baseline="middle"
+  >
+    OWO
+  </text>
 </svg>

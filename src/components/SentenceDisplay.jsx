@@ -1,6 +1,6 @@
 export function SentenceDisplay({ sentence, typed }) {
   return (
-    <div className="text-xl md:text-4xl leading-relaxed md:leading-relaxed tracking-wide select-none">
+    <div className="text-xl md:text-4xl leading-relaxed md:leading-relaxed tracking-wide select-none" style={{ wordWrap: 'break-word', overflowWrap: 'break-word', whiteSpace: 'normal' }}>
       {sentence.split('').map((char, index) => {
         let className = 'transition-colors duration-100 ';
         

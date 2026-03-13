@@ -17,10 +17,13 @@ function App() {
   const [showDeathScreen, setShowDeathScreen] = useState(false);
   const [gameRecorded, setGameRecorded] = useState(false);
   
-  // Initialize theme and test Firebase on app load
+  // Initialize theme and (optionally) test Firebase on app load
   useEffect(() => {
     initTheme();
-    testFirebaseConnection();
+    const enableTest = import.meta.env.DEV && import.meta.env.VITE_ENABLE_FIREBASE_TEST === 'true';
+    if (enableTest) {
+      testFirebaseConnection();
+    }
   }, []);
   
   const {

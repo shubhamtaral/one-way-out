@@ -178,18 +178,18 @@ export async function getLeaderboard(difficulty = 'normal', maxResults = 50, tim
       });
       
       // Filter by time if needed
-      if (timeThreshold) {
-        results = results.filter(r => r.updatedAt?.toDate() >= timeThreshold);
-      }
+      const filtered = timeThreshold
+        ? results.filter(r => r.updatedAt?.toDate() >= timeThreshold)
+        : results;
       
       // Sort in memory
-      results.sort((a, b) => {
+      filtered.sort((a, b) => {
         if (b.level !== a.level) return b.level - a.level;
         return b.wpm - a.wpm;
       });
       
-      console.log('✅ Leaderboard (fallback) loaded:', results.length, 'scores for', difficulty);
-      return results;
+      console.log('✅ Leaderboard (fallback) loaded:', filtered.length, 'scores for', difficulty);
+      return filtered;
     }
   } catch (err) {
     console.error('❌ Error getting leaderboard:', err);

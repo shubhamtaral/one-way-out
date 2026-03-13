@@ -70,6 +70,10 @@ npm run dev
 
 # Build for production
 npm run build
+
+# (Optional) Build & run Docker image
+docker build -t one-way-out .
+docker run -p 8080:80 one-way-out
 ```
 
 ## 📁 Project Structure
@@ -98,6 +102,14 @@ src/
     └── sentences.json       # 115 horror sentences
 ```
 
+## 🧱 Architecture (high level)
+
+- **Core game loop (`useGame`)**: Manages game state (mode, difficulty, level, timer, sentences, mistakes, power-ups, streak multiplier, endless lives) and exposes callbacks like `startGame`, `startDailyChallenge`, `startEndlessMode`, and `handleType` for the UI to drive.
+- **Stats & achievements (`useStats`)**: Listens for completed games via `recordGame`, updates local stats in `localStorage`, computes new achievements, and schedules leaderboard/Firebase syncs when a user is logged in.
+- **Audio system (`useSound`)**: Provides functions (`playKeystroke`, `playError`, `playSuccess`, `playGameOver`, `playTick`, `playWarningTick`, `startHeartbeat`, `updateHeartbeat`, `stopHeartbeat`) that `useGame` calls to keep sound and heartbeat tightly in sync with mistakes and time pressure.
+- **Remote services (`services/leaderboard`)**: Wraps Firebase Firestore calls for saving user profiles, pushing scores (normal + daily), fetching leaderboards with time filters, and saving achievements.
+- **Config & data (`config/*`, `data/*`)**: Difficulty presets, achievements, daily challenge seeding, and sentence pools live in config/data modules so the hooks stay focused on behavior instead of constants.
+
 ## 🏆 Achievements
 
 | Achievement | Requirement |
@@ -124,11 +136,11 @@ MIT
 
 ## 🤝 Contributing
 
-PRs welcome! Feel free to:
-- Add more sentences
-- Create new achievements
-- Improve mobile experience
-- Add new game modes
+PRs are very welcome! See `CONTRIBUTING.md` for:
+- How to run the project locally (dev, lint, tests)
+- Where to add sentences, achievements, and themes
+- How Firebase/leaderboards are wired up
+- Guidelines for PRs and code style
 
 ---
 

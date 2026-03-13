@@ -75,28 +75,31 @@ if (wpm > 100) {
 - Adaptive selection based on player performance
 - Smooth progression (no sudden jumps)
 
-### 5. **Survival Mode** ✅
+### 5. **Endless Mode** ✅
 **Files Modified:** `src/hooks/useGame.js`, `src/components/StartScreen.jsx`, `src/components/StatsBar.jsx`
 
 **Features:**
-- New game mode accessible from main menu
-- Timer continuously decreases (never resets between sentences)
-- Shows cumulative time survived instead of level
-- Goal: Complete as many sentences as possible before dying
+- Endless game mode accessible from main menu
+- No per-sentence timer – you play until you run out of lives
+- Uses a separate `endlessLives` counter instead of the standard mistakes limit
+- Goal: Complete as many sentences as possible before your lives hit zero
 - Full difficulty selection support
 
-**New Function:**
+**Key Implementation:**
 ```javascript
-const startSurvivalMode = useCallback((selectedDifficulty = 'normal') => {
-  setGameMode('survival');
-  survivalStartTimeRef.current = Date.now();
-  // ... initialization
+const [endlessLives, setEndlessLives] = useState(5);
+
+const startEndlessMode = useCallback((selectedDifficulty = 'normal') => {
+  setGameMode('endless');
+  setDifficulty(selectedDifficulty);
+  setEndlessLives(10);
+  // ... initialization (no timer started here)
 }, []);
 ```
 
-**UI Changes:**
-- "SURVIVED: Xs" display in StatsBar instead of "LVL"
-- Dedicated survival mode UI in StartScreen with difficulty selector
+**UI Notes:**
+- StatsBar shows endless lives instead of the usual mistake-based lives
+- StartScreen exposes Endless as a selectable mode alongside Normal and Daily
 
 ### 6. **Cosmetics System** ✅
 **Files Created:** `src/config/themes.js`, `src/components/ThemeSelector.jsx`
@@ -189,8 +192,8 @@ export async function getLeaderboard(difficulty, maxResults, timeFilter = 'globa
 
 1. **useGame Hook** - Core state management for all features
 2. **GameScreen** - Passes new props to display features
-3. **StatsBar** - Shows multiplier and survival time
-4. **StartScreen** - Survival mode entry point
+3. **StatsBar** - Shows multiplier, timer, and lives or endless lives
+4. **StartScreen** - Entry point for Normal, Daily, and Endless modes
 5. **Leaderboard** - Time-based filtering
 6. **StatsDialog** - Theme selector display
 
@@ -221,7 +224,7 @@ export async function getLeaderboard(difficulty, maxResults, timeFilter = 'globa
 1. **Power-ups**: Play multiple games to verify spawn rate and effects
 2. **Multiplier**: Check calculation accuracy at different combo levels
 3. **Adaptive Difficulty**: Monitor sentence difficulty as WPM changes
-4. **Survival Mode**: Verify timer behavior and cumulative time display
+4. **Endless Mode**: Verify endless lives behavior and sentence progression
 5. **Themes**: Test each theme unlock condition and visual appearance
 6. **Leaderboards**: Verify time-based filtering with multiple games
 7. **Cross-browser**: Test theme persistence across sessions

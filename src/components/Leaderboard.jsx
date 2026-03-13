@@ -7,21 +7,28 @@ export function Leaderboard({ onClose, currentUserId }) {
   const [timeFilter, setTimeFilter] = useState('global'); // global, daily, weekly, monthly
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
+   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchScores() {
       setLoading(true);
+      setError(null);
       let results;
-      
-      if (tab === 'daily') {
-        const dailyId = getDailyChallengeId();
-        results = await getDailyLeaderboard(dailyId);
-      } else {
-        results = await getLeaderboard(tab, 50, timeFilter);
+
+      try {
+        if (tab === 'daily') {
+          const dailyId = getDailyChallengeId();
+          results = await getDailyLeaderboard(dailyId);
+        } else {
+          results = await getLeaderboard(tab, 50, timeFilter);
+        }
+        setScores(results);
+      } catch (e) {
+        setScores([]);
+        setError('Unable to load leaderboard right now. Your scores are still saved locally and will sync when the connection recovers.');
+      } finally {
+        setLoading(false);
       }
-      
-      setScores(results);
-      setLoading(false);
     }
     
     fetchScores();
@@ -74,6 +81,13 @@ export function Leaderboard({ onClose, currentUserId }) {
                 {tf === 'global' ? 'All Time' : tf.charAt(0).toUpperCase() + tf.slice(1)}
               </button>
             ))}
+          </div>
+        )}
+
+        {/* Error banner */}
+        {error && (
+          <div className="px-4 py-2 text-xs text-red-400 bg-red-900/30 border-b border-red-800/40">
+            {error}
           </div>
         )}
 

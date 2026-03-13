@@ -1,55 +1,11 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import sentences from '../data/sentences.json';
-import { DIFFICULTIES, getTimerDuration, getMaxMistakes, getMinSentenceLevel } from '../config/difficulty';
+import allSentences from '../data/sentences.json';
+import { DIFFICULTIES, getTimerDuration, getMaxMistakes } from '../config/difficulty';
 import { getDailyChallengeSentences, markDailyPlayed, saveDailyBest } from '../config/dailyChallenge';
-
-// Power-ups Types
-export const POWER_UPS = {
-  FREEZE_TIME: 'freeze_time',     // +5 seconds
-  SHIELD: 'shield',                // Next mistake doesn't count
-  EXTRA_LIFE: 'extra_life',        // Regain a life
-};
-
-const POWER_UP_SPAWN_CHANCE = 0.20; // 20% chance per sentence
-
-function getSentenceForLevel(level, difficulty, sentencePool = null, lastSentenceText = null, wpm = 0) {
-  const pool = sentencePool || sentences;
-  
-  if (sentencePool) {
-    // Daily challenge: use sentences in order
-    const index = Math.min(level - 1, pool.length - 1);
-    return pool[index];
-  }
-  
-  let minLevel = getMinSentenceLevel(difficulty);
-  let effectiveLevel = Math.max(level, minLevel);
-  
-  // Adaptive difficulty: adjust based on WPM
-  if (wpm > 100) {
-    effectiveLevel = Math.min(effectiveLevel + Math.floor((wpm - 100) / 50), 10);
-  } else if (wpm > 0 && wpm < 50) {
-    effectiveLevel = Math.max(effectiveLevel - Math.floor((50 - wpm) / 25), minLevel);
-  }
-  
-  let available = pool.filter(s => s.level <= effectiveLevel && s.level >= minLevel);
-  if (available.length === 0) return pool[0];
-  
-  // Avoid repeating the same sentence
-  if (lastSentenceText && available.length > 1) {
-    available = available.filter(s => s.text !== lastSentenceText);
-  }
-  
-  const weighted = available.filter(s => s.level >= effectiveLevel - 5);
-  const finalPool = weighted.length > 0 ? weighted : available;
-  
-  return finalPool[Math.floor(Math.random() * finalPool.length)];
-}
-
-function generateRandomPowerUp() {
-  if (Math.random() > POWER_UP_SPAWN_CHANCE) return null;
-  const types = Object.values(POWER_UPS);
-  return types[Math.floor(Math.random() * types.length)];
-}
+import { getSentenceForLevel } from '../game/logic/sentences';
+import { POWER_UPS, generateRandomPowerUp } from '../game/logic/powerUps';
+import { computeWpm } from '../game/logic/wpm';
+import { computeStreakMultiplier } from '../game/logic/streakMultiplier';
 
 export function useGame(soundHooks = {}) {
   const { playKeystroke, playError, playSuccess, playGameOver, playTick, playWarningTick, startHeartbeat, updateHeartbeat, stopHeartbeat } = soundHooks;
@@ -255,7 +211,7 @@ export function useGame(soundHooks = {}) {
   const startDailyChallenge = useCallback(() => {
     setGameMode('daily');
     setDifficulty('normal');
-    sentencePoolRef.current = getDailyChallengeSentences(sentences);
+    sentencePoolRef.current = getDailyChallengeSentences(allSentences);
     setLevel(1);
     setTotalMistakes(0);
     setTyped('');
@@ -323,11 +279,12 @@ export function useGame(soundHooks = {}) {
       }
       totalCharsRef.current += 1;
       
-      const elapsedMinutes = (Date.now() - wpmStartRef.current) / 60000;
-      if (elapsedMinutes > 0.01) {
-        const words = totalCharsRef.current / 5;
-        setWpm(Math.min(Math.round(words / elapsedMinutes), 250));
-      }
+      const newWpm = computeWpm({
+        totalChars: totalCharsRef.current,
+        startMs: wpmStartRef.current,
+        nowMs: Date.now(),
+      });
+      if (newWpm > 0) setWpm(newWpm);
 
       playKeystroke?.();
       const newTyped = typed + newChar;
@@ -340,9 +297,7 @@ export function useGame(soundHooks = {}) {
         setCombo(newCombo);
         setMaxCombo(prev => Math.max(prev, newCombo));
         
-        // Calculate streak multiplier: 5x = 1.5x, 10x = 2x, 15x = 2.5x, etc
-        const newMultiplier = 1 + (newCombo >= 5 ? Math.floor((newCombo - 4) / 5) * 0.5 : 0);
-        setStreakMultiplier(newMultiplier);
+        setStreakMultiplier(computeStreakMultiplier(newCombo));
         
         // Track perfect streak (no mistakes this level)
         if (mistakesThisLevelRef.current === 0) {

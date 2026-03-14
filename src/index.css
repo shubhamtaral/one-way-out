@@ -60,3 +60,13 @@ body {
 .death-pulse {
   animation: deathPulse 0.3s ease-in-out infinite;
 }
+
+/* Power-up flash overlay */
+@keyframes flash-cyan {
+  0% { background-color: rgba(0, 255, 255, 0.2); }
+  100% { background-color: transparent; }
+}
+
+.flash-powerup {
+  animation: flash-cyan 0.4s ease-out;
+}

@@ -14,6 +14,8 @@ export function GameScreen({
   typed, 
   isShaking,
   isFlashing,
+  isPowerUpShaking,
+  isPowerUpFlashing,
   timeLeft,
   maxTime,
   combo,
@@ -103,7 +105,7 @@ export function GameScreen({
 
   return (
     <div 
-      className={`min-h-screen flex flex-col p-4 md:p-12 cursor-text ${isFlashing ? 'flash-mistake' : ''}`}
+      className={`min-h-screen flex flex-col p-4 md:p-12 cursor-text ${isFlashing ? 'flash-mistake' : ''} ${isPowerUpFlashing ? 'flash-powerup' : ''}`}
       onClick={handleClick}
     >
       {/* Blurred container for game elements during pause */}
@@ -167,7 +169,7 @@ export function GameScreen({
         />
       </div>
 
-      <div className={`flex-1 flex items-center justify-center relative z-20 ${isShaking ? 'shake' : ''} ${isMobile ? 'pb-16' : ''}`}>
+      <div className={`flex-1 flex items-center justify-center relative z-20 ${isShaking ? 'shake' : ''} ${isPowerUpShaking ? 'shake' : ''} ${isMobile ? 'pb-16' : ''}`}>
         <div className="max-w-4xl px-2">
           <SentenceDisplay sentence={sentence} typed={typed} />
         </div>

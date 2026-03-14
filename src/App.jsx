@@ -37,11 +37,14 @@ function App() {
     typed,
     isShaking,
     isFlashing,
+    isPowerUpShaking,
+    isPowerUpFlashing,
     timeLeft,
     maxTime,
     combo,
     maxCombo,
     wpm,
+    accuracy,
     perfectStreak,
     bestScore,
     handleType,
@@ -65,6 +68,7 @@ function App() {
       recordGame({
         level,
         wpm,
+        accuracy,
         maxCombo,
         difficulty,
         perfectStreak,
@@ -158,6 +162,8 @@ function App() {
           typed={typed}
           isShaking={false}
           isFlashing={false}
+          isPowerUpShaking={false}
+          isPowerUpFlashing={false}
           timeLeft={0}
           maxTime={maxTime}
           combo={combo}
@@ -185,6 +191,7 @@ function App() {
           bestScore={bestScore}
           maxCombo={maxCombo}
           wpm={wpm}
+          accuracy={accuracy}
           difficulty={difficulty}
           gameMode={gameMode}
           onRestart={handleRestart}
@@ -211,6 +218,8 @@ function App() {
         typed={typed}
         isShaking={isShaking}
         isFlashing={isFlashing}
+        isPowerUpShaking={isPowerUpShaking}
+        isPowerUpFlashing={isPowerUpFlashing}
         timeLeft={timeLeft}
         maxTime={maxTime}
         combo={combo}

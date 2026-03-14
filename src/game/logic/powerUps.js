@@ -2,6 +2,8 @@ export const POWER_UPS = {
   FREEZE_TIME: 'freeze_time', // +5 seconds
   SHIELD: 'shield', // Next mistake doesn't count
   EXTRA_LIFE: 'extra_life', // Regain a life
+  SLOW_MOTION: 'slow_motion', // Timer runs at half speed
+  DOUBLE_POINTS: 'double_points', // Multiplier is doubled
 };
 
 export const POWER_UP_SPAWN_CHANCE = 0.2; // 20% chance per sentence

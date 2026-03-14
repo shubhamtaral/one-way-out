@@ -19,11 +19,16 @@ export function useGame(soundHooks = {}) {
   const [typed, setTyped] = useState('');
   const [isShaking, setIsShaking] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);
+  const [isPowerUpShaking, setIsPowerUpShaking] = useState(false);
+  const [isPowerUpFlashing, setIsPowerUpFlashing] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
   const [maxTime, setMaxTime] = useState(15);
   const [combo, setCombo] = useState(0);
   const [maxCombo, setMaxCombo] = useState(0);
   const [wpm, setWpm] = useState(0);
+  const [stageWpms, setStageWpms] = useState([]);
+  const [totalErrors, setTotalErrors] = useState(0);
+  const [accuracy, setAccuracy] = useState(100);
   const [perfectStreak, setPerfectStreak] = useState(0);
   const [bestScore, setBestScore] = useState(() => {
     return parseInt(localStorage.getItem('oneWayOut_bestScore') || '0', 10);
@@ -56,15 +61,21 @@ export function useGame(soundHooks = {}) {
   const totalCharsRef = useRef(0);
   const sentencePoolRef = useRef(null);
   const mistakesThisLevelRef = useRef(0);
+  const levelCharsRef = useRef(0);
+  const levelWpmStartRef = useRef(null);
   const lastSentenceTextRef = useRef(null);
   const shieldActiveRef = useRef(false);
+  const slowMotionRef = useRef(false);
+  const doublePointsRef = useRef(false);
   const isPausedRef = useRef(isPaused);
   const survivalStartTimeRef = useRef(null);
+  const gameStateRef = useRef(gameState);
 
   // Sync state to ref for timer interval to access without recreating
   useEffect(() => {
     isPausedRef.current = isPaused;
-  }, [isPaused]);
+    gameStateRef.current = gameState;
+  }, [isPaused, gameState]);
 
   const maxMistakes = gameMode === 'daily' ? 5 : (gameMode === 'endless' ? 5 : getMaxMistakes(difficulty));
 
@@ -86,13 +97,37 @@ export function useGame(soundHooks = {}) {
     lastTickRef.current = 0;
     
     timerRef.current = setInterval(() => {
-      // Skip timer updates when paused or in endless mode without timer
-      if (isPausedRef.current || (gameMode === 'endless')) {
+      // Skip timer updates when paused
+      if (isPausedRef.current) {
+        return;
+      }
+      
+      // Update current level WPM in real-time
+      if (gameStateRef.current === 'playing' && levelWpmStartRef.current) {
+        const currentLevelWpm = computeWpm({
+          totalChars: levelCharsRef.current,
+          startMs: levelWpmStartRef.current,
+          nowMs: Date.now(),
+        });
+        
+        // Calculate the combined average WPM
+        if (stageWpms.length > 0) {
+          const avgStages = stageWpms.reduce((a, b) => a + b, 0) / stageWpms.length;
+          // Blend current level speed with past stages
+          setWpm(Math.round((avgStages + currentLevelWpm) / 2));
+        } else {
+          setWpm(currentLevelWpm);
+        }
+      }
+      
+      // Don't run countdown in endless mode
+      if (gameMode === 'endless') {
         return;
       }
       
       setTimeLeft(prev => {
-        const newTime = prev - 0.1;
+        const decay = slowMotionRef.current ? 0.05 : 0.1;
+        const newTime = prev - decay;
         
         const wholeSecond = Math.ceil(newTime);
         if (wholeSecond !== lastTickRef.current && wholeSecond > 0) {
@@ -118,6 +153,7 @@ export function useGame(soundHooks = {}) {
       mistakesThisLevelRef.current += 1;
       const newMistakes = totalMistakes + 1;
       setTotalMistakes(newMistakes);
+      setTotalErrors(prev => prev + 1);
       setCombo(0);
       setStreakMultiplier(1);
       setPerfectStreak(0);
@@ -143,9 +179,28 @@ export function useGame(soundHooks = {}) {
         setGameState('gameover');
       } else {
         const newLevel = level + 1;
+        
+        // Calculate this level's WPM before moving on
+        if (levelWpmStartRef.current) {
+          const finalLevelWpm = computeWpm({
+            totalChars: levelCharsRef.current,
+            startMs: levelWpmStartRef.current,
+            nowMs: Date.now(),
+          });
+          setStageWpms(prev => [...prev, finalLevelWpm]);
+        }
+
         setLevel(newLevel);
         setTyped('');
         mistakesThisLevelRef.current = 0;
+        levelCharsRef.current = 0;
+        levelWpmStartRef.current = null;
+        
+        // Reset level-based power-ups
+        slowMotionRef.current = false;
+        doublePointsRef.current = false;
+        setActivePowerUps(prev => prev.filter(p => p === POWER_UPS.SHIELD));
+
         const sentence = getSentenceForLevel(newLevel, difficulty, sentencePoolRef.current, lastSentenceTextRef.current, wpm);
         lastSentenceTextRef.current = sentence.text;
         setCurrentSentence(sentence.text);
@@ -166,21 +221,36 @@ export function useGame(soundHooks = {}) {
     if (activePowerUps.length === 0) return;
     
     activePowerUps.forEach(powerUp => {
+      // Trigger visual effect for any power-up activation
+      setIsPowerUpFlashing(true);
+      setIsPowerUpShaking(true);
+      setTimeout(() => {
+        setIsPowerUpFlashing(false);
+        setIsPowerUpShaking(false);
+      }, 400);
+      
       if (powerUp === POWER_UPS.SHIELD) {
         shieldActiveRef.current = true;
       } else if (powerUp === POWER_UPS.FREEZE_TIME) {
-        // Add 5 seconds to timer
         setTimeLeft(prev => prev + 5);
       } else if (powerUp === POWER_UPS.EXTRA_LIFE) {
-        // Restore a life by reducing mistakes
         if (totalMistakes > 0) {
           setTotalMistakes(prev => Math.max(0, prev - 1));
         }
+      } else if (powerUp === POWER_UPS.SLOW_MOTION) {
+        slowMotionRef.current = true;
+        // Effect lasts for the current level
+      } else if (powerUp === POWER_UPS.DOUBLE_POINTS) {
+        doublePointsRef.current = true;
       }
     });
     
-    // Remove power-ups after use (except shield which is handled in handleType)
-    setActivePowerUps(prev => prev.filter(p => p !== POWER_UPS.FREEZE_TIME && p !== POWER_UPS.EXTRA_LIFE));
+    // Remove one-time power-ups
+    setActivePowerUps(prev => prev.filter(p => 
+      p === POWER_UPS.SHIELD || 
+      p === POWER_UPS.SLOW_MOTION || 
+      p === POWER_UPS.DOUBLE_POINTS
+    ));
   }, [activePowerUps, totalMistakes]);
 
   const startGame = useCallback((selectedDifficulty = 'normal') => {
@@ -199,9 +269,16 @@ export function useGame(soundHooks = {}) {
     setStreakMultiplier(1);
     mistakesThisLevelRef.current = 0;
     wpmStartRef.current = null;
+    levelWpmStartRef.current = null;
     totalCharsRef.current = 0;
+    levelCharsRef.current = 0;
+    setStageWpms([]);
+    setTotalErrors(0);
+    setAccuracy(100);
     lastSentenceTextRef.current = null;
     shieldActiveRef.current = false;
+    slowMotionRef.current = false;
+    doublePointsRef.current = false;
     setGameState('playing');
     
     const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0);
@@ -230,7 +307,12 @@ export function useGame(soundHooks = {}) {
     setStreakMultiplier(1);
     mistakesThisLevelRef.current = 0;
     wpmStartRef.current = null;
+    levelWpmStartRef.current = null;
     totalCharsRef.current = 0;
+    levelCharsRef.current = 0;
+    setStageWpms([]);
+    setTotalErrors(0);
+    setAccuracy(100);
     shieldActiveRef.current = false;
     setGameState('playing');
     
@@ -257,7 +339,12 @@ export function useGame(soundHooks = {}) {
     setTotalMistakes(0);
     mistakesThisLevelRef.current = 0;
     wpmStartRef.current = null;
+    levelWpmStartRef.current = null;
     totalCharsRef.current = 0;
+    levelCharsRef.current = 0;
+    setStageWpms([]);
+    setTotalErrors(0);
+    setAccuracy(100);
     lastSentenceTextRef.current = null;
     shieldActiveRef.current = false;
     setIsPaused(false);
@@ -280,17 +367,31 @@ export function useGame(soundHooks = {}) {
     const expectedChar = currentSentence[typed.length];
 
     if (newChar === expectedChar) {
-      if (!wpmStartRef.current) {
-        wpmStartRef.current = Date.now();
-      }
-      totalCharsRef.current += 1;
+      if (!wpmStartRef.current) wpmStartRef.current = Date.now();
+      if (!levelWpmStartRef.current) levelWpmStartRef.current = Date.now();
       
-      const newWpm = computeWpm({
-        totalChars: totalCharsRef.current,
-        startMs: wpmStartRef.current,
+      totalCharsRef.current += 1;
+      levelCharsRef.current += 1;
+      
+      // Real-time WPM update
+      const currentLevelWpm = computeWpm({
+        totalChars: levelCharsRef.current,
+        startMs: levelWpmStartRef.current,
         nowMs: Date.now(),
       });
-      if (newWpm > 0) setWpm(newWpm);
+      
+      if (stageWpms.length > 0) {
+        const avgStages = stageWpms.reduce((a, b) => a + b, 0) / stageWpms.length;
+        setWpm(Math.round((avgStages + currentLevelWpm) / 2));
+      } else {
+        setWpm(currentLevelWpm);
+      }
+
+      // Update global accuracy
+      const totalAttempts = totalCharsRef.current + totalErrors;
+      if (totalAttempts > 0) {
+        setAccuracy(Math.round((totalCharsRef.current / totalAttempts) * 100));
+      }
 
       playKeystroke?.();
       const newTyped = typed + newChar;
@@ -303,7 +404,9 @@ export function useGame(soundHooks = {}) {
         setCombo(newCombo);
         setMaxCombo(prev => Math.max(prev, newCombo));
         
-        setStreakMultiplier(computeStreakMultiplier(newCombo));
+        let multiplier = computeStreakMultiplier(newCombo);
+        if (doublePointsRef.current) multiplier *= 2;
+        setStreakMultiplier(multiplier);
         
         // Track perfect streak (no mistakes this level)
         if (mistakesThisLevelRef.current === 0) {
@@ -313,9 +416,27 @@ export function useGame(soundHooks = {}) {
         }
         
         const newLevel = level + 1;
+        
+        // Calculate this level's WPM before moving on
+        if (levelWpmStartRef.current) {
+          const finalLevelWpm = computeWpm({
+            totalChars: levelCharsRef.current,
+            startMs: levelWpmStartRef.current,
+            nowMs: Date.now(),
+          });
+          setStageWpms(prev => [...prev, finalLevelWpm]);
+        }
+
         setLevel(newLevel);
         setTyped('');
         mistakesThisLevelRef.current = 0;
+        levelCharsRef.current = 0;
+        levelWpmStartRef.current = null;
+        
+        // Reset level-based power-ups
+        slowMotionRef.current = false;
+        doublePointsRef.current = false;
+        setActivePowerUps(prev => prev.filter(p => p === POWER_UPS.SHIELD));
         
         // Get current WPM for adaptive difficulty
         const currentWPM = wpm;
@@ -356,10 +477,19 @@ export function useGame(soundHooks = {}) {
       }
       
       playError?.();
+      setTotalErrors(prev => prev + 1);
       mistakesThisLevelRef.current += 1;
       setCombo(0);
       setStreakMultiplier(1);
       setPerfectStreak(0);
+
+      // Starting the timer even on error if it hasn't started
+      if (!wpmStartRef.current) wpmStartRef.current = Date.now();
+      if (!levelWpmStartRef.current) levelWpmStartRef.current = Date.now();
+      
+      // Update global accuracy
+      const totalAttempts = totalCharsRef.current + totalErrors + 1;
+      setAccuracy(Math.round((totalCharsRef.current / totalAttempts) * 100));
       
       if (gameMode === 'endless') {
         // In endless mode, decrease lives instead of mistakes
@@ -422,11 +552,15 @@ export function useGame(soundHooks = {}) {
     typed,
     isShaking,
     isFlashing,
+    isPowerUpShaking,
+    isPowerUpFlashing,
     timeLeft,
     maxTime,
     combo,
     maxCombo,
     wpm,
+    accuracy,
+    totalErrors,
     perfectStreak,
     bestScore,
     handleType,

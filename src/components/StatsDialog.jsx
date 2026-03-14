@@ -11,6 +11,7 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
   const bestLevel = stats.bestLevel || 0;
   const bestWpm = stats.bestWpm || 0;
   const bestCombo = stats.bestCombo || 0;
+  const bestAccuracy = stats.bestAccuracy || 0;
   const avgLevel = totalGames > 0 ? Math.round(stats.totalLevels / totalGames) : 0;
 
   // Create simple chart
@@ -82,6 +83,12 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
           <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
             <div className="text-[var(--color-bone)]/60 text-xs mb-1">Best Combo</div>
             <div className="text-2xl font-bold text-green-400">{bestCombo}</div>
+          </div>
+
+          {/* Best Accuracy */}
+          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
+            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Best Accuracy</div>
+            <div className="text-2xl font-bold text-cyan-400">{bestAccuracy}%</div>
           </div>
 
           {/* Average Level */}

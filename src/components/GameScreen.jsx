@@ -33,6 +33,7 @@ export function GameScreen({
 }) {
   const inputRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [capsLockActive, setCapsLockActive] = useState(false);
 
   // Detect mobile
   useEffect(() => {
@@ -73,7 +74,7 @@ export function GameScreen({
 
   // Handle pause keyboard shortcuts
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKey = (e) => {
       if (isGameOver) return;
       
       // ESC to pause/resume
@@ -81,10 +82,19 @@ export function GameScreen({
         e.preventDefault();
         onTogglePause?.();
       }
+
+      // Caps Lock detection
+      if (e.getModifierState) {
+        setCapsLockActive(e.getModifierState('CapsLock'));
+      }
     };
     
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKey);
+    window.addEventListener('keyup', handleKey);
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      window.removeEventListener('keyup', handleKey);
+    };
   }, [isGameOver, onTogglePause]);
 
   // Visual decay based on mistakes
@@ -166,6 +176,15 @@ export function GameScreen({
       {!isMobile && (
         <div className="text-center text-[var(--color-bone)]/20 text-sm relative z-10 transition-opacity" style={{ opacity: isPaused ? 0.3 : 1 }}>
           just type
+        </div>
+      )}
+
+      {capsLockActive && !isPaused && !isGameOver && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 animate-pulse">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-500 px-4 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold flex items-center gap-2">
+            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+            CAPS LOCK ACTIVE
+          </div>
         </div>
       )}
 

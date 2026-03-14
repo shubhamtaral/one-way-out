@@ -1,4 +1,4 @@
-import { POWER_UPS } from '../hooks/useGame';
+import { POWER_UPS } from '../game/logic/powerUps';
 
 export function PowerUpsUI({ activePowerUps, currentLevelPowerUp }) {
   const getPowerUpIcon = (powerUp) => {

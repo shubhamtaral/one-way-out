@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { THEMES, getUnlockedThemes, applyTheme } from '../config/themes';
+import { ACHIEVEMENTS } from '../config/achievements';
 
 export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange }) {
   const [timeframe, setTimeframe] = useState('all'); // all, week, month
@@ -111,15 +112,20 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
               Unlocked ({stats.unlockedAchievements.length})
             </h3>
             <div className="flex flex-wrap gap-2">
-              {stats.unlockedAchievements.slice(0, 8).map((achievement, idx) => (
-                <div
-                  key={idx}
-                  className="w-10 h-10 bg-yellow-900/30 rounded flex items-center justify-center text-lg border border-yellow-600/50"
-                  title={achievement}
-                >
-                  🏆
-                </div>
-              ))}
+              {stats.unlockedAchievements.slice(0, 8).map((achievementId, idx) => {
+                const achievement = ACHIEVEMENTS[achievementId];
+                if (!achievement) return null;
+                
+                return (
+                  <div
+                    key={idx}
+                    className="w-10 h-10 bg-yellow-900/30 rounded flex items-center justify-center text-lg border border-yellow-600/50 cursor-help"
+                    title={`${achievement.name}: ${achievement.description}`}
+                  >
+                    {achievement.icon}
+                  </div>
+                );
+              })}
               {stats.unlockedAchievements.length > 8 && (
                 <div className="w-10 h-10 bg-[var(--color-bone)]/5 rounded flex items-center justify-center text-xs text-[var(--color-bone)]/60">
                   +{stats.unlockedAchievements.length - 8}
@@ -147,17 +153,23 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
                     }
                   }}
                   disabled={!isUnlocked}
-                  className={`p-2 rounded text-center transition-all text-sm ${
+                  className={`p-2 rounded flex flex-col items-center justify-center text-center transition-all text-sm ${
                     isSelected
                       ? 'border-2 border-[var(--color-bone)] bg-[var(--color-bone)]/10'
                       : isUnlocked
                       ? 'border border-[var(--color-bone)]/30 hover:border-[var(--color-bone)]/60'
-                      : 'border border-[var(--color-bone)]/10 opacity-40 cursor-not-allowed'
+                      : 'border border-[var(--color-bone)]/10 opacity-50 cursor-not-allowed'
                   }`}
                 >
                   <div className="text-lg mb-1">{theme.icon}</div>
                   <div className="text-xs font-bold">{theme.name}</div>
-                  {isSelected && <div className="text-xs text-green-400 mt-1">✓</div>}
+                  {!isUnlocked ? (
+                    <div className="text-[10px] text-[var(--color-bone)]/60 mt-1 leading-tight">
+                      🔒 {theme.unlockedBy ? ACHIEVEMENTS[theme.unlockedBy]?.description : 'Locked'}
+                    </div>
+                  ) : isSelected && (
+                    <div className="text-[10px] text-green-400 mt-1">✓ Active</div>
+                  )}
                 </button>
               );
             })}

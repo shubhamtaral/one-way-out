@@ -21,6 +21,9 @@ function loadLocalStats() {
     totalLevels: 0,
     unlockedAchievements: [],
     lastPlayed: null,
+    totalPractice: 0,
+    practicePerfect: 0,
+    konamiCodeUnlocked: false,
   };
 }
 
@@ -150,6 +153,7 @@ export function useStats(user) {
         maxCombo,
         difficulty,
         perfectStreak,
+        gameMode,
         totalGames: updated.totalGames,
       };
 
@@ -180,6 +184,92 @@ export function useStats(user) {
     });
   }, [user]);
 
+  const recordPractice = useCallback((practiceStats) => {
+    setStats(prev => {
+      const updated = {
+        ...prev,
+        totalPractice: (prev.totalPractice || 0) + practiceStats.totalTyped,
+        practicePerfect: (prev.practicePerfect || 0) + practiceStats.correct,
+      };
+
+      const checkStats = {
+        totalPractice: updated.totalPractice,
+        practicePerfect: updated.practicePerfect,
+        gameMode: 'practice',
+        totalGames: updated.totalGames
+      };
+
+      const newlyUnlocked = getNewAchievements(checkStats, prev.unlockedAchievements);
+      
+      if (newlyUnlocked.length > 0) {
+        updated.unlockedAchievements = [
+          ...prev.unlockedAchievements,
+          ...newlyUnlocked.map(a => a.id),
+        ];
+        // Combine new achievements with existing ones pending display
+        setNewAchievements(prevNew => [...prevNew, ...newlyUnlocked]);
+      }
+
+      return updated;
+    });
+  }, []);
+
+  const recordKonami = useCallback(() => {
+    setStats(prev => {
+      if (prev.konamiCodeUnlocked) return prev; // Already unlocked
+      
+      const updated = {
+        ...prev,
+        konamiCodeUnlocked: true,
+      };
+
+      const checkStats = {
+        konamiCodeUnlocked: true,
+      };
+
+      const newlyUnlocked = getNewAchievements(checkStats, prev.unlockedAchievements);
+      
+      if (newlyUnlocked.length > 0) {
+        updated.unlockedAchievements = [
+          ...prev.unlockedAchievements,
+          ...newlyUnlocked.map(a => a.id),
+        ];
+        setNewAchievements(prevNew => [...prevNew, ...newlyUnlocked]);
+      }
+
+      // We should probably save the user profile as well if logged in, just stringifying here for now
+      return updated;
+    });
+  }, []);
+
+  const recordEasterEgg = useCallback((eggId) => {
+    setStats(prev => {
+      const stateKey = `${eggId}Unlocked`;
+      if (prev[stateKey]) return prev;
+      
+      const updated = {
+        ...prev,
+        [stateKey]: true,
+      };
+
+      const checkStats = {
+        [stateKey]: true,
+      };
+
+      const newlyUnlocked = getNewAchievements(checkStats, prev.unlockedAchievements);
+      
+      if (newlyUnlocked.length > 0) {
+        updated.unlockedAchievements = [
+          ...prev.unlockedAchievements,
+          ...newlyUnlocked.map(a => a.id),
+        ];
+        setNewAchievements(prevNew => [...prevNew, ...newlyUnlocked]);
+      }
+
+      return updated;
+    });
+  }, []);
+
   const clearNewAchievements = useCallback(() => {
     setNewAchievements([]);
   }, []);
@@ -189,6 +279,9 @@ export function useStats(user) {
     newAchievements,
     syncing,
     recordGame,
+    recordPractice,
+    recordKonami,
+    recordEasterEgg,
     clearNewAchievements,
   };
 }

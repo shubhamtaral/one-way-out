@@ -1,15 +1,29 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { logger } from '../utils/logger';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCLi0DispQ1JNNyAn5-Yrc6Pwoisw60dRc",
-  authDomain: "one-way-out-d3cf3.firebaseapp.com",
-  projectId: "one-way-out-d3cf3",
-  storageBucket: "one-way-out-d3cf3.firebasestorage.app",
-  messagingSenderId: "33088827867",
-  appId: "1:33088827867:web:daafe66e975dad4c4e37fe"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
+
+const missingKeys = Object.entries(firebaseConfig)
+  .filter(([, value]) => !value)
+  .map(([key]) => key);
+
+if (missingKeys.length > 0) {
+  logger.error(
+    'Firebase config is missing required env vars:',
+    missingKeys.join(', '),
+    '- check your VITE_FIREBASE_* settings.'
+  );
+  throw new Error('Firebase configuration incomplete. See console for details.');
+}
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);

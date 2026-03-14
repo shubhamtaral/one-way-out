@@ -7,7 +7,11 @@ import { PracticeMode } from './PracticeMode';
 import { StatsDialog } from './StatsDialog';
 import { ACHIEVEMENTS } from '../config/achievements';
 
-export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user, onSignIn, onSignOut, authLoading, selectedTheme, onThemeChange }) {
+const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+const SECRET_CREATORS = ['tusharx1143', 'shubhamtaral'];
+const SECRET_JUMPSCARE = 'jumpscare';
+
+export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user, onSignIn, onSignOut, authLoading, selectedTheme, onThemeChange, onRecordPractice, onRecordKonami, onRecordEasterEgg }) {
   const [selectedDifficulty, setSelectedDifficulty] = useState('normal');
   const [flicker, setFlicker] = useState(false);
   const [ready, setReady] = useState(false);
@@ -18,6 +22,8 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
 
   const dailyPlayed = hasDailyBeenPlayed();
   const dailyBest = getDailyBest();
+  const [konamiIndex, setKonamiIndex] = useState(0);
+  const [typedBuffer, setTypedBuffer] = useState('');
 
   useEffect(() => {
     const timeout = setTimeout(() => setReady(true), 500);
@@ -45,11 +51,55 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
           setShowMode('main');
         }
       }
+
+      // Konami Code logic
+      if (showMode === 'main' && !showLeaderboard && !showPractice && !showStats) {
+        if (e.key === KONAMI_CODE[konamiIndex]) {
+          const newIndex = konamiIndex + 1;
+          if (newIndex === KONAMI_CODE.length) {
+            // Unlocked Konami!
+            if (onRecordKonami) {
+              onRecordKonami();
+            }
+            // Add a visual flash effect for finding the easter egg
+            setFlicker(true);
+            setTimeout(() => setFlicker(false), 500);
+            setKonamiIndex(0); // Reset
+          } else {
+            setKonamiIndex(newIndex);
+          }
+        } else {
+          setKonamiIndex(0); // Failed sequence, reset
+        }
+      }
+
+      // Word tracking for other easter eggs
+      if (showMode === 'main' && !showLeaderboard && !showPractice && !showStats && e.key.length === 1) {
+        setTypedBuffer(prev => {
+          const newBuffer = (prev + e.key.toLowerCase()).slice(-20); // Keep last 20 chars
+          
+          if (SECRET_CREATORS.some(creator => newBuffer.includes(creator))) {
+            if (onRecordEasterEgg) onRecordEasterEgg('creator');
+            setFlicker(true);
+            setTimeout(() => setFlicker(false), 800);
+            return ''; // Reset buffer
+          }
+          
+          if (newBuffer.includes(SECRET_JUMPSCARE)) {
+            if (onRecordEasterEgg) onRecordEasterEgg('jumpscare');
+            setFlicker(true);
+            setTimeout(() => setFlicker(false), 200);
+            return ''; // Reset buffer
+          }
+          
+          return newBuffer;
+        });
+      }
     };
     
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [onStart, selectedDifficulty, ready, showMode, showLeaderboard]);
+  }, [onStart, selectedDifficulty, ready, showMode, showLeaderboard, showPractice, showStats, konamiIndex, onRecordKonami, onRecordEasterEgg]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -283,10 +333,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
       {showPractice && (
         <PracticeMode
           onClose={() => setShowPractice(false)}
-          onComplete={() => {
-            setShowPractice(false);
-            setShowMode('main');
-          }}
+          onRecordPractice={onRecordPractice}
         />
       )}
 

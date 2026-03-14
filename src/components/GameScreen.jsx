@@ -93,13 +93,19 @@ export function GameScreen({
 
   return (
     <div 
-      className={`min-h-screen flex flex-col p-4 md:p-12 cursor-text ${isFlashing ? 'flash-mistake' : ''} ${isPaused ? 'opacity-40' : ''}`}
+      className={`min-h-screen flex flex-col p-4 md:p-12 cursor-text ${isFlashing ? 'flash-mistake' : ''}`}
       onClick={handleClick}
-      style={{ 
-        opacity: decayOpacity,
-        filter: isGameOver ? 'none' : (isPaused ? 'blur(5px)' : decayFilter),
-      }}
     >
+      {/* Blurred container for game elements during pause */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none transition-all duration-300"
+        style={{ 
+          opacity: decayOpacity,
+          backdropFilter: isGameOver ? 'none' : (isPaused ? 'blur(5px)' : decayFilter),
+          WebkitBackdropFilter: isGameOver ? 'none' : (isPaused ? 'blur(5px)' : decayFilter),
+          backgroundColor: isPaused ? 'rgba(0,0,0,0.4)' : 'transparent',
+        }}
+      />
       {/* Creature component */}
       <Creature 
         mistakes={mistakes} 
@@ -158,13 +164,13 @@ export function GameScreen({
       </div>
 
       {!isMobile && (
-        <div className="text-center text-[var(--color-bone)]/20 text-sm relative z-20">
+        <div className="text-center text-[var(--color-bone)]/20 text-sm relative z-10 transition-opacity" style={{ opacity: isPaused ? 0.3 : 1 }}>
           just type
         </div>
       )}
 
       {isMobile && (
-        <div className="text-center text-[var(--color-bone)]/30 text-xs pb-16 relative z-20">
+        <div className="text-center text-[var(--color-bone)]/30 text-xs pb-16 relative z-10 transition-opacity" style={{ opacity: isPaused ? 0.3 : 1 }}>
           tap the input below to type
         </div>
       )}

@@ -19,7 +19,7 @@ export const THEMES = {
       bloodBright: '#CC3333',
       void: '#0a0a0a',
     },
-    unlockedBy: 'reach_level_20', // Achievement requirement
+    unlockedBy: 'fighter', // Reach level 10
   },
   bloodRed: {
     id: 'bloodRed',
@@ -30,7 +30,7 @@ export const THEMES = {
       bloodBright: '#FF0000',
       void: '#330000',
     },
-    unlockedBy: 'reach_level_50',
+    unlockedBy: 'legend', // Reach level 30
   },
   neon: {
     id: 'neon',
@@ -41,7 +41,7 @@ export const THEMES = {
       bloodBright: '#FF00FF',
       void: '#0a0a0a',
     },
-    unlockedBy: 'perfect_streak_10',
+    unlockedBy: 'wpm50', // Reach 50 WPM
   },
   ice: {
     id: 'ice',
@@ -52,13 +52,24 @@ export const THEMES = {
       bloodBright: '#00CCFF',
       void: '#001a33',
     },
-    unlockedBy: 'survive_60',
+    unlockedBy: 'addict', // Play 40 games
+  },
+  matrix: {
+    id: 'matrix',
+    name: 'The Matrix',
+    icon: '🕶️',
+    colors: {
+      bone: '#00FF41',
+      bloodBright: '#008F11',
+      void: '#000000',
+    },
+    unlockedBy: 'theMatrix', // Easter egg
   },
 };
 
 export function getUnlockedThemes(achievements) {
   const unlocked = {};
-  
+
   Object.entries(THEMES).forEach(([key, theme]) => {
     if (theme.unlocked) {
       unlocked[key] = theme;
@@ -66,19 +77,19 @@ export function getUnlockedThemes(achievements) {
       unlocked[key] = theme;
     }
   });
-  
+
   return unlocked;
 }
 
 export function applyTheme(themeId) {
   const theme = THEMES[themeId];
   if (!theme) return;
-  
+
   const root = document.documentElement;
   root.style.setProperty('--color-bone', theme.colors.bone);
   root.style.setProperty('--color-blood-bright', theme.colors.bloodBright);
   root.style.setProperty('--color-void', theme.colors.void);
-  
+
   localStorage.setItem('oneWayOut_selectedTheme', themeId);
 }
 

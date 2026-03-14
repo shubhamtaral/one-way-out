@@ -119,7 +119,7 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
               Unlocked ({stats.unlockedAchievements.length})
             </h3>
             <div className="flex flex-wrap gap-2">
-              {stats.unlockedAchievements.slice(0, 8).map((achievementId, idx) => {
+              {stats.unlockedAchievements.map((achievementId, idx) => {
                 const achievement = ACHIEVEMENTS[achievementId];
                 if (!achievement) return null;
                 
@@ -133,11 +133,6 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
                   </div>
                 );
               })}
-              {stats.unlockedAchievements.length > 8 && (
-                <div className="w-10 h-10 bg-[var(--color-bone)]/5 rounded flex items-center justify-center text-xs text-[var(--color-bone)]/60">
-                  +{stats.unlockedAchievements.length - 8}
-                </div>
-              )}
             </div>
           </div>
         )}

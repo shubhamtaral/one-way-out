@@ -58,7 +58,13 @@ export function useGame(soundHooks = {}) {
   const mistakesThisLevelRef = useRef(0);
   const lastSentenceTextRef = useRef(null);
   const shieldActiveRef = useRef(false);
+  const isPausedRef = useRef(isPaused);
   const survivalStartTimeRef = useRef(null);
+
+  // Sync state to ref for timer interval to access without recreating
+  useEffect(() => {
+    isPausedRef.current = isPaused;
+  }, [isPaused]);
 
   const maxMistakes = gameMode === 'daily' ? 5 : (gameMode === 'endless' ? 5 : getMaxMistakes(difficulty));
 
@@ -81,7 +87,7 @@ export function useGame(soundHooks = {}) {
     
     timerRef.current = setInterval(() => {
       // Skip timer updates when paused or in endless mode without timer
-      if (isPaused || (gameMode === 'endless')) {
+      if (isPausedRef.current || (gameMode === 'endless')) {
         return;
       }
       
@@ -102,7 +108,7 @@ export function useGame(soundHooks = {}) {
         return newTime;
       });
     }, 100);
-  }, [clearTimer, playTick, playWarningTick, isPaused, gameMode]);
+  }, [clearTimer, playTick, playWarningTick, gameMode]);
 
   // Handle timer expiry
   useEffect(() => {

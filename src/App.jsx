@@ -13,7 +13,7 @@ import { initTheme } from './config/themes';
 function App() {
   const sound = useSound();
   const { user, loading: authLoading, signInWithGoogle, signOut } = useAuth();
-  const { stats, newAchievements, recordGame, clearNewAchievements } = useStats(user);
+  const { stats, newAchievements, recordGame, recordPractice, recordKonami, recordEasterEgg, clearNewAchievements } = useStats(user);
   const [showDeathScreen, setShowDeathScreen] = useState(false);
   const [gameRecorded, setGameRecorded] = useState(false);
   
@@ -70,11 +70,16 @@ function App() {
         perfectStreak,
         gameMode,
       });
+
+      if (level === 40) {
+        recordEasterEgg('error404');
+      }
+
       setGameRecorded(true);
     } else if (gameState === 'playing') {
       setGameRecorded(false);
     }
-  }, [gameState, gameRecorded, recordGame, level, wpm, maxCombo, difficulty, perfectStreak, gameMode]);
+  }, [gameState, gameRecorded, recordGame, recordEasterEgg, level, wpm, maxCombo, difficulty, perfectStreak, gameMode]);
 
   // Delay showing game over screen for death animation
   useEffect(() => {
@@ -129,6 +134,9 @@ function App() {
           authLoading={authLoading}
           selectedTheme={selectedTheme}
           onThemeChange={setSelectedTheme}
+          onRecordPractice={recordPractice}
+          onRecordKonami={recordKonami}
+          onRecordEasterEgg={recordEasterEgg}
         />
         <AchievementPopup 
           achievements={newAchievements} 

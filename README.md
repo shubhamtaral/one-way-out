@@ -122,13 +122,50 @@ src/
 | 🔥 Combo Starter | Get a 3x combo |
 | 🔥 On Fire | Get a 5x combo |
 | 💥 Unstoppable | Get a 10x combo |
-| ⌨️ Quick Fingers | Reach 50 WPM |
-| ⚡ Speed Demon | Reach 80 WPM |
-| 🌩️ Lightning Hands | Reach 100 WPM |
+| 🦄 Mythical | Get a 15x combo |
+| 🌋 Godlike | Get a 20x combo |
+| 🔍 Keyboard Searcher | Reach 20 WPM |
+| 👆 One Finger Wonder | Reach 30 WPM |
+| 📝 Sarkari Babu | Reach 40 WPM |
+| 💻 Data Entry Pro | Reach 50 WPM |
+| ⌨️ Typist Ji | Reach 60 WPM |
+| 🏪 Cyber Cafe Owner | Reach 70 WPM |
+| ⚖️ High Court Steno | Reach 80 WPM |
+| 🖨️ Typewriter Machine | Reach 90 WPM |
+| 📜 Chitragupta | Reach 100 WPM |
 | 😈 Nightmare Survivor | Level 10 on Nightmare |
+| 👹 Nightmare Master | Level 20 on Nightmare |
+| 💀 Nightmare God | Level 30 on Nightmare |
+| 🎮 Casual Master | Reach level 30 on Casual |
+| 📅 Daily Routine | Play a Daily Challenge |
+| 🌞 Daily Master | Reach level 15 in Daily Challenge |
+| 📚 Practice Makes Perfect | Practice 10 sentences |
+| 🏋️‍♂️ Training Montage | Type 50 perfect sentences in Practice Mode |
 | ✨ Perfect Run | 5 levels without mistakes |
+| 💎 Flawless Execution | 10 levels without mistakes |
+| 🩸 Welcome to Hell | Die for the first time |
 | 🎯 Dedicated | Play 10 games |
+| 🎮 Regular Player | Play 20 games |
+| 🎲 Enthusiast | Play 30 games |
+| 🕹️ Addict | Play 40 games |
 | 🏅 Veteran | Play 50 games |
+| 🔥 Hardcore | Play 60 games |
+| 👀 Obsessed | Play 70 games |
+| 👻 No Life | Play 80 games |
+| 🏠 Resident | Play 90 games |
+| 💯 Centurion | Play 100 games |
+| 🕶️ Glitch in the System | Discover the secret code |
+| 👨‍💻 Developer's Blessing | Summon the creator |
+| 👻 Curiosity Killed the Cat | Found the jumpscare secret |
+| ⛔ Error 404: Skill Not Found | Die exactly on level 40 |
+
+## 🤫 Secrets & Easter Eggs
+
+There are hidden secrets scattered throughout the game! Some hints for dedicated hunters:
+- **Up, Up, Down, Down...** you know the rest. Try it on the main menu.
+- **Who made this game?** Maybe typing their GitHub handle will trigger something...
+- **"JUMPSCARE"** type it if you dare...
+- **404 Not Found:** Precision dying will reward you...
 
 ## 📜 License
 

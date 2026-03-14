@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import sentences from '../data/sentences.json';
 
-export function PracticeMode({ onClose, onComplete }) {
+export function PracticeMode({ onClose, onRecordPractice }) {
   const [level, setLevel] = useState(1);
   const [typed, setTyped] = useState('');
   const [currentSentence, setCurrentSentence] = useState(null);
@@ -89,6 +89,14 @@ export function PracticeMode({ onClose, onComplete }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [typed, currentSentence]);
 
+  // Record practice stats before closing
+  const handleClose = () => {
+    if (onRecordPractice && stats.totalTyped > 0) {
+      onRecordPractice(stats);
+    }
+    onClose();
+  };
+
   if (!currentSentence) {
     return (
       <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
@@ -96,7 +104,7 @@ export function PracticeMode({ onClose, onComplete }) {
           <h2 className="text-2xl font-bold text-[var(--color-bone)] mb-4">Practice Mode</h2>
           <p className="text-[var(--color-bone)]/60 mb-6">No levels available for selected filter</p>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="px-6 py-2 bg-[var(--color-bone)]/10 hover:bg-[var(--color-bone)]/20 text-[var(--color-bone)] rounded"
           >
             Back
@@ -113,7 +121,7 @@ export function PracticeMode({ onClose, onComplete }) {
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-[var(--color-bone)]">📚 Practice Mode</h2>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)] text-2xl"
           >
             ✕
@@ -212,7 +220,7 @@ export function PracticeMode({ onClose, onComplete }) {
             Next Sentence (Enter)
           </button>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="flex-1 bg-[var(--color-bone)]/5 hover:bg-[var(--color-bone)]/10 text-[var(--color-bone)] py-3 rounded font-semibold transition-colors"
           >
             Done

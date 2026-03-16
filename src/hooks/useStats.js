@@ -18,6 +18,7 @@ function loadLocalStats() {
     bestLevel: 0,
     bestWpm: 0,
     bestCombo: 0,
+    bestAccuracy: 0,
     totalLevels: 0,
     unlockedAchievements: [],
     lastPlayed: null,
@@ -55,6 +56,7 @@ export function useStats(user) {
             bestLevel: Math.max(prev.bestLevel, cloudStats.bestLevel || 0),
             bestWpm: Math.max(prev.bestWpm, cloudStats.bestWpm || 0),
             bestCombo: Math.max(prev.bestCombo, cloudStats.bestCombo || 0),
+            bestAccuracy: Math.max(prev.bestAccuracy || 0, cloudStats.bestAccuracy || 0),
             totalLevels: Math.max(prev.totalLevels, cloudStats.totalLevels || 0),
             unlockedAchievements: [...new Set([
               ...(prev.unlockedAchievements || []),
@@ -83,7 +85,7 @@ export function useStats(user) {
     if (!pendingSync || !user) return;
 
     const { gameStats, updatedStats } = pendingSync;
-    const { level, wpm, maxCombo, difficulty, perfectStreak, gameMode } = gameStats;
+    const { level, wpm, accuracy, maxCombo, difficulty, perfectStreak, gameMode } = gameStats;
 
     async function syncToFirebase() {
       try {
@@ -133,7 +135,7 @@ export function useStats(user) {
     console.log('🎮 recordGame called with:', gameStats);
     console.log('👤 Current user:', user ? user.uid : 'NOT LOGGED IN');
     
-    const { level, wpm, maxCombo, difficulty, perfectStreak, gameMode } = gameStats;
+    const { level, wpm, accuracy, maxCombo, difficulty, perfectStreak, gameMode } = gameStats;
     
     setStats(prev => {
       const updated = {
@@ -142,6 +144,7 @@ export function useStats(user) {
         bestLevel: Math.max(prev.bestLevel, level),
         bestWpm: Math.max(prev.bestWpm, wpm),
         bestCombo: Math.max(prev.bestCombo, maxCombo),
+        bestAccuracy: Math.max(prev.bestAccuracy || 0, accuracy || 0),
         totalLevels: prev.totalLevels + level,
         lastPlayed: Date.now(),
       };

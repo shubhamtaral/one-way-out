@@ -37,9 +37,9 @@ export const THEMES = {
     name: 'Neon Nightmare',
     icon: '⚡',
     colors: {
-      bone: '#00FF00',
-      bloodBright: '#FF00FF',
-      void: '#0a0a0a',
+      bone: '#FF00FF', // Neon Magenta
+      bloodBright: '#00FFFF', // Neon Cyan
+      void: '#120422', // Deep Space Purple
     },
     unlockedBy: 'wpm50', // Reach 50 WPM
   },

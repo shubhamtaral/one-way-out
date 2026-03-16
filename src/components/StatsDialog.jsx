@@ -11,6 +11,7 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
   const bestLevel = stats.bestLevel || 0;
   const bestWpm = stats.bestWpm || 0;
   const bestCombo = stats.bestCombo || 0;
+  const bestAccuracy = stats.bestAccuracy || 0;
   const avgLevel = totalGames > 0 ? Math.round(stats.totalLevels / totalGames) : 0;
 
   // Create simple chart
@@ -84,6 +85,12 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
             <div className="text-2xl font-bold text-green-400">{bestCombo}</div>
           </div>
 
+          {/* Best Accuracy */}
+          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
+            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Best Accuracy</div>
+            <div className="text-2xl font-bold text-cyan-400">{bestAccuracy}%</div>
+          </div>
+
           {/* Average Level */}
           <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
             <div className="text-[var(--color-bone)]/60 text-xs mb-1">Avg Level</div>
@@ -112,7 +119,7 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
               Unlocked ({stats.unlockedAchievements.length})
             </h3>
             <div className="flex flex-wrap gap-2">
-              {stats.unlockedAchievements.slice(0, 8).map((achievementId, idx) => {
+              {stats.unlockedAchievements.map((achievementId, idx) => {
                 const achievement = ACHIEVEMENTS[achievementId];
                 if (!achievement) return null;
                 
@@ -126,11 +133,6 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
                   </div>
                 );
               })}
-              {stats.unlockedAchievements.length > 8 && (
-                <div className="w-10 h-10 bg-[var(--color-bone)]/5 rounded flex items-center justify-center text-xs text-[var(--color-bone)]/60">
-                  +{stats.unlockedAchievements.length - 8}
-                </div>
-              )}
             </div>
           </div>
         )}

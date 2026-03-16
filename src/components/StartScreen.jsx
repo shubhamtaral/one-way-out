@@ -5,6 +5,7 @@ import { AuthButton } from './AuthButton';
 import { Leaderboard } from './Leaderboard';
 import { PracticeMode } from './PracticeMode';
 import { StatsDialog } from './StatsDialog';
+import { CreditsDialog } from './CreditsDialog';
 import { ACHIEVEMENTS } from '../config/achievements';
 
 const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -19,6 +20,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showPractice, setShowPractice] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const [showCredits, setShowCredits] = useState(false);
 
   const dailyPlayed = hasDailyBeenPlayed();
   const dailyBest = getDailyBest();
@@ -53,7 +55,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
       }
 
       // Konami Code logic
-      if (showMode === 'main' && !showLeaderboard && !showPractice && !showStats) {
+      if (showMode === 'main' && !showLeaderboard && !showPractice && !showStats && !showCredits) {
         if (e.key === KONAMI_CODE[konamiIndex]) {
           const newIndex = konamiIndex + 1;
           if (newIndex === KONAMI_CODE.length) {
@@ -99,7 +101,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
     
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [onStart, selectedDifficulty, ready, showMode, showLeaderboard, showPractice, showStats, konamiIndex, onRecordKonami, onRecordEasterEgg]);
+  }, [onStart, selectedDifficulty, ready, showMode, showLeaderboard, showPractice, showStats, showCredits, konamiIndex, onRecordKonami, onRecordEasterEgg]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -190,6 +192,13 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
               📊 YOUR STATS
             </button>
           )}
+
+          <button
+            onClick={() => setShowCredits(true)}
+            className="py-2 text-[var(--color-bone)]/30 hover:text-[var(--color-bone)]/60 transition-all text-[10px] tracking-[0.3em] uppercase mt-2"
+          >
+            📜 Credits
+          </button>
         </div>
       )}
 
@@ -345,6 +354,12 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
           onClose={() => setShowStats(false)}
           selectedTheme={selectedTheme}
           onThemeChange={onThemeChange}
+        />
+      )}
+
+      {showCredits && (
+        <CreditsDialog 
+          onClose={() => setShowCredits(false)} 
         />
       )}
     </div>

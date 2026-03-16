@@ -14,6 +14,8 @@ export function GameScreen({
   typed, 
   isShaking,
   isFlashing,
+  isPowerUpShaking,
+  isPowerUpFlashing,
   timeLeft,
   maxTime,
   combo,
@@ -33,6 +35,7 @@ export function GameScreen({
 }) {
   const inputRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [capsLockActive, setCapsLockActive] = useState(false);
 
   // Detect mobile
   useEffect(() => {
@@ -73,7 +76,7 @@ export function GameScreen({
 
   // Handle pause keyboard shortcuts
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKey = (e) => {
       if (isGameOver) return;
       
       // ESC to pause/resume
@@ -81,10 +84,19 @@ export function GameScreen({
         e.preventDefault();
         onTogglePause?.();
       }
+
+      // Caps Lock detection
+      if (e.getModifierState) {
+        setCapsLockActive(e.getModifierState('CapsLock'));
+      }
     };
     
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleKey);
+    window.addEventListener('keyup', handleKey);
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      window.removeEventListener('keyup', handleKey);
+    };
   }, [isGameOver, onTogglePause]);
 
   // Visual decay based on mistakes
@@ -93,7 +105,7 @@ export function GameScreen({
 
   return (
     <div 
-      className={`min-h-screen flex flex-col p-4 md:p-12 cursor-text ${isFlashing ? 'flash-mistake' : ''}`}
+      className={`min-h-screen flex flex-col p-4 md:p-12 cursor-text ${isFlashing ? 'flash-mistake' : ''} ${isPowerUpFlashing ? 'flash-powerup' : ''}`}
       onClick={handleClick}
     >
       {/* Blurred container for game elements during pause */}
@@ -157,7 +169,7 @@ export function GameScreen({
         />
       </div>
 
-      <div className={`flex-1 flex items-center justify-center relative z-20 ${isShaking ? 'shake' : ''} ${isMobile ? 'pb-16' : ''}`}>
+      <div className={`flex-1 flex items-center justify-center relative z-20 ${isShaking ? 'shake' : ''} ${isPowerUpShaking ? 'shake' : ''} ${isMobile ? 'pb-16' : ''}`}>
         <div className="max-w-4xl px-2">
           <SentenceDisplay sentence={sentence} typed={typed} />
         </div>
@@ -166,6 +178,15 @@ export function GameScreen({
       {!isMobile && (
         <div className="text-center text-[var(--color-bone)]/20 text-sm relative z-10 transition-opacity" style={{ opacity: isPaused ? 0.3 : 1 }}>
           just type
+        </div>
+      )}
+
+      {capsLockActive && !isPaused && !isGameOver && (
+        <div className="fixed top-24 left-1/2 -translate-x-1/2 z-50 animate-pulse">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-500 px-4 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold flex items-center gap-2">
+            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+            CAPS LOCK ACTIVE
+          </div>
         </div>
       )}
 

@@ -12,6 +12,7 @@ export function PracticeMode({ onClose, onRecordPractice }) {
     mistakes: 0,
     avgAccuracy: 0,
   });
+  const [capsLockActive, setCapsLockActive] = useState(false);
   const [lastSentenceIndex, setLastSentenceIndex] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState('all'); // 'all' or specific level
 
@@ -81,12 +82,24 @@ export function PracticeMode({ onClose, onRecordPractice }) {
   // Handle key press
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if (e.getModifierState) {
+        setCapsLockActive(e.getModifierState('CapsLock'));
+      }
       if (e.key === 'Enter') {
         handleNext();
       }
     };
+    const handleKeyUp = (e) => {
+      if (e.getModifierState) {
+        setCapsLockActive(e.getModifierState('CapsLock'));
+      }
+    };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
   }, [typed, currentSentence]);
 
   // Record practice stats before closing
@@ -196,6 +209,15 @@ export function PracticeMode({ onClose, onRecordPractice }) {
             placeholder="Start typing..."
             className="w-full bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/20 rounded px-4 py-3 text-[var(--color-bone)] placeholder-[var(--color-bone)]/30 focus:outline-none focus:border-[var(--color-bone)]/40"
           />
+
+          {capsLockActive && (
+            <div className="absolute left-1/2 -translate-x-1/2 -top-10 animate-pulse w-full flex justify-center">
+              <div className="bg-red-500/20 border border-red-500/50 text-red-500 px-4 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold flex items-center gap-2">
+                <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+                CAPS LOCK ACTIVE
+              </div>
+            </div>
+          )}
 
           {/* Accuracy display */}
           {accuracy !== null && (

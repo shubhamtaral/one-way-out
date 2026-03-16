@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DIFFICULTIES } from '../config/difficulty';
 import { ShareCard } from './ShareCard';
 
-export function GameOverScreen({ level, bestScore, maxCombo, wpm, difficulty, gameMode, onRestart, timeSurvived, perfectStreak }) {
+export function GameOverScreen({ level, bestScore, maxCombo, wpm, accuracy, difficulty, gameMode, onRestart, timeSurvived, perfectStreak }) {
   const [showShare, setShowShare] = useState(false);
   
   const isNewBest = level >= bestScore;
@@ -44,25 +44,31 @@ export function GameOverScreen({ level, bestScore, maxCombo, wpm, difficulty, ga
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-blue-400">{wpm}</div>
-            <div>WPM</div>
+            <div className="text-[10px] uppercase tracking-wider">Avg WPM</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-cyan-400">{accuracy}%</div>
+            <div className="text-[10px] uppercase tracking-wider">Accuracy</div>
           </div>
         </div>
       ) : (
-        <div className="flex gap-8 text-[var(--color-bone)]/60 text-sm md:text-base mt-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-[var(--color-bone)]/60 text-sm md:text-base mt-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-[var(--color-bone)]">{wpm}</div>
-            <div>WPM</div>
+            <div className="text-[10px] uppercase tracking-wider">Avg WPM</div>
+          </div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-cyan-400">{accuracy}%</div>
+            <div className="text-[10px] uppercase tracking-wider">Accuracy</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-yellow-400">{maxCombo}</div>
-            <div>Best Combo</div>
+            <div className="text-[10px] uppercase tracking-wider">Best Combo</div>
           </div>
-          {!isDaily && (
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-400">{bestScore}</div>
-              <div>Best Level</div>
-            </div>
-          )}
+          <div className="text-center">
+            <div className="text-2xl font-bold text-green-400">{bestScore}</div>
+            <div className="text-[10px] uppercase tracking-wider">Best Level</div>
+          </div>
         </div>
       )}
 

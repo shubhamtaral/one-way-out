@@ -6,7 +6,7 @@ A tense typing survival game. Type fast or die trying.
 
 ## 🎮 Play Now
 
-**[one-way-out.vercel.app](https://one-way-out.vercel.app)** *(coming soon)*
+**[one-way-out](https://one-way-out.tusharkonde.cloud/)** *is live*
 
 ## 📖 About
 

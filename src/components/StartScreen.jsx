@@ -12,7 +12,7 @@ const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft'
 const SECRET_CREATORS = ['tusharx1143', 'shubhamtaral'];
 const SECRET_JUMPSCARE = 'jumpscare';
 
-export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user, onSignIn, onSignOut, authLoading, selectedTheme, onThemeChange, onRecordPractice, onRecordKonami, onRecordEasterEgg }) {
+export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStory, allStories, stats, user, onSignIn, onSignOut, authLoading, selectedTheme, onThemeChange, onRecordPractice, onRecordKonami, onRecordEasterEgg }) {
   const [selectedDifficulty, setSelectedDifficulty] = useState('normal');
   const [flicker, setFlicker] = useState(false);
   const [ready, setReady] = useState(false);
@@ -148,6 +148,16 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
           </button>
 
           <button
+            disabled
+            className="py-4 px-8 border-2 border-orange-500/20 text-orange-500/40 relative group cursor-not-allowed font-bold tracking-wider text-lg"
+          >
+            📖 STORY MODE
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded font-bold tracking-widest opacity-80">
+              COMING SOON
+            </span>
+          </button>
+
+          <button
             onClick={() => !dailyPlayed && onStartDaily()}
             disabled={dailyPlayed}
             className={`py-4 px-8 border-2 transition-all font-bold tracking-wider ${
@@ -251,6 +261,39 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, stats, user
             >
               START
             </button>
+          </div>
+
+          <button
+            onClick={() => setShowMode('main')}
+            className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)]/60 text-sm"
+          >
+            ← Back
+          </button>
+        </>
+      )}
+
+      {showMode === 'stories' && (
+        <>
+          <div className="mb-6 text-center">
+            <h2 className="text-2xl text-orange-500 font-bold mb-2">STORY MODE</h2>
+            <p className="text-[var(--color-bone)]/50 text-sm">
+              Experience the narrative one sentence at a time.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4 mb-8 w-full max-w-sm">
+            {allStories.map((story) => (
+              <button
+                key={story.id}
+                onClick={() => {
+                  if (ready) onStartStory(story.id);
+                }}
+                className="group p-4 border-2 border-orange-500/30 hover:border-orange-500 text-left transition-all"
+              >
+                <div className="text-orange-500 font-bold tracking-wider uppercase mb-1">{story.name}</div>
+                <div className="text-xs text-[var(--color-bone)]/60 group-hover:text-[var(--color-bone)]/80">{story.description}</div>
+              </button>
+            ))}
           </div>
 
           <button

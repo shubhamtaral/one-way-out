@@ -1,0 +1,46 @@
+[
+  {
+    "id": "awakening",
+    "name": "The Awakening",
+    "description": "Strange things are happening in the terminal.",
+    "sentences": [
+      "The terminal is blinking.",
+      "Who is there?",
+      "The night is cold.",
+      "Something moved.",
+      "The lights died.",
+      "I heard breathing.",
+      "The basement floor is wet.",
+      "I found a strange key.",
+      "The mirror is starting to crack.",
+      "My reflection didn't blink.",
+      "I can hear it thinking.",
+      "It stands in the corner now.",
+      "Don't look behind you.",
+      "It knows where I live.",
+      "Every night at 3am, I hear my name."
+    ]
+  },
+  {
+    "id": "shadows",
+    "name": "House of Shadows",
+    "description": "Escape the shifting house.",
+    "sentences": [
+      "The floor creaks.",
+      "Someone is here.",
+      "Hide and wait.",
+      "I smell something burning.",
+      "The clock stopped at three.",
+      "It's getting closer.",
+      "The mirror showed someone else.",
+      "Fingers scratched the glass.",
+      "Something's in the walls.",
+      "Shadows move when you blink.",
+      "The whispers know your name.",
+      "I found teeth marks on my pillow.",
+      "Something breaths when I hold my breath.",
+      "It's standing over me.",
+      "Don't trust the reflection."
+    ]
+  }
+]

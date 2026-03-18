@@ -6,7 +6,7 @@ export const POWER_UPS = {
   DOUBLE_POINTS: 'double_points', // Multiplier is doubled
 };
 
-export const POWER_UP_SPAWN_CHANCE = 0.2; // 20% chance per sentence
+export const POWER_UP_SPAWN_CHANCE = 0.25; // 25% chance per sentence
 
 export function generateRandomPowerUp(rng = Math.random, spawnChance = POWER_UP_SPAWN_CHANCE) {
   if (rng() > spawnChance) return null;

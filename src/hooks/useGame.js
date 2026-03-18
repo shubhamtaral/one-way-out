@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import allSentences from '../data/sentences.json';
+import allStories from '../data/story.json';
 import { DIFFICULTIES, getTimerDuration, getMaxMistakes } from '../config/difficulty';
 import { getDailyChallengeSentences, markDailyPlayed, saveDailyBest } from '../config/dailyChallenge';
 import { getSentenceForLevel } from '../game/logic/sentences';
@@ -360,6 +361,45 @@ export function useGame(soundHooks = {}) {
     startHeartbeat?.(0);
   }, [clearTimer, startHeartbeat]);
 
+  const startStoryMode = useCallback((storyId) => {
+    const story = allStories.find(s => s.id === storyId);
+    if (!story) return;
+
+    setGameMode('story');
+    setDifficulty('normal');
+    // Convert text array to sentence objects
+    sentencePoolRef.current = story.sentences.map(text => ({ text, level: 1 }));
+    
+    setLevel(1);
+    setTotalMistakes(0);
+    setTyped('');
+    setCombo(0);
+    setMaxCombo(0);
+    setWpm(0);
+    setPerfectStreak(0);
+    setActivePowerUps([]);
+    setCurrentLevelPowerUp(null);
+    setStreakMultiplier(1);
+    mistakesThisLevelRef.current = 0;
+    wpmStartRef.current = null;
+    levelWpmStartRef.current = null;
+    totalCharsRef.current = 0;
+    levelCharsRef.current = 0;
+    setStageWpms([]);
+    setTotalErrors(0);
+    setAccuracy(100);
+    lastSentenceTextRef.current = null;
+    shieldActiveRef.current = false;
+    slowMotionRef.current = false;
+    doublePointsRef.current = false;
+    setGameState('playing');
+    
+    const firstSentence = sentencePoolRef.current[0];
+    setCurrentSentence(firstSentence.text);
+    startTimer(15);
+    startHeartbeat?.(0);
+  }, [startTimer, startHeartbeat]);
+
   const handleType = useCallback((input) => {
     if (gameState !== 'playing' || isPaused) return;
 
@@ -458,6 +498,15 @@ export function useGame(soundHooks = {}) {
           // No timer for endless mode
         } else if (gameMode === 'daily') {
           startTimer(12);
+        } else if (gameMode === 'story') {
+          // Progress through story or end game if last sentence
+          if (newLevel > sentencePoolRef.current.length) {
+            clearTimer();
+            stopHeartbeat?.();
+            setGameState('gameover');
+            return;
+          }
+          startTimer(15);
         } else {
           startTimer(getTimerDuration(newLevel, difficulty));
         }
@@ -567,6 +616,8 @@ export function useGame(soundHooks = {}) {
     startGame,
     startDailyChallenge,
     startEndlessMode,
+    startStoryMode,
+    allStories,
     // New: Power-ups & Multiplier
     activePowerUps,
     currentLevelPowerUp,

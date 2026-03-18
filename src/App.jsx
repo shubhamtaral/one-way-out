@@ -51,6 +51,8 @@ function App() {
     startGame,
     startDailyChallenge,
     startEndlessMode,
+    startStoryMode,
+    allStories,
     activePowerUps,
     currentLevelPowerUp,
     streakMultiplier,
@@ -131,6 +133,8 @@ function App() {
           onStart={startGame} 
           onStartDaily={startDailyChallenge}
           onStartEndless={startEndlessMode}
+          onStartStory={startStoryMode}
+          allStories={allStories}
           stats={stats}
           user={user}
           onSignIn={signInWithGoogle}

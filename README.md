@@ -5,14 +5,15 @@ A tense typing survival game. Type fast or die trying.
 ![One Way Out](https://img.shields.io/badge/React-19-blue) ![Vite](https://img.shields.io/badge/Vite-7-purple) ![Tailwind](https://img.shields.io/badge/Tailwind-4-cyan)
 
 ## 🎮 Play Now
-
-**[one-way-out.vercel.app](https://one-way-out.vercel.app)** *(coming soon)*
+(Live Now)
+**[one-way-out.tusharkonde.cloud](https://one-way-out.tusharkonde.cloud/)** OR
+**[onewayout.shubhamtaral.in](https://onewayout.shubhamtaral.in/)**
 
 ## 📖 About
 
 Type each sentence exactly as shown before time runs out. Every mistake costs a life. The clock gets faster. How long can you survive?
 
-Featuring 115 creepy horror-themed sentences that get progressively more terrifying as you advance.
+Featuring 200+ creepy horror-themed sentences that get progressively more terrifying as you advance.
 
 ## ✨ Features
 

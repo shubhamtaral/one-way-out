@@ -25,6 +25,7 @@ function loadLocalStats() {
     totalPractice: 0,
     practicePerfect: 0,
     konamiCodeUnlocked: false,
+    history: [], // For tracking performance trends
   };
 }
 
@@ -148,6 +149,10 @@ export function useStats(user) {
         totalLevels: prev.totalLevels + level,
         lastPlayed: Date.now(),
       };
+
+      // Add to history (keep last 20 games)
+      const newHistory = [...(prev.history || []), level].slice(-20);
+      updated.history = newHistory;
 
       // Check for new achievements
       const checkStats = {

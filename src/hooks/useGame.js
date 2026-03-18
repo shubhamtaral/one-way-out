@@ -207,11 +207,11 @@ export function useGame(soundHooks = {}) {
         setCurrentSentence(sentence.text);
         
         if (gameMode === 'daily') {
-          startTimer(12);
+          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
         } else if (gameMode === 'survival') {
-          startTimer(getTimerDuration(newLevel, difficulty));
+          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
         } else {
-          startTimer(getTimerDuration(newLevel, difficulty));
+          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
         }
       }
     }
@@ -287,7 +287,7 @@ export function useGame(soundHooks = {}) {
     setCurrentSentence(sentence.text);
     const powerUp = generateRandomPowerUp();
     setCurrentLevelPowerUp(powerUp);
-    const duration = getTimerDuration(1, selectedDifficulty);
+    const duration = getTimerDuration(1, selectedDifficulty, sentence.text.length);
     startTimer(duration);
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
@@ -304,7 +304,7 @@ export function useGame(soundHooks = {}) {
     setWpm(0);
     setPerfectStreak(0);
     setActivePowerUps([]);
-    setCurrentLevelPowerUp(null);
+    setCurrentLevelPowerUp(generateRandomPowerUp(Math.random, 1));
     setStreakMultiplier(1);
     mistakesThisLevelRef.current = 0;
     wpmStartRef.current = null;
@@ -319,7 +319,7 @@ export function useGame(soundHooks = {}) {
     
     const sentence = sentencePoolRef.current[0];
     setCurrentSentence(sentence.text);
-    startTimer(12); // Fixed timer for daily
+    startTimer(getTimerDuration(1, 'normal', sentence.text.length)); // Adaptive timer for daily
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
 
@@ -354,7 +354,7 @@ export function useGame(soundHooks = {}) {
     const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0);
     lastSentenceTextRef.current = sentence.text;
     setCurrentSentence(sentence.text);
-    const powerUp = generateRandomPowerUp();
+    const powerUp = generateRandomPowerUp(Math.random, 1);
     setCurrentLevelPowerUp(powerUp);
     // No timer for endless mode
     clearTimer();
@@ -378,7 +378,7 @@ export function useGame(soundHooks = {}) {
     setWpm(0);
     setPerfectStreak(0);
     setActivePowerUps([]);
-    setCurrentLevelPowerUp(null);
+    setCurrentLevelPowerUp(generateRandomPowerUp(Math.random, 1));
     setStreakMultiplier(1);
     mistakesThisLevelRef.current = 0;
     wpmStartRef.current = null;
@@ -396,7 +396,7 @@ export function useGame(soundHooks = {}) {
     
     const firstSentence = sentencePoolRef.current[0];
     setCurrentSentence(firstSentence.text);
-    startTimer(15);
+    startTimer(getTimerDuration(1, 'normal', firstSentence.text.length));
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
 
@@ -490,7 +490,7 @@ export function useGame(soundHooks = {}) {
         }
         
         // Generate new power-up for next level
-        const newPowerUp = generateRandomPowerUp();
+        const newPowerUp = generateRandomPowerUp(Math.random, newLevel);
         setCurrentLevelPowerUp(newPowerUp);
         
         // Handle timer based on mode
@@ -506,9 +506,9 @@ export function useGame(soundHooks = {}) {
             setGameState('gameover');
             return;
           }
-          startTimer(15);
+          startTimer(getTimerDuration(newLevel, 'normal', sentence.text.length));
         } else {
-          startTimer(getTimerDuration(newLevel, difficulty));
+          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
         }
         
         if (newLevel > bestScore) {

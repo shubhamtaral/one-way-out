@@ -175,11 +175,11 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
 
           <button
             disabled
-            className="py-4 px-8 border-2 border-orange-500/20 text-orange-500/40 relative group cursor-not-allowed font-bold tracking-wider text-lg uppercase"
+            className="py-4 px-8 border-2 border-red-500/20 text-red-500/30 relative group cursor-not-allowed font-bold tracking-wider text-lg uppercase bg-red-950/5"
           >
             📖 STORY MODE
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded font-bold tracking-widest opacity-80 uppercase">
-              COMING SOON
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[8px] px-2 py-1 rounded font-black tracking-widest opacity-90 uppercase animate-pulse whitespace-nowrap">
+              LOCKED: Reach 1000 Likes On LinkedIn Post
             </span>
           </button>
 

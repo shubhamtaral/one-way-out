@@ -34,9 +34,21 @@ export const DIFFICULTIES = {
   },
 };
 
-export function getTimerDuration(level, difficulty) {
+export function getTimerDuration(level, difficulty, sentenceLength = 20) {
   const config = DIFFICULTIES[difficulty];
-  return Math.max(config.minTime, config.baseTime - Math.floor(level / config.timeLevelDivisor));
+  
+  // Base characters per second (how fast player is expected to type)
+  // Nightmare: 5-8 cps (60-96 WPM), Normal: 3.5-5.5 cps (42-66 WPM), Casual: 2-3.5 cps (24-42 WPM)
+  let baseCps = 3.5;
+  if (difficulty === 'nightmare') baseCps = 5 + (level / 12);
+  else if (difficulty === 'normal') baseCps = 3.5 + (level / 18);
+  else baseCps = 2 + (level / 25);
+
+  // Time = Length / CPS + Level-based buffer
+  const buffer = Math.max(3, 7 - (level / 8)); // Decaying buffer starting at 7s, min 3s
+  const duration = (sentenceLength / baseCps) + buffer;
+  
+  return Math.max(config.minTime, duration);
 }
 
 export function getMaxMistakes(difficulty) {

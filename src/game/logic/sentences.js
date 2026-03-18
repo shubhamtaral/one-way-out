@@ -23,7 +23,7 @@ export function getSentenceForLevel(
 
   // Adaptive difficulty: adjust based on WPM
   if (wpm > 100) {
-    effectiveLevel = Math.min(effectiveLevel + Math.floor((wpm - 100) / 50), 10);
+    effectiveLevel = Math.min(effectiveLevel + Math.floor((wpm - 100) / 50), 50);
   } else if (wpm > 0 && wpm < 50) {
     effectiveLevel = Math.max(effectiveLevel - Math.floor((50 - wpm) / 25), minLevel);
   }

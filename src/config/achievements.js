@@ -320,6 +320,43 @@ export const ACHIEVEMENTS = {
     icon: '⛔',
     check: (stats) => stats.error404Unlocked === true,
   },
+
+  // Story achievements
+  story_last_commute: {
+    id: 'story_last_commute',
+    name: 'End of the Line',
+    description: 'Complete "The Last Commute"',
+    icon: '🚇',
+    check: (stats) => stats.story_last_commuteUnlocked === true,
+  },
+  story_notification: {
+    id: 'story_notification',
+    name: 'Read Receipt',
+    description: 'Complete "Unread"',
+    icon: '📱',
+    check: (stats) => stats.story_notificationUnlocked === true,
+  },
+  story_overnight: {
+    id: 'story_overnight',
+    name: 'Clocking Out',
+    description: 'Complete "Overnight Shift"',
+    icon: '🏢',
+    check: (stats) => stats.story_overnightUnlocked === true,
+  },
+  story_grocery_run: {
+    id: 'story_grocery_run',
+    name: 'Price Check',
+    description: 'Complete "Aisle 9"',
+    icon: '🛒',
+    check: (stats) => stats.story_grocery_runUnlocked === true,
+  },
+  story_the_neighbour: {
+    id: 'story_the_neighbour',
+    name: 'Next Door',
+    description: 'Complete "Unit 4B"',
+    icon: '🔑',
+    check: (stats) => stats.story_the_neighbourUnlocked === true,
+  },
 };
 
 export function getUnlockedAchievements(stats) {

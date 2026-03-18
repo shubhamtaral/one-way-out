@@ -33,7 +33,7 @@ export function GameOverScreen({ level, bestScore, maxCombo, wpm, accuracy, diff
 
       {/* Stats */}
       {isEndless ? (
-        <div className="grid grid-cols-3 gap-6 text-[var(--color-bone)]/60 text-sm md:text-base mt-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-[var(--color-bone)]/60 text-sm md:text-base mt-4">
           <div className="text-center">
             <div className="text-2xl font-bold text-[var(--color-bone)]">{level}</div>
             <div>Sentences</div>

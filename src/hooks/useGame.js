@@ -55,6 +55,8 @@ export function useGame(soundHooks = {}) {
   
   // New: Endless mode lives (separate from mistakes)
   const [endlessLives, setEndlessLives] = useState(5);
+  const [currentStoryId, setCurrentStoryId] = useState(null);
+  const [isStoryComplete, setIsStoryComplete] = useState(false);
 
   const timerRef = useRef(null);
   const lastTickRef = useRef(0);
@@ -280,6 +282,7 @@ export function useGame(soundHooks = {}) {
     shieldActiveRef.current = false;
     slowMotionRef.current = false;
     doublePointsRef.current = false;
+    setIsStoryComplete(false);
     setGameState('playing');
     
     const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0);
@@ -315,6 +318,7 @@ export function useGame(soundHooks = {}) {
     setTotalErrors(0);
     setAccuracy(100);
     shieldActiveRef.current = false;
+    setIsStoryComplete(false);
     setGameState('playing');
     
     const sentence = sentencePoolRef.current[0];
@@ -349,6 +353,7 @@ export function useGame(soundHooks = {}) {
     lastSentenceTextRef.current = null;
     shieldActiveRef.current = false;
     setIsPaused(false);
+    setIsStoryComplete(false);
     setGameState('playing');
     
     const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0);
@@ -367,6 +372,7 @@ export function useGame(soundHooks = {}) {
 
     setGameMode('story');
     setDifficulty('normal');
+    setCurrentStoryId(storyId);
     // Convert text array to sentence objects
     sentencePoolRef.current = story.sentences.map(text => ({ text, level: 1 }));
     
@@ -392,6 +398,7 @@ export function useGame(soundHooks = {}) {
     shieldActiveRef.current = false;
     slowMotionRef.current = false;
     doublePointsRef.current = false;
+    setIsStoryComplete(false);
     setGameState('playing');
     
     const firstSentence = sentencePoolRef.current[0];
@@ -503,6 +510,7 @@ export function useGame(soundHooks = {}) {
           if (newLevel > sentencePoolRef.current.length) {
             clearTimer();
             stopHeartbeat?.();
+            setIsStoryComplete(true);
             setGameState('gameover');
             return;
           }
@@ -629,5 +637,7 @@ export function useGame(soundHooks = {}) {
     isPaused,
     togglePause,
     endlessLives,
+    currentStoryId,
+    isStoryComplete,
   };
 }

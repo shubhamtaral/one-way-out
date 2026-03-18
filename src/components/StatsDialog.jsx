@@ -225,29 +225,35 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
         )}
 
         {/* Achievements section */}
-        {stats.unlockedAchievements && stats.unlockedAchievements.length > 0 && (
-          <div className="mb-6">
-            <h3 className="text-[var(--color-bone)]/60 text-sm mb-3 uppercase tracking-wider">
-              ACHIEVEMENTS ({stats.unlockedAchievements.length})
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {stats.unlockedAchievements.map((achievementId, idx) => {
-                const achievement = ACHIEVEMENTS[achievementId];
-                if (!achievement) return null;
-                
-                return (
-                  <div
-                    key={idx}
-                    className="w-10 h-10 bg-yellow-900/30 rounded flex items-center justify-center text-lg border border-yellow-600/50 cursor-help"
-                    title={`${achievement.name}: ${achievement.description}`}
-                  >
+        <div className="mb-6">
+          <h3 className="text-[var(--color-bone)]/60 text-sm mb-3 uppercase tracking-wider">
+            ACHIEVEMENTS ({stats.unlockedAchievements?.length || 0} / {Object.keys(ACHIEVEMENTS).length})
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {Object.values(ACHIEVEMENTS).map((achievement) => {
+              const isUnlocked = stats.unlockedAchievements?.includes(achievement.id);
+              
+              return (
+                <div
+                  key={achievement.id}
+                  className={`w-10 h-10 rounded flex items-center justify-center text-lg border transition-all duration-300 cursor-help relative group ${
+                    isUnlocked
+                      ? 'bg-yellow-900/30 border-yellow-600/50'
+                      : 'bg-black/40 border-white/5 opacity-40 grayscale hover:opacity-100 hover:grayscale-0'
+                  }`}
+                  title={`${achievement.name}: ${achievement.description}${isUnlocked ? ' (UNLOCKED)' : ' (LOCKED)'}`}
+                >
+                  <span className={isUnlocked ? "" : "opacity-30"}>
                     {achievement.icon}
-                  </div>
-                );
-              })}
-            </div>
+                  </span>
+                  {!isUnlocked && (
+                    <div className="absolute -top-1 -right-1 text-[8px]">🔒</div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        )}
+        </div>
 
         {/* Theme Selector */}
         <div className="mb-6 pb-6 border-b border-[var(--color-bone)]/20">

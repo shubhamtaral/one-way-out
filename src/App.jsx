@@ -62,6 +62,8 @@ function App() {
     isPaused,
     togglePause,
     endlessLives,
+    currentStoryId,
+    isStoryComplete,
   } = useGame(sound);
 
   // Record game stats when game ends
@@ -75,6 +77,8 @@ function App() {
         difficulty,
         perfectStreak,
         gameMode,
+        storyId: currentStoryId,
+        isStoryComplete,
       });
 
       if (level === 40) {
@@ -85,7 +89,7 @@ function App() {
     } else if (gameState === 'playing') {
       setGameRecorded(false);
     }
-  }, [gameState, gameRecorded, recordGame, recordEasterEgg, level, wpm, maxCombo, difficulty, perfectStreak, gameMode]);
+  }, [gameState, gameRecorded, recordGame, recordEasterEgg, level, wpm, maxCombo, difficulty, perfectStreak, gameMode, currentStoryId, isStoryComplete]);
 
   // Delay showing game over screen for death animation
   useEffect(() => {

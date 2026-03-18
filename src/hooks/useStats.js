@@ -136,7 +136,7 @@ export function useStats(user) {
     console.log('🎮 recordGame called with:', gameStats);
     console.log('👤 Current user:', user ? user.uid : 'NOT LOGGED IN');
     
-    const { level, wpm, accuracy, maxCombo, difficulty, perfectStreak, gameMode } = gameStats;
+    const { level, wpm, accuracy, maxCombo, difficulty, perfectStreak, gameMode, storyId, isStoryComplete } = gameStats;
     
     setStats(prev => {
       const updated = {
@@ -149,6 +149,11 @@ export function useStats(user) {
         totalLevels: prev.totalLevels + level,
         lastPlayed: Date.now(),
       };
+      
+      // Handle story completion
+      if (isStoryComplete && storyId) {
+        updated[`story_${storyId}Unlocked`] = true;
+      }
 
       // Add to history (keep last 20 games)
       const newHistory = [...(prev.history || []), level].slice(-20);
@@ -163,6 +168,8 @@ export function useStats(user) {
         perfectStreak,
         gameMode,
         totalGames: updated.totalGames,
+        // Pass the story completion flags to the achievement checker
+        ...updated, 
       };
 
       const newlyUnlocked = getNewAchievements(checkStats, prev.unlockedAchievements);
@@ -184,6 +191,8 @@ export function useStats(user) {
           difficulty,
           perfectStreak,
           gameMode,
+          storyId,
+          isStoryComplete,
         },
         updatedStats: updated,
       });

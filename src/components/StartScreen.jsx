@@ -111,8 +111,34 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
     return () => clearInterval(interval);
   }, []);
 
+  const [capsLockActive, setCapsLockActive] = useState(false);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.getModifierState) {
+        setCapsLockActive(e.getModifierState('CapsLock'));
+      }
+    };
+    window.addEventListener('keydown', handleKey);
+    window.addEventListener('keyup', handleKey);
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      window.removeEventListener('keyup', handleKey);
+    };
+  }, []);
+
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center p-8 transition-opacity duration-100 ${flicker ? 'opacity-70' : 'opacity-100'}`}>
+      {/* Caps lock warning for start screen */}
+      {capsLockActive && (
+        <div className="fixed top-12 left-1/2 -translate-x-1/2 z-50 animate-pulse">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-500 px-4 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold flex items-center gap-2">
+            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+            CAPS LOCK ACTIVE
+          </div>
+        </div>
+      )}
+
       {/* Auth button in top right */}
       <div className="absolute top-4 right-4">
         <AuthButton 
@@ -123,11 +149,11 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
         />
       </div>
 
-      <h1 className="text-4xl md:text-8xl font-bold tracking-[0.2em] md:tracking-[0.3em] mb-4 text-[var(--color-bone)]">
+      <h1 className="text-4xl md:text-8xl font-bold tracking-[0.2em] md:tracking-[0.3em] mb-4 text-[var(--color-bone)] uppercase">
         ONE WAY OUT
       </h1>
       
-      <p className="text-[var(--color-bone)]/40 text-lg md:text-xl mb-12 tracking-widest">
+      <p className="text-[var(--color-bone)]/40 text-lg md:text-xl mb-12 tracking-widest uppercase">
         TYPE OR DIE
       </p>
 
@@ -135,7 +161,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
         <div className="flex flex-col gap-4 w-full max-w-xs">
           <button
             onClick={() => setShowMode('difficulty')}
-            className="py-4 px-8 border-2 border-[var(--color-bone)] text-[var(--color-bone)] hover:bg-[var(--color-bone)] hover:text-[var(--color-void)] transition-all font-bold tracking-wider text-lg"
+            className="py-4 px-8 border-2 border-[var(--color-bone)] text-[var(--color-bone)] hover:bg-[var(--color-bone)] hover:text-[var(--color-void)] transition-all font-bold tracking-wider text-lg uppercase"
           >
             PLAY
           </button>
@@ -149,10 +175,10 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
 
           <button
             disabled
-            className="py-4 px-8 border-2 border-orange-500/20 text-orange-500/40 relative group cursor-not-allowed font-bold tracking-wider text-lg"
+            className="py-4 px-8 border-2 border-orange-500/20 text-orange-500/40 relative group cursor-not-allowed font-bold tracking-wider text-lg uppercase"
           >
             📖 STORY MODE
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded font-bold tracking-widest opacity-80">
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded font-bold tracking-widest opacity-80 uppercase">
               COMING SOON
             </span>
           </button>
@@ -160,7 +186,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           <button
             onClick={() => !dailyPlayed && onStartDaily()}
             disabled={dailyPlayed}
-            className={`py-4 px-8 border-2 transition-all font-bold tracking-wider ${
+            className={`py-4 px-8 border-2 transition-all font-bold tracking-wider uppercase ${
               dailyPlayed
                 ? 'border-[var(--color-bone)]/20 text-[var(--color-bone)]/30 cursor-not-allowed'
                 : 'border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-[var(--color-void)]'
@@ -181,7 +207,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           {/* Practice Mode button */}
           <button
             onClick={() => setShowPractice(true)}
-            className="py-3 px-8 border border-cyan-500/50 text-cyan-500 hover:bg-cyan-500/10 transition-all text-sm tracking-wider"
+            className="py-3 px-8 border border-cyan-500/50 text-cyan-500 hover:bg-cyan-500/10 transition-all text-sm tracking-wider uppercase"
           >
             📚 PRACTICE MODE
           </button>
@@ -189,7 +215,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           {/* Leaderboard button */}
           <button
             onClick={() => setShowLeaderboard(true)}
-            className="py-3 px-8 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 transition-all text-sm tracking-wider"
+            className="py-3 px-8 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 transition-all text-sm tracking-wider uppercase"
           >
             🏆 LEADERBOARD
           </button>
@@ -197,7 +223,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           {stats && stats.totalGames > 0 && (
             <button
               onClick={() => setShowStats(true)}
-              className="py-3 px-8 border border-[var(--color-bone)]/30 text-[var(--color-bone)]/60 hover:border-[var(--color-bone)]/60 hover:text-[var(--color-bone)] transition-all text-sm tracking-wider"
+              className="py-3 px-8 border border-[var(--color-bone)]/30 text-[var(--color-bone)]/60 hover:border-[var(--color-bone)]/60 hover:text-[var(--color-bone)] transition-all text-sm tracking-wider uppercase"
             >
               📊 YOUR STATS
             </button>
@@ -229,14 +255,14 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
                 }`}
               >
                 <div className="font-bold tracking-wider">{diff.name}</div>
-                <div className="text-xs mt-1 opacity-60">{diff.maxMistakes} lives</div>
+                <div className="text-xs mt-1 opacity-60 uppercase">{diff.maxMistakes} LIVES</div>
               </button>
             ))}
           </div>
 
           <button
             onClick={() => setShowMode('main')}
-            className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)]/60 text-sm"
+            className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)]/60 text-sm uppercase"
           >
             ← Back
           </button>
@@ -275,8 +301,8 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
       {showMode === 'stories' && (
         <>
           <div className="mb-6 text-center">
-            <h2 className="text-2xl text-orange-500 font-bold mb-2">STORY MODE</h2>
-            <p className="text-[var(--color-bone)]/50 text-sm">
+            <h2 className="text-2xl text-orange-500 font-bold mb-2 uppercase">STORY MODE</h2>
+            <p className="text-[var(--color-bone)]/50 text-sm uppercase tracking-wider">
               Experience the narrative one sentence at a time.
             </p>
           </div>
@@ -291,7 +317,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
                 className="group p-4 border-2 border-orange-500/30 hover:border-orange-500 text-left transition-all"
               >
                 <div className="text-orange-500 font-bold tracking-wider uppercase mb-1">{story.name}</div>
-                <div className="text-xs text-[var(--color-bone)]/60 group-hover:text-[var(--color-bone)]/80">{story.description}</div>
+                <div className="text-xs text-[var(--color-bone)]/60 group-hover:text-[var(--color-bone)]/80 uppercase">{story.description}</div>
               </button>
             ))}
           </div>

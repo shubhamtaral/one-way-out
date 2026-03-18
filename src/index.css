@@ -70,3 +70,27 @@ body {
 .flash-powerup {
   animation: flash-cyan 0.4s ease-out;
 }
+
+/* Custom Scrollbar for a more integrated look */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 10, 10, 1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(245, 245, 220, 0.15);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 245, 220, 0.3);
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 245, 220, 0.15) rgba(10, 10, 10, 1);
+}

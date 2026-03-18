@@ -115,8 +115,8 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
         {/* Achievements section */}
         {stats.unlockedAchievements && stats.unlockedAchievements.length > 0 && (
           <div className="mb-6">
-            <h3 className="text-[var(--color-bone)]/60 text-sm mb-3">
-              Unlocked ({stats.unlockedAchievements.length})
+            <h3 className="text-[var(--color-bone)]/60 text-sm mb-3 uppercase tracking-wider">
+              ACHIEVEMENTS ({stats.unlockedAchievements.length})
             </h3>
             <div className="flex flex-wrap gap-2">
               {stats.unlockedAchievements.map((achievementId, idx) => {

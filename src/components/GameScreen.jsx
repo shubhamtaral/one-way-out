@@ -20,11 +20,9 @@ export function GameScreen({
   maxTime,
   combo,
   wpm,
-  difficulty,
   isGameOver,
   onType,
   streakMultiplier,
-  timeSurvived,
   gameMode,
   activePowerUps,
   currentLevelPowerUp,
@@ -157,9 +155,7 @@ export function GameScreen({
           maxTime={maxTime}
           combo={combo}
           wpm={wpm}
-          difficulty={difficulty}
           streakMultiplier={streakMultiplier}
-          timeSurvived={timeSurvived}
           gameMode={gameMode}
           endlessLives={endlessLives}
         />

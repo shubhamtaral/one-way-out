@@ -29,15 +29,15 @@ npm run build
 npm run preview
 ```
 
-4. **Lint and tests**
+4. **Local validation & tests**
 
 ```bash
-npm run lint      # ESLint
-npm run test      # Vitest (single run)
-npm run test:watch
+npm run validate  # Full check: lint, test, build, and security audit
+npm run lint      # Fast ESLint check
+npm run test:watch # Continuous testing
 ```
 
-Please make sure lint and tests pass before opening a PR.
+Please make sure `npm run validate` passes before opening a PR.
 
 ---
 
@@ -107,7 +107,8 @@ When testing leaderboard behavior locally, make sure your Firebase security rule
 ## PR guidelines
 
 - **Keep changes focused**: One feature or refactor per PR when possible.
-- **Tests and linting**: Run `npm run lint` and `npm run test` locally and fix issues before submitting.
+- **Tests and linting**: Run `npm run validate` locally and fix issues before submitting.
+- **DevOps**: See `DEVOPS.md` for details on our open-source CI/CD, security scanning, and infrastructure.
 - **No secrets**: Do not commit personal Firebase keys, `.env` files, or other secrets.
 - **Describe the change**: In your PR description, explain:
   - What you changed.

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { THEMES, getUnlockedThemes, applyTheme } from '../config/themes';
 import { ACHIEVEMENTS } from '../config/achievements';
 
-export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange }) {
+export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange, readOnly = false }) {
   const [timeframe, setTimeframe] = useState('all'); // all, week, month
   const [showChart, setShowChart] = useState(true);
 
@@ -22,7 +22,7 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
       return (
         <div className="flex items-end justify-center gap-1 h-32 bg-[var(--color-bone)]/5 p-4 rounded border border-[var(--color-bone)]/10">
           <div className="text-[var(--color-bone)]/40 text-xs text-center italic">
-            Play more games to see your performance graph...
+            {readOnly ? 'No performance trend available yet...' : 'Play more games to see your performance graph...'}
           </div>
         </div>
       );
@@ -120,11 +120,13 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
   };
 
   return (
-    <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/95 flex items-center justify-center z-[60] p-4">
       <div className="bg-[#111] border border-[var(--color-bone)]/20 rounded-lg max-w-md w-full p-8 max-h-[80vh] overflow-y-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-[var(--color-bone)]">📊 Your Stats</h2>
+          <h2 className="text-2xl font-bold text-[var(--color-bone)]">
+            {readOnly ? `📊 ${user?.displayName || 'Survivor'}'s Stats` : '📊 Your Stats'}
+          </h2>
           <button
             onClick={onClose}
             className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)] text-2xl"
@@ -256,52 +258,54 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
         </div>
 
         {/* Theme Selector */}
-        <div className="mb-6 pb-6 border-b border-[var(--color-bone)]/20">
-          <h3 className="text-[var(--color-bone)] font-bold text-sm mb-3">⚙️ Themes</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {Object.entries(THEMES).map(([id, theme]) => {
-              const isUnlocked = !theme.unlockedBy || (stats.unlockedAchievements?.includes(theme.unlockedBy));
-              const isSelected = selectedTheme === id;
-              
-              return (
-                <button
-                  key={id}
-                  onClick={() => {
-                    if (isUnlocked) {
-                      applyTheme(id);
-                      onThemeChange(id);
-                    }
-                  }}
-                  disabled={!isUnlocked}
-                  className={`p-2 rounded flex flex-col items-center justify-center text-center transition-all text-sm ${
-                    isSelected
-                      ? 'border-2 border-[var(--color-bone)] bg-[var(--color-bone)]/10'
-                      : isUnlocked
-                      ? 'border border-[var(--color-bone)]/30 hover:border-[var(--color-bone)]/60'
-                      : 'border border-[var(--color-bone)]/10 opacity-50 cursor-not-allowed'
-                  }`}
-                >
-                  <div className="text-lg mb-1">{theme.icon}</div>
-                  <div className="text-xs font-bold">{theme.name}</div>
-                  {!isUnlocked ? (
-                    <div className="text-[10px] text-[var(--color-bone)]/60 mt-1 leading-tight">
-                      🔒 {theme.unlockedBy ? ACHIEVEMENTS[theme.unlockedBy]?.description : 'Locked'}
-                    </div>
-                  ) : isSelected && (
-                    <div className="text-[10px] text-green-400 mt-1">✓ Active</div>
-                  )}
-                </button>
-              );
-            })}
+        {!readOnly && (
+          <div className="mb-6 pb-6 border-b border-[var(--color-bone)]/20">
+            <h3 className="text-[var(--color-bone)] font-bold text-sm mb-3">⚙️ Themes</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {Object.entries(THEMES).map(([id, theme]) => {
+                const isUnlocked = !theme.unlockedBy || (stats.unlockedAchievements?.includes(theme.unlockedBy));
+                const isSelected = selectedTheme === id;
+                
+                return (
+                  <button
+                    key={id}
+                    onClick={() => {
+                      if (isUnlocked) {
+                        applyTheme(id);
+                        onThemeChange(id);
+                      }
+                    }}
+                    disabled={!isUnlocked}
+                    className={`p-2 rounded flex flex-col items-center justify-center text-center transition-all text-sm ${
+                      isSelected
+                        ? 'border-2 border-[var(--color-bone)] bg-[var(--color-bone)]/10'
+                        : isUnlocked
+                        ? 'border border-[var(--color-bone)]/30 hover:border-[var(--color-bone)]/60'
+                        : 'border border-[var(--color-bone)]/10 opacity-50 cursor-not-allowed'
+                    }`}
+                  >
+                    <div className="text-lg mb-1">{theme.icon}</div>
+                    <div className="text-xs font-bold">{theme.name}</div>
+                    {!isUnlocked ? (
+                      <div className="text-[10px] text-[var(--color-bone)]/60 mt-1 leading-tight">
+                        🔒 {theme.unlockedBy ? ACHIEVEMENTS[theme.unlockedBy]?.description : 'Locked'}
+                      </div>
+                    ) : isSelected && (
+                      <div className="text-[10px] text-green-400 mt-1">✓ Active</div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Close button */}
         <button
           onClick={onClose}
           className="w-full bg-[var(--color-bone)]/20 hover:bg-[var(--color-bone)]/30 text-[var(--color-bone)] py-3 rounded font-semibold transition-colors"
         >
-          Close
+          {readOnly ? 'Back to Leaderboard' : 'Close'}
         </button>
       </div>
     </div>

@@ -52,7 +52,8 @@ jobs:
           path: "."
           fail-build: true
           severity-cutoff: "high"
-          env: GRYPE_DB_AUTO_UPDATE: true
+        env: 
+          GRYPE_DB_AUTO_UPDATE: true
 
 
       - name: 🏗️ Build App

@@ -60,7 +60,7 @@ jobs:
       - name: 🧪 Test
         run: npm test
 
-      - name: 🏗️ Build
+      - name: 🏗️ Build App
         run: npm run build
         env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}

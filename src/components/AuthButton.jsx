@@ -19,12 +19,6 @@ export function AuthButton({ user, onSignIn, onSignOut, loading }) {
         )}
         <div className="text-sm">
           <div className="text-[var(--color-bone)]">{user.displayName || 'Player'}</div>
-          <button 
-            onClick={onSignOut}
-            className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)]/60 text-xs"
-          >
-            Sign out
-          </button>
         </div>
       </div>
     );

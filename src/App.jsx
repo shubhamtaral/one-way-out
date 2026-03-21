@@ -9,6 +9,7 @@ import { GameOverScreen } from './components/GameOverScreen';
 import { AchievementPopup } from './components/AchievementPopup';
 import { testFirebaseConnection } from './services/leaderboard';
 import { initTheme } from './config/themes';
+import { setGlobalVolume } from './hooks/useSound';
 
 function App() {
   const sound = useSound();
@@ -31,6 +32,9 @@ function App() {
   // Initialize theme and (optionally) test Firebase on app load
   useEffect(() => {
     initTheme();
+    if (stats.preferences?.volume !== undefined) {
+      setGlobalVolume(stats.preferences.volume);
+    }
     const enableTest = import.meta.env.DEV && import.meta.env.VITE_ENABLE_FIREBASE_TEST === 'true';
     if (enableTest) {
       testFirebaseConnection();
@@ -56,6 +60,7 @@ function App() {
     maxCombo,
     wpm,
     accuracy,
+    totalErrors,
     perfectStreak,
     bestScore,
     handleType,
@@ -76,7 +81,28 @@ function App() {
     currentStoryId,
     isStoryComplete,
     sentencesUsed,
-  } = useGame(sound, stats.recentlyUsedSentences || []);
+  } = useGame(
+    sound, 
+    stats.recentlyUsedSentences || [],
+    stats.preferences?.personalization?.useName 
+      ? (user?.displayName || stats.preferences?.guestName || 'Player') 
+      : null
+  );
+
+  // Mode specific ambience and button clicks
+  useEffect(() => {
+    if (gameState === 'playing') {
+      sound.playModeAmbience(gameMode);
+    }
+  }, [gameState, gameMode]);
+
+  useEffect(() => {
+    const handleGlobalClick = () => {
+      sound.playClick();
+    };
+    window.addEventListener('mousedown', handleGlobalClick);
+    return () => window.removeEventListener('mousedown', handleGlobalClick);
+  }, [sound]);
 
   // Record game stats when game ends
   useEffect(() => {

@@ -27,7 +27,10 @@ function loadLocalStats() {
     konamiCodeUnlocked: false,
     history: [], // For tracking performance trends
     recentlyUsedSentences: [], // Track last 15 sentences to avoid repetition
-    preferences: {      guestName: '',      favoriteThemes: [],
+    preferences: {
+      guestName: '',
+      favoriteThemes: [],
+      volume: 0.5,
       personalization: {
         useName: true,
         useLocation: true,
@@ -76,6 +79,7 @@ export function useStats(user) {
             preferences: cloudStats.preferences || prev.preferences || {
               guestName: '',
               favoriteThemes: [],
+              volume: 0.5,
               personalization: {
                 useName: false,
                 useLocation: false,

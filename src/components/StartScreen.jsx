@@ -5,8 +5,10 @@ import { AuthButton } from './AuthButton';
 import { Leaderboard } from './Leaderboard';
 import { PracticeMode } from './PracticeMode';
 import { StatsDialog } from './StatsDialog';
+import { SettingsDialog } from './SettingsDialog';
 import { CreditsDialog } from './CreditsDialog';
 import { ACHIEVEMENTS } from '../config/achievements';
+import pkg from '../../package.json';
 
 const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 const SECRET_CREATORS = ['tusharx1143', 'shubhamtaral'];
@@ -20,6 +22,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showPractice, setShowPractice] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
   const [showCredits, setShowCredits] = useState(false);
 
   const dailyPlayed = hasDailyBeenPlayed();
@@ -203,14 +206,6 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
             )}
           </button>
 
-          {/* Practice Mode button */}
-          <button
-            onClick={() => setShowPractice(true)}
-            className="py-3 px-8 border border-cyan-500/50 text-cyan-500 hover:bg-cyan-500/10 transition-all text-sm tracking-wider uppercase"
-          >
-            📚 PRACTICE MODE
-          </button>
-
           {/* Leaderboard button */}
           <button
             onClick={() => setShowLeaderboard(true)}
@@ -229,11 +224,15 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           )}
 
           <button
-            onClick={() => setShowCredits(true)}
-            className="py-2 text-[var(--color-bone)]/30 hover:text-[var(--color-bone)]/60 transition-all text-[10px] tracking-[0.3em] uppercase mt-2"
+            onClick={() => setShowSettings(true)}
+            className="py-3 px-8 border border-[var(--color-bone)]/30 text-[var(--color-bone)]/60 hover:border-[var(--color-bone)]/60 hover:text-[var(--color-bone)] transition-all text-sm tracking-wider uppercase"
           >
-            📜 Credits
+            ⚙️ SETTINGS
           </button>
+          
+          <div className="text-[var(--color-bone)]/10 text-[8px] uppercase tracking-widest text-center mt-1">
+            v{pkg.version}
+          </div>
         </div>
       )}
 
@@ -420,12 +419,23 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           stats={stats}
           user={user}
           onClose={() => setShowStats(false)}
+        />
+      )}
+
+      {/* Settings Dialog modal */}
+      {showSettings && (
+        <SettingsDialog
+          onClose={() => setShowSettings(false)}
+          stats={stats}
+          user={user}
+          onSignOut={onSignOut}
           selectedTheme={selectedTheme}
           onThemeChange={onThemeChange}
           updatePreference={updatePreference}
           updatePersonalization={updatePersonalization}
           toggleFavoriteTheme={toggleFavoriteTheme}
-          readOnly={false}
+          onOpenPractice={() => setShowPractice(true)}
+          onOpenCredits={() => setShowCredits(true)}
         />
       )}
 

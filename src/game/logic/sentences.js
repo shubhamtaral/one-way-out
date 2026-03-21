@@ -1,6 +1,63 @@
 import sentences from '../../data/sentences.json';
 import { getMinSentenceLevel } from '../../config/difficulty';
 
+/**
+ * Apply personalization to a sentence (inserting user name)
+ * @param {string} text - The original sentence text
+ * @param {string} userName - The name to insert
+ * @param {number} level - Current level (to control intensity)
+ * @returns {string} - The personalized sentence
+ */
+export function personalizeSentence(text, userName, level = 1) {
+  if (!userName || !text) return text;
+
+  // Keywords that can be replaced with the user's name
+  const patterns = [
+    { regex: /my name/gi, replacement: userName },
+    { regex: /your name/gi, replacement: userName },
+    { regex: /the name/gi, replacement: `the name ${userName}` },
+    { regex: /is yours/gi, replacement: `is ${userName}'s` },
+    { regex: /calls me/gi, replacement: `calls ${userName}` },
+    { regex: /prints your/gi, replacement: `prints ${userName}'s` },
+    { regex: /shows only my/gi, replacement: `shows only ${userName}'s` },
+    { regex: /I see you/gi, replacement: `I see you, ${userName}` },
+    { regex: /know my name/gi, replacement: `know your name, ${userName}` },
+    { regex: /you/gi, replacement: userName, chance: 0.1 }, // Low chance for general pronoun replacement
+  ];
+
+  let result = text;
+  let personalized = false;
+
+  for (const pattern of patterns) {
+    if (pattern.regex.test(result)) {
+      // If it has a chance, roll for it
+      if (pattern.chance !== undefined && Math.random() > pattern.chance) {
+        continue;
+      }
+      
+      result = result.replace(pattern.regex, pattern.replacement);
+      personalized = true;
+    }
+  }
+
+  // If we haven't personalized yet, occasionally prepend/append the name
+  // Frequency increases with level (max 70% at lvl 50)
+  const frequency = Math.min(0.2, (level / 50) * 0.7);
+  if (!personalized && Math.random() < frequency) {
+    const templates = [
+      `${userName}...`,
+      `${userName}, look behind you.`,
+      `Where are you, ${userName}?`,
+      `I'm coming for you, ${userName}.`,
+      `Is that you, ${userName}?`,
+      `${userName}, don't stop typing.`,
+    ];
+    result = templates[Math.floor(Math.random() * templates.length)];
+  }
+
+  return result;
+}
+
 export function getSentenceForLevel(
   level,
   difficulty,
@@ -9,14 +66,16 @@ export function getSentenceForLevel(
   wpm = 0,
   rng = Math.random,
   poolOverride = null,
-  recentlyUsedSentences = []
+  recentlyUsedSentences = [],
+  userName = null
 ) {
   const pool = poolOverride || sentencePool || sentences;
 
   if (sentencePool) {
     // Daily challenge: use sentences in order
     const index = Math.min(level - 1, pool.length - 1);
-    return pool[index];
+    const selected = pool[index];
+    return { ...selected, text: personalizeSentence(selected.text, userName, level) };
   }
 
   const minLevel = getMinSentenceLevel(difficulty);
@@ -38,11 +97,15 @@ export function getSentenceForLevel(
   }
 
   // Avoid recently used sentences (anti-repetition)
+  // We keep at least 1 option if filtering would empty the list
   if (recentlyUsedSentences.length > 0 && available.length > 1) {
-    available = available.filter((s) => !recentlyUsedSentences.includes(s.text));
+    const filtered = available.filter((s) => !recentlyUsedSentences.includes(s.text));
+    if (filtered.length > 0) {
+      available = filtered;
+    }
   }
 
-  // If filtering left us with too few options, relax constraints
+  // If filtering left us with too few options, we still want variety
   if (available.length < 3) {
     // Fall back to pool without recent filtering
     available = pool.filter((s) => s.level <= effectiveLevel && s.level >= minLevel);
@@ -95,11 +158,11 @@ export function getSentenceForLevel(
   for (const s of topHalf) {
     random -= s.score;
     if (random <= 0) {
-      return s;
+      return { ...s, text: personalizeSentence(s.text, userName, level) };
     }
   }
 
   // Fallback: return first from top half
-  return topHalf[0];
+  return { ...topHalf[0], text: personalizeSentence(topHalf[0].text, userName, level) };
 }
 

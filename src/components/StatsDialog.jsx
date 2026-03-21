@@ -1,13 +1,8 @@
-import { useState, useEffect } from 'react';
-import { THEMES, getUnlockedThemes, applyTheme } from '../config/themes';
+import { useState } from 'react';
 import { ACHIEVEMENTS } from '../config/achievements';
 
-export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange, updatePreference, updatePersonalization, toggleFavoriteTheme, readOnly = false }) {
-  const [timeframe, setTimeframe] = useState('all'); // all, week, month
+export function StatsDialog({ stats, onClose, user }) {
   const [showChart, setShowChart] = useState(true);
-  const [guestName, setGuestName] = useState('');
-  const [showGuestNamePrompt, setShowGuestNamePrompt] = useState(false);
-  const [settingsExpanded, setSettingsExpanded] = useState(true); // Collapsible settings
 
   // Calculate derived stats
   const totalGames = stats.totalGames || 0;
@@ -138,7 +133,7 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
       >
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-[var(--color-bone)]">📊 Your Stats</h2>
+          <h2 className="text-2xl font-bold text-[var(--color-bone)] uppercase tracking-widest">📊 Your Stats</h2>
           <button
             onClick={onClose}
             className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)] text-2xl"
@@ -269,190 +264,12 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
           </div>
         </div>
 
-        {/* Theme Selector */}
-        <div className="mb-6 pb-6 border-b border-[var(--color-bone)]/20">
-          <h3 className="text-[var(--color-bone)] font-bold text-sm mb-3">⚙️ Themes</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {Object.entries(THEMES).map(([id, theme]) => {
-              const isUnlocked = !theme.unlockedBy || (stats.unlockedAchievements?.includes(theme.unlockedBy));
-              const isSelected = selectedTheme === id;
-              
-              return (
-                <button
-                  key={id}
-                  onClick={() => {
-                    if (isUnlocked) {
-                      applyTheme(id);
-                      onThemeChange(id);
-                    }
-                  }}
-                  disabled={!isUnlocked}
-                  className={`p-2 rounded flex flex-col items-center justify-center text-center transition-all text-sm ${
-                    isSelected
-                      ? 'border-2 border-[var(--color-bone)] bg-[var(--color-bone)]/10'
-                      : isUnlocked
-                      ? 'border border-[var(--color-bone)]/30 hover:border-[var(--color-bone)]/60'
-                      : 'border border-[var(--color-bone)]/10 opacity-50 cursor-not-allowed'
-                  }`}
-                >
-                  <div className="text-lg mb-1">{theme.icon}</div>
-                  <div className="text-xs font-bold">{theme.name}</div>
-                  {!isUnlocked ? (
-                    <div className="text-[10px] text-[var(--color-bone)]/60 mt-1 leading-tight">
-                      🔒 {theme.unlockedBy ? ACHIEVEMENTS[theme.unlockedBy]?.description : 'Locked'}
-                    </div>
-                  ) : isSelected && (
-                    <div className="text-[10px] text-green-400 mt-1">✓ Active</div>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Personalization Preferences */}
-        {!readOnly && (
-          <div className="mb-6 pb-6 border-b border-[var(--color-bone)]/20">
-            <h3 className="text-[var(--color-bone)] font-bold text-sm mb-3">🎯 Personalization</h3>
-            
-            {/* Name Personalization */}
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <div className="text-[var(--color-bone)]/60 text-xs uppercase tracking-widest">Use My Name</div>
-                <div className="text-xs text-[var(--color-bone)]/40">
-                  {!user ? 'Play as guest with a name' : 'Include your name in sentences'}
-                </div>
-              </div>
-              <label className="relative inline-block w-10 h-5">
-                <input
-                  type="checkbox"
-                  className="sr-only peer"
-                  checked={stats.preferences?.personalization?.useName || false}
-                  onChange={(e) => {
-                    if (!user && e.target.checked) {
-                      // Not logged in - ask for guest name
-                      setShowGuestNamePrompt(true);
-                    } else {
-                      updatePersonalization('useName', e.target.checked);
-                    }
-                  }}
-                />
-                <div className="w-full h-full bg-[var(--color-bone)]/20 rounded-full peer peer-checked:bg-green-500 transition-colors"></div>
-                <div className="absolute top-0.5 left-0.5 bg-white border border-[var(--color-bone)]/20 rounded-full h-4 w-4 transition-transform peer-checked:translate-x-5"></div>
-              </label>
-            </div>
-
-            {/* Guest Name Prompt Modal */}
-            {showGuestNamePrompt && (
-              <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4" onClick={() => setShowGuestNamePrompt(false)}>
-                <div className="bg-[#111] border border-[var(--color-bone)]/20 rounded-lg p-6 max-w-sm w-full" onClick={e => e.stopPropagation()}>
-                  <h3 className="text-[var(--color-bone)] font-bold mb-4">Enter Your Name</h3>
-                  <input
-                    type="text"
-                    className="w-full bg-black/50 border border-[var(--color-bone)]/30 rounded px-3 py-2 text-[var(--color-bone)] mb-4"
-                    placeholder="Your name"
-                    value={guestName}
-                    onChange={(e) => setGuestName(e.target.value)}
-                    autoFocus
-                  />
-                  <div className="flex gap-2">
-                    <button
-                      className="flex-1 bg-[var(--color-bone)]/20 hover:bg-[var(--color-bone)]/30 text-[var(--color-bone)] py-2 rounded"
-                      onClick={() => {
-                        if (guestName.trim()) {
-                          updatePreference('guestName', guestName.trim());
-                          updatePersonalization('useName', true);
-                          setShowGuestNamePrompt(false);
-                          setGuestName('');
-                        }
-                      }}
-                    >
-                      Confirm
-                    </button>
-                    <button
-                      className="flex-1 bg-[var(--color-bone)]/10 hover:bg-[var(--color-bone)]/20 text-[var(--color-bone)]/60 py-2 rounded"
-                      onClick={() => {
-                        setShowGuestNamePrompt(false);
-                        setGuestName('');
-                      }}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Location Personalization */}
-            <div className="flex items-center justify-between mb-3">
-              <div>
-                <div className="text-[var(--color-bone)]/60 text-xs uppercase tracking-widest">Use Location</div>
-                <div className="text-xs text-[var(--color-bone)]/40">Add location context (if available)</div>
-              </div>
-              <label className="relative inline-block w-10 h-5">
-                <input
-                  type="checkbox"
-                  className="sr-only peer"
-                  checked={stats.preferences?.personalization?.useLocation || false}
-                  onChange={(e) => {
-                    updatePersonalization('useLocation', e.target.checked);
-                  }}
-                />
-                <div className="w-full h-full bg-[var(--color-bone)]/20 rounded-full peer peer-checked:bg-green-500 transition-colors"></div>
-                <div className="absolute top-0.5 left-0.5 bg-white border border-[var(--color-bone)]/20 rounded-full h-4 w-4 transition-transform peer-checked:translate-x-5"></div>
-              </label>
-            </div>
-
-            {/* Adaptive Difficulty */}
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-[var(--color-bone)]/60 text-xs uppercase tracking-widest">Adaptive Difficulty</div>
-                <div className="text-xs text-[var(--color-bone)]/40">Adjust sentence difficulty based on your performance</div>
-              </div>
-              <label className="relative inline-block w-10 h-5">
-                <input
-                  type="checkbox"
-                  className="sr-only peer"
-                  checked={stats.preferences?.personalization?.adaptiveDifficulty ?? true}
-                  onChange={(e) => {
-                    updatePersonalization('adaptiveDifficulty', e.target.checked);
-                  }}
-                />
-                <div className="w-full h-full bg-[var(--color-bone)]/20 rounded-full peer peer-checked:bg-green-500 transition-colors"></div>
-                <div className="absolute top-0.5 left-0.5 bg-white border border-[var(--color-bone)]/20 rounded-full h-4 w-4 transition-transform peer-checked:translate-x-5"></div>
-              </label>
-            </div>
-
-            {/* Favorite Themes (multi-select) */}
-            <div className="mt-4">
-              <div className="text-[var(--color-bone)]/60 text-xs uppercase tracking-widest mb-2">Favorite Themes</div>
-              <div className="flex flex-wrap gap-2">
-                {['paranormal', 'technology', 'psychological', 'body_horror', 'suspense', 'existential'].map(theme => (
-                  <button
-                    key={theme}
-                    className={`px-2 py-1 text-xs rounded border transition-all ${
-                      stats.preferences?.favoriteThemes?.includes(theme)
-                        ? 'border-green-500 bg-green-500/20 text-green-400'
-                        : 'border-[var(--color-bone)]/30 hover:border-[var(--color-bone)]/60 text-[var(--color-bone)]/60'
-                    }`}
-                    onClick={() => {
-                      toggleFavoriteTheme(theme);
-                    }}
-                  >
-                    {theme.replace('_', ' ')}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
         {/* Close button */}
         <button
           onClick={onClose}
-          className="w-full bg-[var(--color-bone)]/20 hover:bg-[var(--color-bone)]/30 text-[var(--color-bone)] py-3 rounded font-semibold transition-colors"
+          className="w-full bg-[var(--color-bone)]/10 hover:bg-[var(--color-bone)]/20 text-[var(--color-bone)]/60 py-3 rounded font-bold uppercase tracking-[0.2em] text-[10px] transition-colors"
         >
-          Close
+          Close Stats
         </button>
       </div>
     </div>

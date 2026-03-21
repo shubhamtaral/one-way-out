@@ -1,6 +1,11 @@
 import { useCallback, useRef, useEffect } from 'react';
 
 let audioContext = null;
+let globalVolume = 0.5;
+
+export function setGlobalVolume(vol) {
+  globalVolume = vol;
+}
 
 function getAudioContext() {
   if (!audioContext) {
@@ -28,7 +33,7 @@ function playDrone(frequency, duration, volume = 0.1) {
     filter.frequency.setValueAtTime(200, ctx.currentTime);
     
     gain.gain.setValueAtTime(0, ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.1);
+    gain.gain.linearRampToValueAtTime(volume * globalVolume, ctx.currentTime + 0.1);
     gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
     
     osc.connect(filter);
@@ -64,7 +69,7 @@ function playWhisper(duration, volume = 0.05) {
     filter.Q.setValueAtTime(2, ctx.currentTime);
     
     gain.gain.setValueAtTime(0, ctx.currentTime);
-    gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + 0.1);
+    gain.gain.linearRampToValueAtTime(volume * globalVolume, ctx.currentTime + 0.1);
     gain.gain.linearRampToValueAtTime(0, ctx.currentTime + duration);
     
     noise.connect(filter);
@@ -100,7 +105,7 @@ function playScreech(volume = 0.15) {
     osc2.frequency.setValueAtTime(150, ctx.currentTime);
     osc2.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.3);
     
-    gain.gain.setValueAtTime(volume, ctx.currentTime);
+    gain.gain.setValueAtTime(volume * globalVolume, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4);
     
     osc1.connect(distortion);
@@ -126,7 +131,7 @@ function playImpact(volume = 0.2) {
     osc.frequency.setValueAtTime(80, ctx.currentTime);
     osc.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + 0.2);
     
-    gain.gain.setValueAtTime(volume, ctx.currentTime);
+    gain.gain.setValueAtTime(volume * globalVolume, ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
     
     osc.connect(gain);
@@ -148,7 +153,7 @@ function playDeath() {
     rumble.type = 'sawtooth';
     rumble.frequency.setValueAtTime(40, ctx.currentTime);
     rumble.frequency.linearRampToValueAtTime(20, ctx.currentTime + 2);
-    rumbleGain.gain.setValueAtTime(0.3, ctx.currentTime);
+    rumbleGain.gain.setValueAtTime(0.3 * globalVolume, ctx.currentTime);
     rumbleGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 2);
     rumble.connect(rumbleGain);
     rumbleGain.connect(ctx.destination);
@@ -168,6 +173,63 @@ function playDeath() {
   } catch (e) {}
 }
 
+// Digital glitch sound
+function playGlitch(volume = 0.1) {
+  try {
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(Math.random() * 1000 + 500, ctx.currentTime);
+    
+    // Rapid frequency changes for glitch effect
+    for (let i = 0; i < 10; i++) {
+      osc.frequency.setValueAtTime(Math.random() * 2000 + 100, ctx.currentTime + (i * 0.02));
+    }
+    
+    gain.gain.setValueAtTime(volume * globalVolume, ctx.currentTime);
+    gain.gain.setValueAtTime(0, ctx.currentTime + 0.2);
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    osc.start();
+    osc.stop(ctx.currentTime + 0.2);
+  } catch (e) {}
+}
+
+// Static burst
+function playStatic(duration = 0.3, volume = 0.05) {
+  try {
+    const ctx = getAudioContext();
+    const bufferSize = ctx.sampleRate * duration;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    
+    const noise = ctx.createBufferSource();
+    const gain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    
+    noise.buffer = buffer;
+    filter.type = 'highpass';
+    filter.frequency.setValueAtTime(1000, ctx.currentTime);
+    
+    gain.gain.setValueAtTime(volume * globalVolume, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    
+    noise.start();
+  } catch (e) {}
+}
+
 export function useSound() {
   const heartbeatRef = useRef(null);
   const heartbeatSpeed = useRef(1200);
@@ -183,7 +245,7 @@ export function useSound() {
       osc.type = 'sine';
       osc.frequency.setValueAtTime(100 + Math.random() * 50, ctx.currentTime);
       
-      gain.gain.setValueAtTime(0.02, ctx.currentTime);
+      gain.gain.setValueAtTime(0.02 * globalVolume, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
       
       osc.connect(gain);
@@ -212,7 +274,7 @@ export function useSound() {
       osc.frequency.setValueAtTime(220, ctx.currentTime);
       osc.frequency.linearRampToValueAtTime(330, ctx.currentTime + 0.1);
       
-      gain.gain.setValueAtTime(0.05, ctx.currentTime);
+      gain.gain.setValueAtTime(0.05 * globalVolume, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
       
       osc.connect(gain);
@@ -238,7 +300,7 @@ export function useSound() {
       osc.type = 'sine';
       osc.frequency.setValueAtTime(60, ctx.currentTime);
       
-      gain.gain.setValueAtTime(0.01, ctx.currentTime);
+      gain.gain.setValueAtTime(0.01 * globalVolume, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
       
       osc.connect(gain);
@@ -252,6 +314,26 @@ export function useSound() {
   // Warning tick - deeper, more urgent
   const playWarningTick = useCallback(() => {
     playDrone(50, 0.15, 0.08);
+  }, []);
+
+  const playGlitchSound = useCallback(() => {
+    playGlitch(0.12);
+  }, []);
+
+  const playStaticSound = useCallback(() => {
+    playStatic(0.4, 0.06);
+  }, []);
+
+  // Ambient tension for different modes
+  const playModeAmbience = useCallback((mode) => {
+    if (mode === 'endless') {
+      // Endless: high-pitched anxiety drone
+      playDrone(150, 0.3, 0.05);
+    } else if (mode === 'daily') {
+      // Daily: digital pulse
+      playDrone(80, 0.2, 0.1);
+      setTimeout(() => playDrone(120, 0.1, 0.05), 100);
+    }
   }, []);
 
   // Heartbeat - organic, terrifying
@@ -270,7 +352,7 @@ export function useSound() {
         const gain1 = ctx.createGain();
         osc1.type = 'sine';
         osc1.frequency.setValueAtTime(40, ctx.currentTime);
-        gain1.gain.setValueAtTime(0.1, ctx.currentTime);
+        gain1.gain.setValueAtTime(0.1 * globalVolume, ctx.currentTime);
         gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
         osc1.connect(gain1);
         gain1.connect(ctx.destination);
@@ -284,7 +366,7 @@ export function useSound() {
           const gain2 = ctx.createGain();
           osc2.type = 'sine';
           osc2.frequency.setValueAtTime(35, ctx.currentTime);
-          gain2.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain2.gain.setValueAtTime(0.08 * globalVolume, ctx.currentTime);
           gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
           osc2.connect(gain2);
           gain2.connect(ctx.destination);
@@ -324,6 +406,24 @@ export function useSound() {
     playGameOver,
     playTick,
     playWarningTick,
+    playGlitch: playGlitchSound,
+    playStatic: playStaticSound,
+    playModeAmbience,
+    playClick: () => {
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800 + Math.random() * 200, ctx.currentTime);
+        gain.gain.setValueAtTime(0.02 * globalVolume, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.05);
+      } catch (e) {}
+    },
     startHeartbeat,
     updateHeartbeat,
     stopHeartbeat,

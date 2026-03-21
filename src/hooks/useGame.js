@@ -8,8 +8,12 @@ import { POWER_UPS, generateRandomPowerUp } from '../game/logic/powerUps';
 import { computeWpm } from '../game/logic/wpm';
 import { computeStreakMultiplier } from '../game/logic/streakMultiplier';
 
-export function useGame(soundHooks = {}, recentlyUsedSentences = []) {
-  const { playKeystroke, playError, playSuccess, playGameOver, playTick, playWarningTick, startHeartbeat, updateHeartbeat, stopHeartbeat } = soundHooks;
+export function useGame(soundHooks = {}, recentlyUsedSentences = [], userName = null) {
+  const { 
+    playKeystroke, playError, playSuccess, playGameOver, 
+    playTick, playWarningTick, startHeartbeat, updateHeartbeat, 
+    stopHeartbeat, playGlitch, playStatic 
+  } = soundHooks;
 
   const [gameState, setGameState] = useState('idle');
   const [gameMode, setGameMode] = useState('normal'); // normal, daily, survival
@@ -209,19 +213,21 @@ export function useGame(soundHooks = {}, recentlyUsedSentences = []) {
         doublePointsRef.current = false;
         setActivePowerUps(prev => prev.filter(p => p === POWER_UPS.SHIELD));
 
-        const sentence = getSentenceForLevel(newLevel, difficulty, sentencePoolRef.current, lastSentenceTextRef.current, wpm, Math.random, null, recentlyUsedSentences);
+        const sentence = getSentenceForLevel(newLevel, difficulty, sentencePoolRef.current, lastSentenceTextRef.current, wpm, Math.random, null, recentlyUsedSentences, userName);
         lastSentenceTextRef.current = sentence.text;
         setCurrentSentence(sentence.text);
         // Track sentence for anti-repetition
         sentencesUsedRef.current.push(sentence.text);
         
-        if (gameMode === 'daily') {
-          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
-        } else if (gameMode === 'survival') {
-          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
-        } else {
-          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
+        const powerUp = generateRandomPowerUp(Math.random, newLevel);
+        if (powerUp) {
+          playGlitch?.();
         }
+        setCurrentLevelPowerUp(powerUp);
+        
+        const duration = getTimerDuration(newLevel, difficulty, sentence.text.length);
+        startTimer(duration);
+        playStatic?.();
       }
     }
   }, [timeLeft, gameState, totalMistakes, level, difficulty, gameMode, maxMistakes, wpm, clearTimer, startTimer, playError, playGameOver, updateHeartbeat, stopHeartbeat]);
@@ -292,14 +298,16 @@ export function useGame(soundHooks = {}, recentlyUsedSentences = []) {
     setIsStoryComplete(false);
     setGameState('playing');
     
-    const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0, Math.random, null, recentlyUsedSentences);
+    const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0, Math.random, null, recentlyUsedSentences, userName);
     lastSentenceTextRef.current = sentence.text;
     setCurrentSentence(sentence.text);
     sentencesUsedRef.current = [sentence.text]; // Initialize tracking
     const powerUp = generateRandomPowerUp();
+    if (powerUp) playGlitch?.();
     setCurrentLevelPowerUp(powerUp);
     const duration = getTimerDuration(1, selectedDifficulty, sentence.text.length);
     startTimer(duration);
+    playStatic?.();
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
 
@@ -365,7 +373,7 @@ export function useGame(soundHooks = {}, recentlyUsedSentences = []) {
     setIsStoryComplete(false);
     setGameState('playing');
     
-    const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0, Math.random, null, recentlyUsedSentences);
+    const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0, Math.random, null, recentlyUsedSentences, userName);
     lastSentenceTextRef.current = sentence.text;
     setCurrentSentence(sentence.text);
     sentencesUsedRef.current = [sentence.text]; // Initialize tracking
@@ -498,9 +506,14 @@ export function useGame(soundHooks = {}, recentlyUsedSentences = []) {
         
         // Get current WPM for adaptive difficulty
         const currentWPM = wpm;
-        const sentence = getSentenceForLevel(newLevel, difficulty, sentencePoolRef.current, lastSentenceTextRef.current, currentWPM, Math.random, null, recentlyUsedSentences);
+        const combinedHistory = [...(recentlyUsedSentences || []), ...(sentencesUsedRef.current || [])];
+        const sentence = getSentenceForLevel(newLevel, difficulty, sentencePoolRef.current, lastSentenceTextRef.current, currentWPM, Math.random, null, combinedHistory, userName);
         lastSentenceTextRef.current = sentence.text;
         setCurrentSentence(sentence.text);
+        
+        // Track sentence for anti-repetition - update both Ref and State
+        sentencesUsedRef.current = [...sentencesUsedRef.current, sentence.text];
+        setSentencesUsed(sentencesUsedRef.current);
         
         // Trigger power-up if it exists for this level
         if (currentLevelPowerUp) {

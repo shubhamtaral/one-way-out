@@ -26,6 +26,14 @@ function loadLocalStats() {
     practicePerfect: 0,
     konamiCodeUnlocked: false,
     history: [], // For tracking performance trends
+    recentlyUsedSentences: [], // Track last 15 sentences to avoid repetition
+    preferences: {      guestName: '',      favoriteThemes: [],
+      personalization: {
+        useName: true,
+        useLocation: true,
+        adaptiveDifficulty: true,
+      },
+    },
   };
 }
 
@@ -63,6 +71,17 @@ export function useStats(user) {
               ...(prev.unlockedAchievements || []),
               ...(cloudStats.achievements || [])
             ])],
+            history: cloudStats.history || prev.history || [],
+            recentlyUsedSentences: cloudStats.recentlyUsedSentences || prev.recentlyUsedSentences || [],
+            preferences: cloudStats.preferences || prev.preferences || {
+              guestName: '',
+              favoriteThemes: [],
+              personalization: {
+                useName: false,
+                useLocation: false,
+                adaptiveDifficulty: true,
+              },
+            },
             lastPlayed: Date.now(),
           };
           saveLocalStats(merged);
@@ -136,7 +155,7 @@ export function useStats(user) {
     console.log('🎮 recordGame called with:', gameStats);
     console.log('👤 Current user:', user ? user.uid : 'NOT LOGGED IN');
     
-    const { level, wpm, accuracy, maxCombo, difficulty, perfectStreak, gameMode, storyId, isStoryComplete } = gameStats;
+    const { level, wpm, accuracy, maxCombo, difficulty, perfectStreak, gameMode, storyId, isStoryComplete, sentencesUsed } = gameStats;
     
     setStats(prev => {
       const updated = {
@@ -158,6 +177,13 @@ export function useStats(user) {
       // Add to history (keep last 20 games)
       const newHistory = [...(prev.history || []), level].slice(-20);
       updated.history = newHistory;
+
+      // Add to recently used sentences (keep last 15)
+      if (sentencesUsed && sentencesUsed.length > 0) {
+        const newRecent = [...(prev.recentlyUsedSentences || []), ...sentencesUsed]
+          .slice(-15);
+        updated.recentlyUsedSentences = newRecent;
+      }
 
       // Check for new achievements
       const checkStats = {
@@ -291,6 +317,65 @@ export function useStats(user) {
     setNewAchievements([]);
   }, []);
 
+  const updatePreference = useCallback((key, value) => {
+    setStats(prev => {
+      const updated = {
+        ...prev,
+        preferences: {
+          ...(prev.preferences || {
+            favoriteThemes: [],
+            personalization: {
+              useName: false,
+              useLocation: false,
+              adaptiveDifficulty: true,
+            },
+          }),
+          [key]: value,
+        },
+      };
+      saveLocalStats(updated);
+      return updated;
+    });
+  }, []);
+
+  const updatePersonalization = useCallback((personalizationKey, value) => {
+    setStats(prev => {
+      const updated = {
+        ...prev,
+        preferences: {
+          ...prev.preferences,
+          personalization: {
+            ...(prev.preferences?.personalization || {
+              useName: false,
+              useLocation: false,
+              adaptiveDifficulty: true,
+            }),
+            [personalizationKey]: value,
+          },
+        },
+      };
+      saveLocalStats(updated);
+      return updated;
+    });
+  }, []);
+
+  const toggleFavoriteTheme = useCallback((theme) => {
+    setStats(prev => {
+      const current = prev.preferences?.favoriteThemes || [];
+      const updated = {
+        ...prev,
+        preferences: {
+          ...prev.preferences,
+          favoriteThemes: current.includes(theme)
+            ? current.filter(t => t !== theme)
+            : [...current, theme],
+        },
+      };
+      saveLocalStats(updated);
+      return updated;
+    });
+  }, []);
+
   return {
     stats,
     newAchievements,
@@ -300,5 +385,8 @@ export function useStats(user) {
     recordKonami,
     recordEasterEgg,
     clearNewAchievements,
+    updatePreference,
+    updatePersonalization,
+    toggleFavoriteTheme,
   };
 }

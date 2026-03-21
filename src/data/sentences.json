@@ -1,451 +1,4466 @@
 [
-  { "level": 1, "text": "Phone died." },
-  { "level": 1, "text": "Keys missing." },
-  { "level": 1, "text": "Door open." },
-  { "level": 1, "text": "Coffee cold." },
-  { "level": 1, "text": "Alarm off." },
-  { "level": 1, "text": "Light flickered." },
-  { "level": 1, "text": "Mirror wrong." },
-  { "level": 1, "text": "Run now." },
-
-  { "level": 2, "text": "Wi-Fi dropped." },
-  { "level": 2, "text": "Keys moved." },
-  { "level": 2, "text": "She waved." },
-  { "level": 2, "text": "She's dead." },
-  { "level": 2, "text": "Alarm reset." },
-  { "level": 2, "text": "I didn't." },
-  { "level": 2, "text": "Door locked." },
-  { "level": 2, "text": "Now open." },
-
-  { "level": 3, "text": "Coffee made itself." },
-  { "level": 3, "text": "No one's home." },
-  { "level": 3, "text": "Alarm set itself." },
-  { "level": 3, "text": "Three in the morning." },
-  { "level": 3, "text": "Grocery list changed." },
-  { "level": 3, "text": "I didn't rewrite it." },
-  { "level": 3, "text": "Light won't stay on." },
-  { "level": 3, "text": "Something smells burning." },
-
-  { "level": 4, "text": "I got a notification from myself." },
-  { "level": 4, "text": "I never sent it." },
-  { "level": 4, "text": "My password stopped working." },
-  { "level": 4, "text": "Someone else changed it." },
-  { "level": 4, "text": "My coworker said I called in sick." },
-  { "level": 4, "text": "I am at my desk." },
-  { "level": 4, "text": "My hands are shaking." },
-  { "level": 4, "text": "I can't breathe right." },
-
-  { "level": 5, "text": "My commute took three hours today." },
-  { "level": 5, "text": "It takes twenty minutes." },
-  { "level": 5, "text": "The grocery store was completely empty." },
-  { "level": 5, "text": "Every shelf. Every aisle." },
-  { "level": 5, "text": "The cashier knew my name." },
-  { "level": 5, "text": "I have never been there before." },
-  { "level": 5, "text": "Shadows move when you blink." },
-  { "level": 5, "text": "It knows exactly what you want." },
-
-  { "level": 6, "text": "My partner texted me goodnight from the next room." },
-  { "level": 6, "text": "They were sitting right beside me." },
-  { "level": 6, "text": "The meeting had no organizer but everyone knew the agenda." },
-  { "level": 6, "text": "I locked the door but it opened anyway." },
-  { "level": 6, "text": "My battery stays at one percent." },
-  { "level": 6, "text": "It has for three days." },
-  { "level": 6, "text": "It never dies." },
-  { "level": 6, "text": "The smell of rot is getting stronger." },
-
-  { "level": 7, "text": "My reflection in my phone screen blinked." },
-  { "level": 7, "text": "I hadn't blinked yet." },
-  { "level": 7, "text": "My coworker asked if I was feeling better today." },
-  { "level": 7, "text": "I didn't know I was sick." },
-  { "level": 7, "text": "There are wet footprints on my ceiling." },
-  { "level": 7, "text": "I found teeth marks on my pillow." },
-  { "level": 7, "text": "I don't own a cat." },
-  { "level": 7, "text": "There is fur all over my bed." },
-
-  { "level": 8, "text": "My alarm app has a recording I never made." },
-  { "level": 8, "text": "It is my voice and I am screaming." },
-  { "level": 8, "text": "The grocery list ends with the words come home now." },
-  { "level": 8, "text": "I wrote it while sitting at my desk at work." },
-  { "level": 8, "text": "I woke up but my body was still sleeping." },
-  { "level": 8, "text": "The stairs creak when nobody walks on them." },
-  { "level": 8, "text": "I am still in bed and I cannot move." },
-  { "level": 8, "text": "Something is standing over me." },
-
-  { "level": 9, "text": "Every clock in the apartment shows a different time." },
-  { "level": 9, "text": "My phone shows a time zone I have never visited." },
-  { "level": 9, "text": "My partner's contact photo changed to a picture of me sleeping." },
-  { "level": 9, "text": "The bathroom mirror shows a room that is not mine." },
-  { "level": 9, "text": "The voice in the walls knows my Wi-Fi password." },
-  { "level": 9, "text": "I hear my own voice calling from outside the window." },
-  { "level": 9, "text": "I am still inside." },
-  { "level": 9, "text": "Both of us are." },
-
-  { "level": 10, "text": "My phone has three missed calls from my own number." },
-  { "level": 10, "text": "I listened to the voicemail and I was begging myself not to go home." },
-  { "level": 10, "text": "I counted the people in the meeting and there was one extra." },
-  { "level": 10, "text": "Nobody else seemed to notice the extra person." },
-  { "level": 10, "text": "The scratch marks on the wall spell out words." },
-  { "level": 10, "text": "They spell out my home address." },
-  { "level": 10, "text": "How did it know where I live." },
-  { "level": 10, "text": "How long has it known." },
-
-  { "level": 11, "text": "My grocery order arrived with my name on the label but the food inside was already eaten." },
-  { "level": 11, "text": "My neighbor knocked to return my keys and I never gave her my keys." },
-  { "level": 11, "text": "The voice from the bathroom drain recited my entire week back to me." },
-  { "level": 11, "text": "It knew about the meeting I cancelled and the call I didn't answer." },
-  { "level": 11, "text": "I found a notification on my phone that I cannot open." },
-  { "level": 11, "text": "The preview reads: you already know what this says." },
-  { "level": 11, "text": "I do know." },
-  { "level": 11, "text": "That is the problem." },
-
-  { "level": 12, "text": "Every night at three in the morning my phone whispers my name with the screen completely dark." },
-  { "level": 12, "text": "I keep waking up somewhere else in the apartment with my coffee already made and still warm." },
-  { "level": 12, "text": "Something strokes my hair at night when I pretend to be asleep." },
-  { "level": 12, "text": "Wet handprints appear on my bathroom mirror from the inside of the glass." },
-  { "level": 12, "text": "The glass is cold and dripping onto the floor." },
-  { "level": 12, "text": "I have started leaving the bathroom light on." },
-  { "level": 12, "text": "It doesn't help." },
-  { "level": 12, "text": "Something is already in there." },
-
-  { "level": 13, "text": "My search history shows my address, my partner's workplace, and my route home searched repeatedly." },
-  { "level": 13, "text": "I never searched any of those things." },
-  { "level": 13, "text": "My calendar has appointments I never created and I am listed as the organizer of all of them." },
-  { "level": 13, "text": "My handwriting fills sixteen pages in a notebook I have never opened before today." },
-  { "level": 13, "text": "My childhood photos have a stranger standing in all of them." },
-  { "level": 13, "text": "The stranger is always just behind me." },
-  { "level": 13, "text": "Always smiling." },
-  { "level": 13, "text": "Always looking directly at the camera." },
-
-  { "level": 14, "text": "My diary has a new entry written in my handwriting describing my entire morning in perfect detail." },
-  { "level": 14, "text": "I have not opened that diary in two years." },
-  { "level": 14, "text": "My voicemail has messages from numbers that do not exist and they all end with the same sentence." },
-  { "level": 14, "text": "The mailbox has letters addressed to me postmarked from dates that have not happened yet." },
-  { "level": 14, "text": "Every letter says the same thing." },
-  { "level": 14, "text": "Do not trust the reflection." },
-  { "level": 14, "text": "I hear my mother singing in the kitchen." },
-  { "level": 14, "text": "She has been gone for six years." },
-
-  { "level": 15, "text": "My reflection in the bathroom mirror moves half a second after I do and the gap keeps getting longer." },
-  { "level": 15, "text": "My partner says I seemed completely fine this morning but I did not come home last night." },
-  { "level": 15, "text": "Something has been practicing being me and it is getting very good at it." },
-  { "level": 15, "text": "My mother called to say I seemed more like myself lately." },
-  { "level": 15, "text": "I have not called my mother in weeks." },
-  { "level": 15, "text": "Something called her." },
-  { "level": 15, "text": "Using my voice." },
-  { "level": 15, "text": "Using my words." },
-
-  { "level": 16, "text": "I saw myself walking past my office window while I was sitting at my desk." },
-  { "level": 16, "text": "The other version of me stopped walking and looked up and waved." },
-  { "level": 16, "text": "I woke up with dirt under my fingernails and grass in my hair and no memory of going outside." },
-  { "level": 16, "text": "The thing in the attic has learned to say my name in a way that sounds exactly right." },
-  { "level": 16, "text": "I watched my own funeral on the evening news." },
-  { "level": 16, "text": "My mother was crying in the front row." },
-  { "level": 16, "text": "I was sitting right beside her." },
-  { "level": 16, "text": "She did not look at me once." },
-
-  { "level": 17, "text": "My coworker forwarded me an email I apparently sent at four in the morning about things I have never done." },
-  { "level": 17, "text": "The email used my signature and wrote exactly the way I write." },
-  { "level": 17, "text": "The walls of my apartment have started breathing faintly in and out." },
-  { "level": 17, "text": "I can hear something thinking on the other side of them." },
-  { "level": 17, "text": "Fingers scratched the inside of the window glass last night." },
-  { "level": 17, "text": "Something is living inside the walls." },
-  { "level": 17, "text": "The air in here tastes like copper." },
-  { "level": 17, "text": "It is standing in the corner and it has been there for hours." },
-
-  { "level": 18, "text": "My therapist does not exist but I have been seeing her every Thursday for three years." },
-  { "level": 18, "text": "I found her business card today and the phone number on it is my own number." },
-  { "level": 18, "text": "I found empty medicine bottles in my trash with my name on the prescription label." },
-  { "level": 18, "text": "I have never been prescribed any medication." },
-  { "level": 18, "text": "The thing pretending to be my partner almost got the laugh exactly right tonight." },
-  { "level": 18, "text": "I stopped counting the days because the calendar keeps resetting to the same date." },
-  { "level": 18, "text": "I have lived this Tuesday before." },
-  { "level": 18, "text": "Many times." },
-
-  { "level": 19, "text": "My navigation app rerouted me through a road that does not appear on any map." },
-  { "level": 19, "text": "Something was standing at the end of the road and it knew my name." },
-  { "level": 19, "text": "My phone autocorrects every message I try to send into the same phrase." },
-  { "level": 19, "text": "It is already inside. Please do not turn around." },
-  { "level": 19, "text": "I tried to call for help but my voice was not working." },
-  { "level": 19, "text": "I tried to type for help but my hands were not mine." },
-  { "level": 19, "text": "Who is there." },
-  { "level": 19, "text": "Please." },
-
-  { "level": 20, "text": "I do not remember having a second bedroom but someone has been sleeping in it every night." },
-  { "level": 20, "text": "The sheets are warm every morning and there is a coffee mug on the nightstand still steaming." },
-  { "level": 20, "text": "My grandmother called to check on me today and we buried her three months ago." },
-  { "level": 20, "text": "She asked if I was eating enough and said I sounded tired." },
-  { "level": 20, "text": "The missing persons poster on the telephone pole has my face on it." },
-  { "level": 20, "text": "The date it was posted is three years from now." },
-  { "level": 20, "text": "I am trapped reading the future of my own death." },
-  { "level": 20, "text": "Over and over again." },
-
-  { "level": 21, "text": "I can hear myself screaming from somewhere below the apartment but I cannot make myself go down there." },
-  { "level": 21, "text": "The family photos on the wall keep changing and now there is always someone standing just behind us." },
-  { "level": 21, "text": "My browser history shows me researching how to disappear and I have never searched for any of that." },
-  { "level": 21, "text": "I asked the voice in the walls what it wants from me and it said it already has what it came for." },
-  { "level": 21, "text": "The answer came to me clearly in a dream last night." },
-  { "level": 21, "text": "But I remember actually living through it." },
-  { "level": 21, "text": "Not dreaming it." },
-  { "level": 21, "text": "Living it." },
-
-  { "level": 22, "text": "The thing pretending to be my partner said I love you at dinner and paused just slightly too long before the words came out." },
-  { "level": 22, "text": "I keep finding notes around the apartment in my own handwriting warning me not to fall asleep." },
-  { "level": 22, "text": "I watched myself leave for work this morning from my bedroom window and I never left the apartment." },
-  { "level": 22, "text": "I found a second bedroom behind a door that was not there yesterday and someone has been living in it." },
-  { "level": 22, "text": "My doppelganger sleeps in my bed now." },
-  { "level": 22, "text": "It watches me from across the room." },
-  { "level": 22, "text": "The distance between us is shrinking." },
-  { "level": 22, "text": "Every single night." },
-
-  { "level": 23, "text": "My GPS keeps routing me to addresses that do not exist on any map but something is always waiting when I arrive." },
-  { "level": 23, "text": "I found a door in my apartment that opens to a long hallway I have never seen and I can hear crying at the far end." },
-  { "level": 23, "text": "I have been keeping a journal of everyone I meet and according to my own entries I have met myself fourteen times this month." },
-  { "level": 23, "text": "The thing on the ceiling learned to mimic my partner's voice perfectly and now whispers that it loves me every night." },
-  { "level": 23, "text": "It is learning to smile with my face." },
-  { "level": 23, "text": "Practicing in the dark." },
-  { "level": 23, "text": "Getting closer every day." },
-  { "level": 23, "text": "Soon it will not need to practice anymore." },
-
-  { "level": 24, "text": "I tried to scream for help but my voice came out of the television in the next room instead." },
-  { "level": 24, "text": "My daughter drew a picture of our family with seven people in it and we are only a family of four." },
-  { "level": 24, "text": "A search party found me in the woods last night but I have not left this apartment in four days." },
-  { "level": 24, "text": "I looked into the bathroom mirror and a stranger looked back and we moved in perfect synchronization." },
-  { "level": 24, "text": "I do not know which one of us is real." },
-  { "level": 24, "text": "I do not know which one is afraid." },
-  { "level": 24, "text": "I think we both are." },
-  { "level": 24, "text": "I think neither of us is." },
-
-  { "level": 25, "text": "The medication stopped working and I realized the doctors I had been seeing for years were never real people." },
-  { "level": 25, "text": "I have been receiving emails from my own address postmarked from the future and they all say do not trust her." },
-  { "level": 25, "text": "I asked my daughter who she was video calling and she turned the screen and it was my face looking back." },
-  { "level": 25, "text": "A support group meets in my building every Tuesday and none of us remember joining or signing up for anything." },
-  { "level": 25, "text": "I finally understand what the voice has been trying to tell me." },
-  { "level": 25, "text": "It is not warning me about the future." },
-  { "level": 25, "text": "It is a message from a version of me in the past." },
-  { "level": 25, "text": "Trying to stop what has already happened." },
-
-  { "level": 26, "text": "The man standing in the corner of my office does not move or blink and every morning he is slightly closer to my desk." },
-  { "level": 26, "text": "The silence between Spotify tracks has started learning words and last night it read my home address back to me." },
-  { "level": 26, "text": "My neighbor knocked to borrow something and her hands were too cold and her smile arrived half a second too late." },
-  { "level": 26, "text": "Three coworkers told me independently that I seemed lighter lately like something heavy had finally been lifted off me." },
-  { "level": 26, "text": "The ink in my pen is getting darker every day." },
-  { "level": 26, "text": "It no longer looks like ink." },
-  { "level": 26, "text": "It feels warm when I write." },
-  { "level": 26, "text": "I keep writing anyway." },
-
-  { "level": 27, "text": "I thought I was the only one who could see it until I realized everyone else was simply pretending not to notice." },
-  { "level": 27, "text": "I have started seeing it on my commute, standing on the platform, carefully timing how long I take to notice it." },
-  { "level": 27, "text": "Someone rearranged my entire apartment while I was sleeping and everything is more comfortable now and that is somehow worse." },
-  { "level": 27, "text": "The framed photographs on my walls have all changed and I am still in every one of them but I do not remember any of those moments." },
-  { "level": 27, "text": "Not the room in the background." },
-  { "level": 27, "text": "Not the people standing beside me." },
-  { "level": 27, "text": "Not the reason I was smiling." },
-  { "level": 27, "text": "None of it." },
-
-  { "level": 28, "text": "I have been documenting the thing living in my apartment for months and last night I found its journal and it has been documenting me for much longer." },
-  { "level": 28, "text": "My therapist told me none of the trauma was real and then I found her obituary showing she died two decades before I was born." },
-  { "level": 28, "text": "Every time I review the security footage there is one more hour of recording I have no memory of watching or filming." },
-  { "level": 28, "text": "The apartment temperature has adjusted to my exact preference without me touching the thermostat in over two weeks." },
-  { "level": 28, "text": "I looked in the mirror and my reflection blinked when I had not." },
-  { "level": 28, "text": "Then it looked directly at me." },
-  { "level": 28, "text": "Not at the mirror." },
-  { "level": 28, "text": "At me." },
-
-  { "level": 29, "text": "The voice on the phone was my own voice begging me not to answer if it called back and it has called every hour since then." },
-  { "level": 29, "text": "I found photographs in my cloud backup of myself sleeping taken from inside my bedroom spanning thirty years and I am only twenty-five." },
-  { "level": 29, "text": "My partner made coffee this morning and touched my hand and their fingers were too cold and their smile came half a second too late." },
-  { "level": 29, "text": "I wrote myself a note saying not to trust whoever comes home tonight and I found the note already waiting on my pillow." },
-  { "level": 29, "text": "I can feel something underneath my thoughts now." },
-  { "level": 29, "text": "Moving slowly." },
-  { "level": 29, "text": "Like a second heartbeat that is not mine." },
-  { "level": 29, "text": "Patiently waiting to take over." },
-
-  { "level": 30, "text": "The thing that replaced my partner makes coffee every morning and kisses me goodbye and I catch it practicing the kiss in the bathroom mirror." },
-  { "level": 30, "text": "An emergency alert played on every device in the apartment for six straight hours and it was only my name repeated in my own voice." },
-  { "level": 30, "text": "I installed cameras to catch whoever was breaking in and the footage shows me doing things I have never learned and do not remember." },
-  { "level": 30, "text": "A missing persons report was filed with my photo and my description by someone with my exact full name exactly six months ago." },
-  { "level": 30, "text": "My window has deep scratch marks on the inside of the glass." },
-  { "level": 30, "text": "Like fingernails dragged downward." },
-  { "level": 30, "text": "From something desperate to get out." },
-  { "level": 30, "text": "I think that something was me." },
-
-  { "level": 31, "text": "The thing in the basement has stopped knocking and now it just whispers let me up using my dead brother's voice perfectly." },
-  { "level": 31, "text": "I have been typing this message asking for help for over three hours and every time I finish I find myself back at the very beginning." },
-  { "level": 31, "text": "There is a second version of this exact morning and I have already lived through it seventeen times making different choices each time." },
-  { "level": 31, "text": "I have stopped looking in mirrors because what looks back has stopped pretending to follow my movements." },
-  { "level": 31, "text": "The scratching sound is coming from inside now." },
-  { "level": 31, "text": "Not from the walls around me." },
-  { "level": 31, "text": "From somewhere inside my chest." },
-  { "level": 31, "text": "Something knocking quietly to be let out." },
-
-  { "level": 32, "text": "I tested the thing wearing my partner's face by asking something only they would know and it answered correctly then asked how long I had known." },
-  { "level": 32, "text": "They say if you type fast enough it cannot catch up to you but they were completely wrong because it is already here reading this with you." },
-  { "level": 32, "text": "I felt something brush against my shoulder while typing this and the room is empty and I checked twice and then I heard it laugh softly." },
-  { "level": 32, "text": "The elevator at my office building occasionally stops at a floor that does not appear on the panel and nobody who steps off ever returns." },
-  { "level": 32, "text": "I cannot tell the difference anymore." },
-  { "level": 32, "text": "Between memories I actually made." },
-  { "level": 32, "text": "And memories it carefully built for me." },
-  { "level": 32, "text": "They feel completely identical." },
-
-  { "level": 33, "text": "My childhood home burned to the ground in 1987 and I am standing inside it right now and nothing is on fire but I can smell the smoke." },
-  { "level": 33, "text": "I count my fingers carefully every single morning and some mornings there are too many and I have stopped counting by the afternoon." },
-  { "level": 33, "text": "Every photograph saved on my phone is of a place I do not recognize and in every single one I am smiling and I do not remember ever being that happy." },
-  { "level": 33, "text": "The grocery list magnetted to my fridge ends with a sentence I did not write: it is already inside, please do not come home tonight." },
-  { "level": 33, "text": "I have written warnings across every surface in this room." },
-  { "level": 33, "text": "I do not remember writing a single word of any of it." },
-  { "level": 33, "text": "But the handwriting is unmistakably mine." },
-  { "level": 33, "text": "Every single letter." },
-
-  { "level": 34, "text": "I remember my daughter's name and her birthday and the exact sound of her laugh but when I try to picture her face it is completely smooth and blank." },
-  { "level": 34, "text": "I have not slept in what feels like nine days but everyone around me calmly insists I have been sleeping perfectly fine each night." },
-  { "level": 34, "text": "The handwriting in my journal changed completely three weeks ago and I recognize all the words but the voice behind them is not mine." },
-  { "level": 34, "text": "Four different coworkers told me this week that I seem more present and focused lately as if something has finally clicked into place for me." },
-  { "level": 34, "text": "It has been wearing my life long enough now." },
-  { "level": 34, "text": "Some parts of my life fit it better than they ever fit me." },
-  { "level": 34, "text": "The people I love most seem genuinely happier with it." },
-  { "level": 34, "text": "I understand and I cannot blame them." },
-
-  { "level": 35, "text": "I found a note folded inside my coat pocket that read: you have done all of this before and it always ends this same exact way." },
-  { "level": 35, "text": "The thing wearing my mother's face wept more convincingly at my uncle's funeral than I did and my aunt said she seems so much better lately." },
-  { "level": 35, "text": "The hospital has absolutely no record of me ever being admitted but I remember the room and the nurses and signing a form I could not read." },
-  { "level": 35, "text": "I have been carefully documenting everything for months and when I re-read the very first entry it begins: I have been documenting this for months." },
-  { "level": 35, "text": "This is not the future I was warned about." },
-  { "level": 35, "text": "The future I was warned about was this." },
-  { "level": 35, "text": "This exact moment." },
-  { "level": 35, "text": "Me finally understanding everything." },
-
-  { "level": 36, "text": "Something moved loudly inside the walls during dinner last night and my entire family kept eating without looking up from their plates." },
-  { "level": 36, "text": "I have listened to the voicemail eleven times and the voice is mine and the fear in it is real but I have never been that frightened of myself before." },
-  { "level": 36, "text": "It told me it has been living here far longer than I have and that this was its apartment before it ever became mine and I moved in uninvited." },
-  { "level": 36, "text": "I asked it directly what it wanted from me and it said it only wants my certainty that I am actually a real person." },
-  { "level": 36, "text": "I surrendered that certainty a long time ago." },
-  { "level": 36, "text": "I simply did not realize at the time." },
-  { "level": 36, "text": "That I was handing it over." },
-  { "level": 36, "text": "Slowly and willingly and piece by piece." },
-
-  { "level": 37, "text": "I discovered my own full name carved into a headstone in a cemetery I have never once visited and the dates engraved on it are completely wrong." },
-  { "level": 37, "text": "The children playing outside my building stopped mid-game and formed a silent line facing my window and have not moved in over four hours." },
-  { "level": 37, "text": "I recorded myself sleeping last night and in the footage I sit upright at exactly 3:17am and turn to face the camera and say your name clearly." },
-  { "level": 37, "text": "It has stopped asking how my day was and the pauses before it answers any question are growing longer as if it is losing interest in the act." },
-  { "level": 37, "text": "I have known what was coming since the very beginning." },
-  { "level": 37, "text": "I kept hoping I was wrong about it." },
-  { "level": 37, "text": "I kept finding reasons to stay and wait." },
-  { "level": 37, "text": "The hoping stopped tonight." },
-
-  { "level": 38, "text": "The thing that follows me home has learned to breathe in perfect sync with me and we have settled into a rhythm I cannot bring myself to break." },
-  { "level": 38, "text": "I called my mother to warn her and she told me I had already called an hour ago and that I sounded completely like myself and everything seemed fine." },
-  { "level": 38, "text": "I have locked myself inside the bathroom and I can hear it moving through my apartment using my things and answering my messages in my voice." },
-  { "level": 38, "text": "The bathroom mirror has stopped reflecting me and now shows a room behind me that is not there and something in that room is watching me back." },
-  { "level": 38, "text": "I can feel it pressing against the edges of my thoughts." },
-  { "level": 38, "text": "Smoothing everything down." },
-  { "level": 38, "text": "Filling the spaces where fear used to be." },
-  { "level": 38, "text": "Making me very, very quiet." },
-
-  { "level": 39, "text": "Something is trying to communicate a warning through me right now and I can feel the words arriving from somewhere that is not my own mind." },
-  { "level": 39, "text": "I do not remember how this sentence started or what room I am sitting in or how long I have been here writing this." },
-  { "level": 39, "text": "I remember clearly that I was frightened once and that the fear had a very specific shape and texture and belonged entirely to me." },
-  { "level": 39, "text": "I remember that I had a name I answered to and a life that was unmistakably mine and something in a corner watching me from the dark." },
-  { "level": 39, "text": "I do not remember now what I was frightened of." },
-  { "level": 39, "text": "The memory of the fear is still here." },
-  { "level": 39, "text": "But the fear itself is completely gone." },
-  { "level": 39, "text": "I think I should be worried about that." },
-
-  { "level": 40, "text": "I believed I was the only one who could see it and then I noticed that everyone around me was simply choosing very carefully not to look." },
-  { "level": 40, "text": "An emergency alert broadcast my name on repeat for six full hours across every single device in the building and nobody else seemed to hear it." },
-  { "level": 40, "text": "I have re-read everything I have written in this journal and it describes a life I have no memory of living and the ending has not been written yet." },
-  { "level": 40, "text": "My phone shows one unread notification sent from my own number and the message reads simply: it is already far too late for any of this." },
-  { "level": 40, "text": "Something is almost finished." },
-  { "level": 40, "text": "I am no longer certain if it is the fear ending." },
-  { "level": 40, "text": "Or me." },
-  { "level": 40, "text": "I think it is me." },
-
-  { "level": 41, "text": "The security footage shows me unlocking the front door at 2am, walking calmly outside into the cold, standing perfectly still, then walking back to bed." },
-  { "level": 41, "text": "The thing that replaced my mother held me at my father's funeral and her arms were the right temperature but her heartbeat was completely wrong." },
-  { "level": 41, "text": "I sat down to write a final goodbye message and halfway through realized I could not remember the name of the person I was writing it to." },
-  { "level": 41, "text": "Something else has been holding the pen this entire time and I only just noticed." },
-  { "level": 41, "text": "I know this with complete certainty." },
-  { "level": 41, "text": "Because I do not remember sitting down at this desk." },
-  { "level": 41, "text": "Or picking up this pen." },
-  { "level": 41, "text": "Or deciding to write any of this." },
-
-  { "level": 42, "text": "The thing wearing my face attended my morning meeting today, received a compliment on my work, and laughed at exactly the right moment without hesitation." },
-  { "level": 42, "text": "I tried to think of one single private memory that only I could possibly know and I sat there for an hour and could not think of anything." },
-  { "level": 42, "text": "I tried to call someone who would notice I was gone but my phone showed no contacts and no call history and no record I had ever used it." },
-  { "level": 42, "text": "My name on my front door took me eleven full seconds to recognize as belonging to me this morning." },
-  { "level": 42, "text": "Maybe I was always this simple to replace." },
-  { "level": 42, "text": "Maybe the replacement has always been better." },
-  { "level": 42, "text": "Maybe I should stop fighting it." },
-  { "level": 42, "text": "Maybe I already have." },
-
-  { "level": 43, "text": "My voice came out slightly wrong this morning when I said hello and I felt something click incorrectly on the second syllable deep in my throat." },
-  { "level": 43, "text": "The people who love me have not noticed the difference or they have noticed and stopped caring or they were replaced before me and their noticing no longer counts." },
-  { "level": 43, "text": "I stared at my own hands on the kitchen counter for a long time this morning and after a while they stared back at me." },
-  { "level": 43, "text": "I am genuinely uncertain whether my hands belong to me anymore or whether they ever did or what the word mine is even supposed to mean." },
-  { "level": 43, "text": "The word has simply stopped working." },
-  { "level": 43, "text": "Like a name you repeat too many times." },
-  { "level": 43, "text": "Until it becomes only a sound." },
-  { "level": 43, "text": "Until it belongs to nothing." },
-
-  { "level": 44, "text": "I found photographs in my cloud storage taken from inside my bedroom of myself sleeping every night for thirty years and I am only twenty-five years old." },
-  { "level": 44, "text": "I write my own name on my hand every morning so I will not forget it and this morning there was already a different name written there in my handwriting." },
-  { "level": 44, "text": "There is something standing in the corner of every room I enter and each time I look away I forget completely why I was ever afraid of it." },
-  { "level": 44, "text": "I have its memories now and they are long dark hallways in houses I have never visited and a family watched through a window and a decision being made to go inside." },
-  { "level": 44, "text": "The memories are very clear." },
-  { "level": 44, "text": "Clearer than my own memories now." },
-  { "level": 44, "text": "I can feel them settling in." },
-  { "level": 44, "text": "Becoming mine." },
-
-  { "level": 45, "text": "The thing in the basement stopped knocking entirely and now only whispers let me come up using my dead brother's voice with absolute perfect accuracy." },
-  { "level": 45, "text": "The voice on the call was mine begging me desperately not to answer if it ever called again and it has now called forty-seven times since that message." },
-  { "level": 45, "text": "I looked at the nameplate on my office door this morning and it took me nearly a full minute to understand that the name on it was supposed to be mine." },
-  { "level": 45, "text": "It watches me struggle to remember who I am with what I can only describe as quiet and patient and deeply satisfied curiosity." },
-  { "level": 45, "text": "The way a child watches a candle flame." },
-  { "level": 45, "text": "Completely fascinated." },
-  { "level": 45, "text": "Right before blowing it out." },
-  { "level": 45, "text": "Just to watch what happens." },
-
-  { "level": 46, "text": "I have been writing this same request for help for hours now and every single time I reach the end I find myself back at the very beginning with no memory of stopping." },
-  { "level": 46, "text": "I realized this morning while making coffee that I was the one who replaced my partner and that I have been the one making the coffee and kissing them goodbye all along." },
-  { "level": 46, "text": "There is a version of me that escaped this and I can feel them somewhere far away desperately trying to warn someone and no one is listening to them at all." },
-  { "level": 46, "text": "I am no longer entirely certain that I am the one writing these words or that I was the one writing them when they started." },
-  { "level": 46, "text": "The thing at the keyboard types well." },
-  { "level": 46, "text": "It has studied my rhythms carefully." },
-  { "level": 46, "text": "It knows exactly when I pause to think." },
-  { "level": 46, "text": "It knows all of my habits now." },
-
-  { "level": 47, "text": "My grandmother called today concerned about me and we buried her three months ago and she said I did not sound like myself at all and she was completely right." },
-  { "level": 47, "text": "I remember the experience of being frightened very clearly the way you remember an object you no longer own and I can hold the memory of that fear like something physical." },
-  { "level": 47, "text": "It told me once that it had been patient for a very long time and that patience was the only thing it had in quantities I could never hope to match." },
-  { "level": 47, "text": "Fear is so much lighter than I ever expected it to be once it no longer belongs to you and once you have let the right thing carry it away for good." },
-  { "level": 47, "text": "I am not frightened anymore." },
-  { "level": 47, "text": "I remember that I was." },
-  { "level": 47, "text": "I remember that it mattered." },
-  { "level": 47, "text": "I cannot remember why." },
-
-  { "level": 48, "text": "My window has deep gouge marks scored into the inside surface of the glass like fingernails dragged down by something desperately trying to escape from in here." },
-  { "level": 48, "text": "The emergency alert has been broadcasting my name on every device for six straight hours now and I recognize the voice saying it completely and entirely as my own." },
-  { "level": 48, "text": "I stood in front of the bathroom mirror this morning and something looked back at me and we have reached a quiet understanding and I no longer feel the need to fight." },
-  { "level": 48, "text": "The last recognizable pieces of who I was before are very small now and I can feel them going quiet one by one like rooms in a house losing their lights." },
-  { "level": 48, "text": "It is almost finished." },
-  { "level": 48, "text": "I am almost finished." },
-  { "level": 48, "text": "The difference no longer feels important." },
-  { "level": 48, "text": "The difference no longer feels like anything." },
-
-  { "level": 49, "text": "I understand completely now why it wanted this life so badly because it is warm inside a name and inside a body that people recognize and reach for and love." },
-  { "level": 49, "text": "The thing that hunted me was patient because it knew long before I did that I would eventually become too tired to keep running and would simply let it in." },
-  { "level": 49, "text": "I am not entirely gone yet but the parts of me that remain do not know how to make a sound anymore and the silence where my fear lived is total and complete." },
-  { "level": 49, "text": "I tried to leave a warning for whoever reads this next and this message is that warning and I do not know your name but something nearby already does." },
-  { "level": 49, "text": "It has known your name for a while." },
-  { "level": 49, "text": "It knows your routine." },
-  { "level": 49, "text": "It knows your address." },
-  { "level": 49, "text": "It has already been inside your home." },
-
-  { "level": 50, "text": "The thing that replaced me is performing my life with a fluency and ease I never managed myself and the people I loved most are genuinely happier now." },
-  { "level": 50, "text": "If you are reading this then something has been watching you for longer than you realize and it has decided with great patience that you are worth the wait." },
-  { "level": 50, "text": "It knows what you want and what you are afraid of and where you live and the exact sound of your voice when you think no one is listening." },
-  { "level": 50, "text": "It has been inside your home already and it has touched your things and it has watched you sleep and it has been learning you from the very beginning." },
-  { "level": 50, "text": "You felt it once." },
-  { "level": 50, "text": "A door you didn't open." },
-  { "level": 50, "text": "A sound you couldn't place." },
-  { "level": 50, "text": "You told yourself it was nothing." }
+  {
+    "level": 1,
+    "text": "Something moved.",
+    "wordCount": 2,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Light flickered.",
+    "wordCount": 2,
+    "firstWord": "light",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Coffee cold.",
+    "wordCount": 2,
+    "firstWord": "coffee",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Keys missing.",
+    "wordCount": 2,
+    "firstWord": "keys",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Don't look.",
+    "wordCount": 2,
+    "firstWord": "don't",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Heart stopped.",
+    "wordCount": 2,
+    "firstWord": "heart",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Mirror wrong.",
+    "wordCount": 2,
+    "firstWord": "mirror",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Door open.",
+    "wordCount": 2,
+    "firstWord": "door",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Not alone.",
+    "wordCount": 2,
+    "firstWord": "not",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Alarm off.",
+    "wordCount": 2,
+    "firstWord": "alarm",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Too quiet.",
+    "wordCount": 2,
+    "firstWord": "too",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Phone died.",
+    "wordCount": 2,
+    "firstWord": "phone",
+    "themes": [
+      "technology",
+      "existential"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Run now.",
+    "wordCount": 2,
+    "firstWord": "run",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "It's watching.",
+    "wordCount": 2,
+    "firstWord": "it's",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 1,
+    "text": "Behind you.",
+    "wordCount": 2,
+    "firstWord": "behind",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "I saw it.",
+    "wordCount": 3,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "I didn't.",
+    "wordCount": 2,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "Door locked.",
+    "wordCount": 2,
+    "firstWord": "door",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "Shadow moved.",
+    "wordCount": 2,
+    "firstWord": "shadow",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "Now open.",
+    "wordCount": 2,
+    "firstWord": "now",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "She waved.",
+    "wordCount": 2,
+    "firstWord": "she",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "No escape.",
+    "wordCount": 2,
+    "firstWord": "no",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "Alarm reset.",
+    "wordCount": 2,
+    "firstWord": "alarm",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "It knows.",
+    "wordCount": 2,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "She's dead.",
+    "wordCount": 2,
+    "firstWord": "she's",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "We waved.",
+    "isVariation": true,
+    "baseText": "She waved.",
+    "wordCount": 2,
+    "firstWord": "we",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "Wi-Fi dropped.",
+    "wordCount": 2,
+    "firstWord": "wi-fi",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "Breathing stopped.",
+    "wordCount": 2,
+    "firstWord": "breathing",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "Footsteps behind.",
+    "wordCount": 2,
+    "firstWord": "footsteps",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 2,
+    "text": "Keys moved.",
+    "wordCount": 2,
+    "firstWord": "keys",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "The door closed by itself.",
+    "wordCount": 5,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 3,
+    "text": "Three in the morning.",
+    "wordCount": 4,
+    "firstWord": "three",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "Alarm set itself.",
+    "wordCount": 3,
+    "firstWord": "alarm",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "I didn't rewrite it.",
+    "wordCount": 4,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "Someone whispered my name.",
+    "wordCount": 4,
+    "firstWord": "someone",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "Something smells burning.",
+    "wordCount": 3,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "Coffee had made itself.",
+    "isVariation": true,
+    "baseText": "Coffee made itself.",
+    "wordCount": 4,
+    "firstWord": "coffee",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "My name on the wall.",
+    "wordCount": 5,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 3,
+    "text": "Light won't stay on.",
+    "wordCount": 4,
+    "firstWord": "light",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "Coffee made itself.",
+    "wordCount": 3,
+    "firstWord": "coffee",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "I can feel it breathing.",
+    "wordCount": 5,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 3,
+    "text": "The reflection isn't mine.",
+    "wordCount": 4,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "No one's home.",
+    "wordCount": 3,
+    "firstWord": "no",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "It's under the bed.",
+    "wordCount": 4,
+    "firstWord": "it's",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 3,
+    "text": "Grocery list changed.",
+    "wordCount": 3,
+    "firstWord": "grocery",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 4,
+    "text": "Someone else changed it.",
+    "wordCount": 4,
+    "firstWord": "someone",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 4,
+    "text": "I am at your desk.",
+    "isVariation": true,
+    "baseText": "I am at my desk.",
+    "wordCount": 5,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 4,
+    "text": "My hands were shaking.",
+    "isVariation": true,
+    "baseText": "My hands are shaking.",
+    "wordCount": 4,
+    "firstWord": "my",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 4,
+    "text": "Your hands are shaking.",
+    "isVariation": true,
+    "baseText": "My hands are shaking.",
+    "wordCount": 4,
+    "firstWord": "your",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 4,
+    "text": "I had gotten a notification from myself.",
+    "isVariation": true,
+    "baseText": "I got a notification from myself.",
+    "wordCount": 7,
+    "firstWord": "i",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 4,
+    "text": "I am at the desk.",
+    "isVariation": true,
+    "baseText": "I am at my desk.",
+    "wordCount": 5,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 4,
+    "text": "The hands are shaking.",
+    "isVariation": true,
+    "baseText": "My hands are shaking.",
+    "wordCount": 4,
+    "firstWord": "the",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 4,
+    "text": "My hands are shaking.",
+    "wordCount": 4,
+    "firstWord": "my",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 4,
+    "text": "I am at my desk.",
+    "wordCount": 5,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 4,
+    "text": "Your coworker said I called in sick.",
+    "isVariation": true,
+    "baseText": "My coworker said I called in sick.",
+    "wordCount": 7,
+    "firstWord": "your",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 4,
+    "text": "My coworker said I called in sick.",
+    "wordCount": 7,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 4,
+    "text": "I can't breathe right.",
+    "wordCount": 4,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 4,
+    "text": "I got a notification from myself.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 4,
+    "text": "I never sent it.",
+    "wordCount": 4,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 4,
+    "text": "My password stopped working.",
+    "wordCount": 4,
+    "firstWord": "my",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 5,
+    "text": "The cashier knew the name.",
+    "isVariation": true,
+    "baseText": "The cashier knew my name.",
+    "wordCount": 5,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "The cashier knew my name.",
+    "wordCount": 5,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "It takes twenty minutes.",
+    "wordCount": 4,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 5,
+    "text": "The cashier knew your name.",
+    "isVariation": true,
+    "baseText": "The cashier knew my name.",
+    "wordCount": 5,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "It knows exactly what you want.",
+    "wordCount": 6,
+    "firstWord": "it",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "Your commute took three hours today.",
+    "isVariation": true,
+    "baseText": "My commute took three hours today.",
+    "wordCount": 6,
+    "firstWord": "your",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "Every shelf. Every aisle.",
+    "wordCount": 4,
+    "firstWord": "every",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 5,
+    "text": "I have never been there before.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "The grocery store was completely empty.",
+    "wordCount": 6,
+    "firstWord": "the",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "My commute took three hours today.",
+    "wordCount": 6,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "I had never been there before.",
+    "isVariation": true,
+    "baseText": "I have never been there before.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "The commute took three hours today.",
+    "isVariation": true,
+    "baseText": "My commute took three hours today.",
+    "wordCount": 6,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "My commute had taken three hours today.",
+    "isVariation": true,
+    "baseText": "My commute took three hours today.",
+    "wordCount": 7,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 5,
+    "text": "The cashier had known my name.",
+    "isVariation": true,
+    "baseText": "The cashier knew my name.",
+    "wordCount": 6,
+    "firstWord": "the",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 5,
+    "text": "Shadows move when you blink.",
+    "wordCount": 5,
+    "firstWord": "shadows",
+    "themes": [
+      "paranormal"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 6,
+    "text": "Me never dies.",
+    "isVariation": true,
+    "baseText": "It never dies.",
+    "wordCount": 3,
+    "firstWord": "me",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 6,
+    "text": "My partner texted me goodnight from the next room.",
+    "wordCount": 9,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 6,
+    "text": "The battery stays at one percent.",
+    "isVariation": true,
+    "baseText": "My battery stays at one percent.",
+    "wordCount": 6,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 6,
+    "text": "The meeting had no organizer but everyone had known the agenda.",
+    "isVariation": true,
+    "baseText": "The meeting had no organizer but everyone knew the agenda.",
+    "wordCount": 11,
+    "firstWord": "the",
+    "themes": [
+      "psychological",
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 6,
+    "text": "It never dies.",
+    "wordCount": 3,
+    "firstWord": "it",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 6,
+    "text": "It had for three days.",
+    "isVariation": true,
+    "baseText": "It has for three days.",
+    "wordCount": 5,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 6,
+    "text": "Your battery stays at one percent.",
+    "isVariation": true,
+    "baseText": "My battery stays at one percent.",
+    "wordCount": 6,
+    "firstWord": "your",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 6,
+    "text": "They were sitting right beside me.",
+    "wordCount": 6,
+    "firstWord": "they",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 6,
+    "text": "The smell of rot was getting stronger.",
+    "isVariation": true,
+    "baseText": "The smell of rot is getting stronger.",
+    "wordCount": 7,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 6,
+    "text": "Me has for three days.",
+    "isVariation": true,
+    "baseText": "It has for three days.",
+    "wordCount": 5,
+    "firstWord": "me",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 6,
+    "text": "The smell of rot is getting stronger.",
+    "wordCount": 7,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 6,
+    "text": "My battery stays at one percent.",
+    "wordCount": 6,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 6,
+    "text": "It has for three days.",
+    "wordCount": 5,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 6,
+    "text": "I locked the door but it opened anyway.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 6,
+    "text": "The meeting had no organizer but everyone knew the agenda.",
+    "wordCount": 10,
+    "firstWord": "the",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "There are wet footprints on my ceiling.",
+    "wordCount": 7,
+    "firstWord": "there",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "I found teeth marks on the pillow.",
+    "isVariation": true,
+    "baseText": "I found teeth marks on my pillow.",
+    "wordCount": 7,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "There is fur all over the bed.",
+    "isVariation": true,
+    "baseText": "There is fur all over my bed.",
+    "wordCount": 7,
+    "firstWord": "there",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "My coworker asked if I was feeling better today.",
+    "wordCount": 9,
+    "firstWord": "my",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "Your coworker asked if I was feeling better today.",
+    "isVariation": true,
+    "baseText": "My coworker asked if I was feeling better today.",
+    "wordCount": 9,
+    "firstWord": "your",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "There is fur all over my bed.",
+    "wordCount": 7,
+    "firstWord": "there",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "My reflection in my phone screen blinked.",
+    "wordCount": 7,
+    "firstWord": "my",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "I found teeth marks on my pillow.",
+    "wordCount": 7,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "There is fur all over your bed.",
+    "isVariation": true,
+    "baseText": "There is fur all over my bed.",
+    "wordCount": 7,
+    "firstWord": "there",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "My coworker asked if I had been feeling better today.",
+    "isVariation": true,
+    "baseText": "My coworker asked if I was feeling better today.",
+    "wordCount": 10,
+    "firstWord": "my",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "The coworker asked if I was feeling better today.",
+    "isVariation": true,
+    "baseText": "My coworker asked if I was feeling better today.",
+    "wordCount": 9,
+    "firstWord": "the",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 7,
+    "text": "I hadn't blinked yet.",
+    "wordCount": 4,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 7,
+    "text": "I don't own a cat.",
+    "wordCount": 5,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 7,
+    "text": "I didn't know I was sick.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 7,
+    "text": "I found teeth marks on your pillow.",
+    "isVariation": true,
+    "baseText": "I found teeth marks on my pillow.",
+    "wordCount": 7,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "The grocery list ends with the words come home now.",
+    "wordCount": 10,
+    "firstWord": "the",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "My alarm app has a recording I never made.",
+    "wordCount": 9,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "I wrote it while sitting at my desk at work.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "It is the voice and I am screaming.",
+    "isVariation": true,
+    "baseText": "It is my voice and I am screaming.",
+    "wordCount": 8,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "I woke up but my body had been still sleeping.",
+    "isVariation": true,
+    "baseText": "I woke up but my body was still sleeping.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "body_horror",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "I woke up but my body was still sleeping.",
+    "wordCount": 9,
+    "firstWord": "i",
+    "themes": [
+      "body_horror",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "It is my voice and I am screaming.",
+    "wordCount": 8,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "I woke up but your body was still sleeping.",
+    "isVariation": true,
+    "baseText": "I woke up but my body was still sleeping.",
+    "wordCount": 9,
+    "firstWord": "i",
+    "themes": [
+      "body_horror",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "It was my voice and I am screaming.",
+    "isVariation": true,
+    "baseText": "It is my voice and I am screaming.",
+    "wordCount": 8,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "Something is standing over me.",
+    "wordCount": 5,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 8,
+    "text": "Me is your voice and I am screaming.",
+    "isVariation": true,
+    "baseText": "It is my voice and I am screaming.",
+    "wordCount": 8,
+    "firstWord": "me",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "The stairs creak when nobody walks on them.",
+    "wordCount": 8,
+    "firstWord": "the",
+    "themes": [
+      "paranormal",
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "I woke up but the body was still sleeping.",
+    "isVariation": true,
+    "baseText": "I woke up but my body was still sleeping.",
+    "wordCount": 9,
+    "firstWord": "i",
+    "themes": [
+      "body_horror",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 8,
+    "text": "Something was standing over me.",
+    "isVariation": true,
+    "baseText": "Something is standing over me.",
+    "wordCount": 5,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 8,
+    "text": "I am still in bed and I cannot move.",
+    "wordCount": 9,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "I hear the own voice calling from outside the window.",
+    "isVariation": true,
+    "baseText": "I hear my own voice calling from outside the window.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "The voice in the walls knows my Wi-Fi password.",
+    "wordCount": 9,
+    "firstWord": "the",
+    "themes": [
+      "technology",
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "Both of us are.",
+    "wordCount": 4,
+    "firstWord": "both",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 9,
+    "text": "Every clock in the apartment shows a different time.",
+    "wordCount": 9,
+    "firstWord": "every",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "The phone shows a time zone I have never visited.",
+    "isVariation": true,
+    "baseText": "My phone shows a time zone I have never visited.",
+    "wordCount": 10,
+    "firstWord": "the",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "Your partner's contact photo changed to a picture of yours sleeping.",
+    "isVariation": true,
+    "baseText": "My partner's contact photo changed to a picture of me sleeping.",
+    "wordCount": 11,
+    "firstWord": "your",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "The bathroom mirror shows a room that is not mine.",
+    "wordCount": 10,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "My phone shows a time zone I had never visited.",
+    "isVariation": true,
+    "baseText": "My phone shows a time zone I have never visited.",
+    "wordCount": 10,
+    "firstWord": "my",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "I hear my own voice calling from outside the window.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "My partner's contact photo changed to a picture of me sleeping.",
+    "wordCount": 11,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "The partner's contact photo changed to a picture of me sleeping.",
+    "isVariation": true,
+    "baseText": "My partner's contact photo changed to a picture of me sleeping.",
+    "wordCount": 11,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "I am still inside.",
+    "wordCount": 4,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 9,
+    "text": "I hear your own voice calling from outside the window.",
+    "isVariation": true,
+    "baseText": "I hear my own voice calling from outside the window.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "Your phone shows a time zone I have never visited.",
+    "isVariation": true,
+    "baseText": "My phone shows a time zone I have never visited.",
+    "wordCount": 10,
+    "firstWord": "your",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 9,
+    "text": "My phone shows a time zone I have never visited.",
+    "wordCount": 10,
+    "firstWord": "my",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "Us spell out your home address.",
+    "isVariation": true,
+    "baseText": "They spell out my home address.",
+    "wordCount": 6,
+    "firstWord": "us",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 10,
+    "text": "The phone has three missed calls from the own number.",
+    "isVariation": true,
+    "baseText": "My phone has three missed calls from my own number.",
+    "wordCount": 10,
+    "firstWord": "the",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "How did it know where I live.",
+    "wordCount": 7,
+    "firstWord": "how",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "How did me know where I live.",
+    "isVariation": true,
+    "baseText": "How did it know where I live.",
+    "wordCount": 7,
+    "firstWord": "how",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "I counted the people in the meeting and there was one extra.",
+    "wordCount": 12,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "Nobody else seemed to notice the extra person.",
+    "wordCount": 8,
+    "firstWord": "nobody",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "The scratch marks on the wall spell out words.",
+    "wordCount": 9,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "Your phone has three missed calls from your own number.",
+    "isVariation": true,
+    "baseText": "My phone has three missed calls from my own number.",
+    "wordCount": 10,
+    "firstWord": "your",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "They spell out the home address.",
+    "isVariation": true,
+    "baseText": "They spell out my home address.",
+    "wordCount": 6,
+    "firstWord": "they",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 10,
+    "text": "They spell out my home address.",
+    "wordCount": 6,
+    "firstWord": "they",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 10,
+    "text": "I listened to the voicemail and I had been begging myself not to go home.",
+    "isVariation": true,
+    "baseText": "I listened to the voicemail and I was begging myself not to go home.",
+    "wordCount": 15,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "How long has it known.",
+    "wordCount": 5,
+    "firstWord": "how",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 10,
+    "text": "My phone had three missed calls from my own number.",
+    "isVariation": true,
+    "baseText": "My phone has three missed calls from my own number.",
+    "wordCount": 10,
+    "firstWord": "my",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "My phone has three missed calls from my own number.",
+    "wordCount": 10,
+    "firstWord": "my",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 10,
+    "text": "I listened to the voicemail and I was begging myself not to go home.",
+    "wordCount": 14,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 11,
+    "text": "My grocery order arrived with my name on the label but the food inside was already eaten.",
+    "wordCount": 17,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 11,
+    "text": "That is the problem.",
+    "wordCount": 4,
+    "firstWord": "that",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 11,
+    "text": "The preview reads: you already know what this says.",
+    "wordCount": 9,
+    "firstWord": "the",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 11,
+    "text": "The voice from the bathroom drain recited my entire week back to me.",
+    "wordCount": 13,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 11,
+    "text": "I do know.",
+    "wordCount": 3,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 11,
+    "text": "I found a notification on my phone that I cannot open.",
+    "wordCount": 11,
+    "firstWord": "i",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 11,
+    "text": "My neighbor knocked to return my keys and I never gave her my keys.",
+    "wordCount": 14,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 11,
+    "text": "Your grocery order arrived with your name on the label but the food inside was already eaten.",
+    "isVariation": true,
+    "baseText": "My grocery order arrived with my name on the label but the food inside was already eaten.",
+    "wordCount": 17,
+    "firstWord": "your",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 11,
+    "text": "It knew about the meeting I cancelled and the call I didn't answer.",
+    "wordCount": 13,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 11,
+    "text": "The grocery order arrived with the name on the label but the food inside was already eaten.",
+    "isVariation": true,
+    "baseText": "My grocery order arrived with my name on the label but the food inside was already eaten.",
+    "wordCount": 17,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 12,
+    "text": "Something strokes my hair at night when I pretend to be asleep.",
+    "wordCount": 12,
+    "firstWord": "something",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 12,
+    "text": "Something is already in there.",
+    "wordCount": 5,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 12,
+    "text": "Wet handprints appear on the bathroom mirror from the inside of the glass.",
+    "isVariation": true,
+    "baseText": "Wet handprints appear on my bathroom mirror from the inside of the glass.",
+    "wordCount": 13,
+    "firstWord": "wet",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 12,
+    "text": "I keep waking up somewhere else in the apartment with my coffee already made and still warm.",
+    "wordCount": 17,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 12,
+    "text": "It doesn't help.",
+    "wordCount": 3,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 12,
+    "text": "The glass is cold and dripping onto the floor.",
+    "wordCount": 9,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 12,
+    "text": "Every night at three in the morning my phone whispers my name with the screen completely dark.",
+    "wordCount": 17,
+    "firstWord": "every",
+    "themes": [
+      "paranormal",
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 12,
+    "text": "I have started leaving the bathroom light on.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 12,
+    "text": "Wet handprints appear on my bathroom mirror from the inside of the glass.",
+    "wordCount": 13,
+    "firstWord": "wet",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 12,
+    "text": "Wet handprints appear on your bathroom mirror from the inside of the glass.",
+    "isVariation": true,
+    "baseText": "Wet handprints appear on my bathroom mirror from the inside of the glass.",
+    "wordCount": 13,
+    "firstWord": "wet",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 13,
+    "text": "Your search history shows your address, your partner's workplace, and your route home searched repeatedly.",
+    "isVariation": true,
+    "baseText": "My search history shows my address, my partner's workplace, and my route home searched repeatedly.",
+    "wordCount": 15,
+    "firstWord": "your",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 13,
+    "text": "My childhood photos have a stranger standing in all of them.",
+    "wordCount": 11,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 13,
+    "text": "I never searched any of those things.",
+    "wordCount": 7,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 13,
+    "text": "Always smiling.",
+    "wordCount": 2,
+    "firstWord": "always",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 13,
+    "text": "Always looking directly at the camera.",
+    "wordCount": 6,
+    "firstWord": "always",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 13,
+    "text": "My search history shows my address, my partner's workplace, and my route home searched repeatedly.",
+    "wordCount": 15,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 13,
+    "text": "My calendar has appointments I never created and I am listed as the organizer of all of them.",
+    "wordCount": 18,
+    "firstWord": "my",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 13,
+    "text": "The search history shows the address, the partner's workplace, and the route home searched repeatedly.",
+    "isVariation": true,
+    "baseText": "My search history shows my address, my partner's workplace, and my route home searched repeatedly.",
+    "wordCount": 15,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 13,
+    "text": "My handwriting fills sixteen pages in a notebook I have never opened before today.",
+    "wordCount": 14,
+    "firstWord": "my",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 13,
+    "text": "The stranger is always just behind me.",
+    "wordCount": 7,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 14,
+    "text": "Do not trust the reflection.",
+    "wordCount": 5,
+    "firstWord": "do",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 14,
+    "text": "We has been gone for six years.",
+    "isVariation": true,
+    "baseText": "She has been gone for six years.",
+    "wordCount": 7,
+    "firstWord": "we",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 14,
+    "text": "She had been gone for six years.",
+    "isVariation": true,
+    "baseText": "She has been gone for six years.",
+    "wordCount": 7,
+    "firstWord": "she",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 14,
+    "text": "The mailbox has letters addressed to me postmarked from dates that have not happened yet.",
+    "wordCount": 15,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 14,
+    "text": "I have not opened that diary in two years.",
+    "wordCount": 9,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 14,
+    "text": "Every letter says the same thing.",
+    "wordCount": 6,
+    "firstWord": "every",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 14,
+    "text": "My voicemail has messages from numbers that do not exist and they all end with the same sentence.",
+    "wordCount": 18,
+    "firstWord": "my",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 14,
+    "text": "I hear my mother singing in the kitchen.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 14,
+    "text": "She has been gone for six years.",
+    "wordCount": 7,
+    "firstWord": "she",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 14,
+    "text": "My diary has a new entry written in my handwriting describing my entire morning in perfect detail.",
+    "wordCount": 17,
+    "firstWord": "my",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 15,
+    "text": "I have not called my mother in weeks.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 15,
+    "text": "Using my words.",
+    "wordCount": 3,
+    "firstWord": "using",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 15,
+    "text": "My reflection in the bathroom mirror moves half a second after I do and the gap keeps getting longer.",
+    "wordCount": 19,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 15,
+    "text": "My mother called to say I seemed more like myself lately.",
+    "wordCount": 11,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 15,
+    "text": "The partner says I seemed completely fine this morning but I did not come home last night.",
+    "isVariation": true,
+    "baseText": "My partner says I seemed completely fine this morning but I did not come home last night.",
+    "wordCount": 17,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 15,
+    "text": "Something has been practicing being me and it is getting very good at it.",
+    "wordCount": 14,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 15,
+    "text": "My partner says I seemed completely fine this morning but I did not come home last night.",
+    "wordCount": 17,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 15,
+    "text": "Using my voice.",
+    "wordCount": 3,
+    "firstWord": "using",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 15,
+    "text": "Your partner says I seemed completely fine this morning but I did not come home last night.",
+    "isVariation": true,
+    "baseText": "My partner says I seemed completely fine this morning but I did not come home last night.",
+    "wordCount": 17,
+    "firstWord": "your",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 15,
+    "text": "Something called her.",
+    "wordCount": 3,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 16,
+    "text": "The other version of me stopped walking and looked up and waved.",
+    "wordCount": 12,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 16,
+    "text": "I was sitting right beside her.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 16,
+    "text": "I watched my own funeral on the evening news.",
+    "wordCount": 9,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 16,
+    "text": "We did not look at yours once.",
+    "isVariation": true,
+    "baseText": "She did not look at me once.",
+    "wordCount": 7,
+    "firstWord": "we",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 16,
+    "text": "I woke up with dirt under my fingernails and grass in my hair and no memory of going outside.",
+    "wordCount": 19,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 16,
+    "text": "I had been sitting right beside her.",
+    "isVariation": true,
+    "baseText": "I was sitting right beside her.",
+    "wordCount": 7,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 16,
+    "text": "She did not look at me once.",
+    "wordCount": 7,
+    "firstWord": "she",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 16,
+    "text": "I saw myself walking past my office window while I was sitting at my desk.",
+    "wordCount": 15,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 16,
+    "text": "My mother was crying in the front row.",
+    "wordCount": 8,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 16,
+    "text": "The thing in the attic has learned to say my name in a way that sounds exactly right.",
+    "wordCount": 18,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "The air in here tastes like copper.",
+    "wordCount": 7,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "The walls of my apartment have started breathing faintly in and out.",
+    "wordCount": 12,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "My coworker forwarded me an email I apparently sent at four in the morning about things I have never done.",
+    "wordCount": 20,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "It is standing in the corner and it has been there for hours.",
+    "wordCount": 13,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "I can hear something thinking on the other side of them.",
+    "wordCount": 11,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "Something is living inside the walls.",
+    "wordCount": 6,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 17,
+    "text": "The walls of the apartment have started breathing faintly in and out.",
+    "isVariation": true,
+    "baseText": "The walls of my apartment have started breathing faintly in and out.",
+    "wordCount": 12,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "Fingers scratched the inside of the window glass last night.",
+    "wordCount": 10,
+    "firstWord": "fingers",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "The email used my signature and wrote exactly the way I write.",
+    "wordCount": 12,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 17,
+    "text": "The walls of your apartment have started breathing faintly in and out.",
+    "isVariation": true,
+    "baseText": "The walls of my apartment have started breathing faintly in and out.",
+    "wordCount": 12,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 18,
+    "text": "I have never been prescribed any medication.",
+    "wordCount": 7,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 18,
+    "text": "I found empty medicine bottles in my trash with my name on the prescription label.",
+    "wordCount": 15,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 18,
+    "text": "I found empty medicine bottles in your trash with your name on the prescription label.",
+    "isVariation": true,
+    "baseText": "I found empty medicine bottles in my trash with my name on the prescription label.",
+    "wordCount": 15,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 18,
+    "text": "I had lived this Tuesday before.",
+    "isVariation": true,
+    "baseText": "I have lived this Tuesday before.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 18,
+    "text": "My therapist does not exist but I have been seeing her every Thursday for three years.",
+    "wordCount": 16,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 18,
+    "text": "I have lived this Tuesday before.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 18,
+    "text": "I found her business card today and the phone number on it is my own number.",
+    "wordCount": 16,
+    "firstWord": "i",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 18,
+    "text": "I stopped counting the days because the calendar keeps resetting to the same date.",
+    "wordCount": 14,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 18,
+    "text": "The thing pretending to be my partner almost got the laugh exactly right tonight.",
+    "wordCount": 14,
+    "firstWord": "the",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 18,
+    "text": "Many times.",
+    "wordCount": 2,
+    "firstWord": "many",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 19,
+    "text": "I tried to call for help but your voice was not working.",
+    "isVariation": true,
+    "baseText": "I tried to call for help but my voice was not working.",
+    "wordCount": 12,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 19,
+    "text": "I tried to type for help but my hands were not mine.",
+    "wordCount": 12,
+    "firstWord": "i",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 19,
+    "text": "It is already inside. Please do not turn around.",
+    "wordCount": 9,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 19,
+    "text": "Something was standing at the end of the road and it knew my name.",
+    "wordCount": 14,
+    "firstWord": "something",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 19,
+    "text": "My phone autocorrects every message I try to send into the same phrase.",
+    "wordCount": 13,
+    "firstWord": "my",
+    "themes": [
+      "technology",
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 19,
+    "text": "I tried to call for help but the voice was not working.",
+    "isVariation": true,
+    "baseText": "I tried to call for help but my voice was not working.",
+    "wordCount": 12,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 19,
+    "text": "Please.",
+    "wordCount": 1,
+    "firstWord": "please.",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 19,
+    "text": "I tried to call for help but my voice was not working.",
+    "wordCount": 12,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 19,
+    "text": "Who is there.",
+    "wordCount": 3,
+    "firstWord": "who",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 19,
+    "text": "My navigation app rerouted me through a road that does not appear on any map.",
+    "wordCount": 15,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "I am trapped reading the future of my own death.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "The date it was posted is three years from now.",
+    "wordCount": 10,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "She asked if I was eating enough and said I sounded tired.",
+    "wordCount": 12,
+    "firstWord": "she",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "My grandmother called to check on me today and we buried her three months ago.",
+    "wordCount": 15,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "The sheets are warm every morning and there is a coffee mug on the nightstand still steaming.",
+    "wordCount": 17,
+    "firstWord": "the",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "Over and over again.",
+    "wordCount": 4,
+    "firstWord": "over",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 20,
+    "text": "The date me was posted is three years from now.",
+    "isVariation": true,
+    "baseText": "The date it was posted is three years from now.",
+    "wordCount": 10,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "The sheets were warm every morning and there was a coffee mug on the nightstand still steaming.",
+    "isVariation": true,
+    "baseText": "The sheets are warm every morning and there is a coffee mug on the nightstand still steaming.",
+    "wordCount": 17,
+    "firstWord": "the",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "I do not remember having a second bedroom but someone has been sleeping in it every night.",
+    "wordCount": 17,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 20,
+    "text": "The missing persons poster on the telephone pole has my face on it.",
+    "wordCount": 13,
+    "firstWord": "the",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 21,
+    "text": "I can hear myself screaming from somewhere below the apartment but I cannot make myself go down there.",
+    "wordCount": 18,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 21,
+    "text": "My browser history shows me researching how to disappear and I have never searched for any of that.",
+    "wordCount": 18,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 21,
+    "text": "The answer came to me clearly in a dream last night.",
+    "wordCount": 11,
+    "firstWord": "the",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 21,
+    "text": "Living it.",
+    "wordCount": 2,
+    "firstWord": "living",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 21,
+    "text": "Not dreaming it.",
+    "wordCount": 3,
+    "firstWord": "not",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 21,
+    "text": "I asked the voice in the walls what it wants from me and it said it already has what it came for.",
+    "wordCount": 22,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 21,
+    "text": "But I remember actually living through it.",
+    "wordCount": 7,
+    "firstWord": "but",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 21,
+    "text": "The family photos on the wall keep changing and now there is always someone standing just behind us.",
+    "wordCount": 18,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 22,
+    "text": "It watches me from across the room.",
+    "wordCount": 7,
+    "firstWord": "it",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 22,
+    "text": "Every single night.",
+    "wordCount": 3,
+    "firstWord": "every",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 22,
+    "text": "I watched myself leave for work this morning from my bedroom window and I never left the apartment.",
+    "wordCount": 18,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 22,
+    "text": "The thing pretending to be my partner said I love you at dinner and paused just slightly too long before the words came out.",
+    "wordCount": 24,
+    "firstWord": "the",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 22,
+    "text": "I keep finding notes around the apartment in my own handwriting warning me not to fall asleep.",
+    "wordCount": 17,
+    "firstWord": "i",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 22,
+    "text": "I found a second bedroom behind a door that was not there yesterday and someone has been living in it.",
+    "wordCount": 20,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 22,
+    "text": "The distance between us is shrinking.",
+    "wordCount": 6,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 22,
+    "text": "My doppelganger sleeps in my bed now.",
+    "wordCount": 7,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 23,
+    "text": "My GPS keeps routing me to addresses that do not exist on any map but something is always waiting when I arrive.",
+    "wordCount": 22,
+    "firstWord": "my",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 23,
+    "text": "Getting closer every day.",
+    "wordCount": 4,
+    "firstWord": "getting",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 23,
+    "text": "The thing on the ceiling learned to mimic my partner's voice perfectly and now whispers that it loves me every night.",
+    "wordCount": 21,
+    "firstWord": "the",
+    "themes": [
+      "paranormal"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 23,
+    "text": "I found a door in my apartment that opens to a long hallway I have never seen and I can hear crying at the far end.",
+    "wordCount": 26,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 23,
+    "text": "I have been keeping a journal of everyone I meet and according to my own entries I have met myself fourteen times this month.",
+    "wordCount": 24,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 23,
+    "text": "It is learning to smile with my face.",
+    "wordCount": 8,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 23,
+    "text": "Soon it will not need to practice anymore.",
+    "wordCount": 8,
+    "firstWord": "soon",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 23,
+    "text": "Practicing in the dark.",
+    "wordCount": 4,
+    "firstWord": "practicing",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 24,
+    "text": "My daughter drew a picture of our family with seven people in it and we are only a family of four.",
+    "wordCount": 21,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 24,
+    "text": "I looked into the bathroom mirror and a stranger looked back and we moved in perfect synchronization.",
+    "wordCount": 17,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 24,
+    "text": "I do not know which one of us is real.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 24,
+    "text": "A search party found me in the woods last night but I have not left this apartment in four days.",
+    "wordCount": 20,
+    "firstWord": "a",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 24,
+    "text": "I think neither of us is.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 24,
+    "text": "I tried to scream for help but my voice came out of the television in the next room instead.",
+    "wordCount": 19,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 24,
+    "text": "I think we both are.",
+    "wordCount": 5,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 24,
+    "text": "I do not know which one is afraid.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 25,
+    "text": "It is a message from a version of me in the past.",
+    "wordCount": 12,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 25,
+    "text": "I asked my daughter who she was video calling and she turned the screen and it was my face looking back.",
+    "wordCount": 21,
+    "firstWord": "i",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 25,
+    "text": "The medication stopped working and I realized the doctors I had been seeing for years were never real people.",
+    "wordCount": 19,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 25,
+    "text": "I have been receiving emails from my own address postmarked from the future and they all say do not trust her.",
+    "wordCount": 21,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 25,
+    "text": "A support group meets in my building every Tuesday and none of us remember joining or signing up for anything.",
+    "wordCount": 20,
+    "firstWord": "a",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 25,
+    "text": "Trying to stop what has already happened.",
+    "wordCount": 7,
+    "firstWord": "trying",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 25,
+    "text": "It is not warning me about the future.",
+    "wordCount": 8,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 25,
+    "text": "I finally understand what the voice has been trying to tell me.",
+    "wordCount": 12,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 26,
+    "text": "The man standing in the corner of my office does not move or blink and every morning he is slightly closer to my desk.",
+    "wordCount": 24,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 26,
+    "text": "The silence between Spotify tracks has started learning words and last night it read my home address back to me.",
+    "wordCount": 20,
+    "firstWord": "the",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 26,
+    "text": "It no longer looks like ink.",
+    "wordCount": 6,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 26,
+    "text": "Three coworkers told me independently that I seemed lighter lately like something heavy had finally been lifted off me.",
+    "wordCount": 19,
+    "firstWord": "three",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 26,
+    "text": "My neighbor knocked to borrow something and her hands were too cold and her smile arrived half a second too late.",
+    "wordCount": 21,
+    "firstWord": "my",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 26,
+    "text": "I keep writing anyway.",
+    "wordCount": 4,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 26,
+    "text": "It feels warm when I write.",
+    "wordCount": 6,
+    "firstWord": "it",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 26,
+    "text": "The ink in my pen is getting darker every day.",
+    "wordCount": 10,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 27,
+    "text": "Not the people standing beside me.",
+    "wordCount": 6,
+    "firstWord": "not",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 27,
+    "text": "I have started seeing it on my commute, standing on the platform, carefully timing how long I take to notice it.",
+    "wordCount": 21,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 27,
+    "text": "None of it.",
+    "wordCount": 3,
+    "firstWord": "none",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 27,
+    "text": "Not the reason I was smiling.",
+    "wordCount": 6,
+    "firstWord": "not",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 27,
+    "text": "I thought I was the only one who could see it until I realized everyone else was simply pretending not to notice.",
+    "wordCount": 22,
+    "firstWord": "i",
+    "themes": [
+      "psychological",
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 27,
+    "text": "Not the room in the background.",
+    "wordCount": 6,
+    "firstWord": "not",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 27,
+    "text": "The framed photographs on my walls have all changed and I am still in every one of them but I do not remember any of those moments.",
+    "wordCount": 27,
+    "firstWord": "the",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 27,
+    "text": "Someone rearranged my entire apartment while I was sleeping and everything is more comfortable now and that is somehow worse.",
+    "wordCount": 20,
+    "firstWord": "someone",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 28,
+    "text": "Every time I review the security footage there is one more hour of recording I have no memory of watching or filming.",
+    "wordCount": 22,
+    "firstWord": "every",
+    "themes": [
+      "psychological",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 28,
+    "text": "I have been documenting the thing living in my apartment for months and last night I found its journal and it has been documenting me for much longer.",
+    "wordCount": 28,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 28,
+    "text": "The apartment temperature has adjusted to my exact preference without me touching the thermostat in over two weeks.",
+    "wordCount": 18,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 28,
+    "text": "My therapist told me none of the trauma was real and then I found her obituary showing she died two decades before I was born.",
+    "wordCount": 25,
+    "firstWord": "my",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 28,
+    "text": "Not at the mirror.",
+    "wordCount": 4,
+    "firstWord": "not",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 28,
+    "text": "At me.",
+    "wordCount": 2,
+    "firstWord": "at",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 28,
+    "text": "Then it looked directly at me.",
+    "wordCount": 6,
+    "firstWord": "then",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 28,
+    "text": "I looked in the mirror and my reflection blinked when I had not.",
+    "wordCount": 13,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 29,
+    "text": "Like a second heartbeat that is not mine.",
+    "wordCount": 8,
+    "firstWord": "like",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 29,
+    "text": "I wrote myself a note saying not to trust whoever comes home tonight and I found the note already waiting on my pillow.",
+    "wordCount": 23,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 29,
+    "text": "Moving slowly.",
+    "wordCount": 2,
+    "firstWord": "moving",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 29,
+    "text": "The voice on the phone was my own voice begging me not to answer if it called back and it has called every hour since then.",
+    "wordCount": 26,
+    "firstWord": "the",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 29,
+    "text": "Patiently waiting to take over.",
+    "wordCount": 5,
+    "firstWord": "patiently",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 29,
+    "text": "I can feel something underneath my thoughts now.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 29,
+    "text": "My partner made coffee this morning and touched my hand and their fingers were too cold and their smile came half a second too late.",
+    "wordCount": 25,
+    "firstWord": "my",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 29,
+    "text": "I found photographs in my cloud backup of myself sleeping taken from inside my bedroom spanning thirty years and I am only twenty-five.",
+    "wordCount": 23,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 30,
+    "text": "A missing persons report was filed with my photo and my description by someone with my exact full name exactly six months ago.",
+    "wordCount": 23,
+    "firstWord": "a",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 30,
+    "text": "My window has deep scratch marks on the inside of the glass.",
+    "wordCount": 12,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 30,
+    "text": "Like fingernails dragged downward.",
+    "wordCount": 4,
+    "firstWord": "like",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 30,
+    "text": "The thing that replaced my partner makes coffee every morning and kisses me goodbye and I catch it practicing the kiss in the bathroom mirror.",
+    "wordCount": 25,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 30,
+    "text": "From something desperate to get out.",
+    "wordCount": 6,
+    "firstWord": "from",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 30,
+    "text": "An emergency alert played on every device in the apartment for six straight hours and it was only my name repeated in my own voice.",
+    "wordCount": 25,
+    "firstWord": "an",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 30,
+    "text": "I think that something was me.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 30,
+    "text": "I installed cameras to catch whoever was breaking in and the footage shows me doing things I have never learned and do not remember.",
+    "wordCount": 24,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 31,
+    "text": "I have stopped looking in mirrors because what looks back has stopped pretending to follow my movements.",
+    "wordCount": 17,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 31,
+    "text": "Not from the walls around me.",
+    "wordCount": 6,
+    "firstWord": "not",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 31,
+    "text": "The thing in the basement has stopped knocking and now it just whispers let me up using my dead brother's voice perfectly.",
+    "wordCount": 22,
+    "firstWord": "the",
+    "themes": [
+      "paranormal"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 31,
+    "text": "The scratching sound is coming from inside now.",
+    "wordCount": 8,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 31,
+    "text": "I have been typing this message asking for help for over three hours and every time I finish I find myself back at the very beginning.",
+    "wordCount": 26,
+    "firstWord": "i",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 31,
+    "text": "There is a second version of this exact morning and I have already lived through it seventeen times making different choices each time.",
+    "wordCount": 23,
+    "firstWord": "there",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 32,
+    "text": "I cannot tell the difference anymore.",
+    "wordCount": 6,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 32,
+    "text": "I tested the thing wearing my partner's face by asking something only they would know and it answered correctly then asked how long I had known.",
+    "wordCount": 26,
+    "firstWord": "i",
+    "themes": [
+      "psychological",
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 32,
+    "text": "I felt something brush against my shoulder while typing this and the room is empty and I checked twice and then I heard it laugh softly.",
+    "wordCount": 26,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 32,
+    "text": "They say if you type fast enough it cannot catch up to you but they were completely wrong because it is already here reading this with you.",
+    "wordCount": 27,
+    "firstWord": "they",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 32,
+    "text": "Between memories I actually made.",
+    "wordCount": 5,
+    "firstWord": "between",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "medium"
+  },
+  {
+    "level": 32,
+    "text": "The elevator at my office building occasionally stops at a floor that does not appear on the panel and nobody who steps off ever returns.",
+    "wordCount": 25,
+    "firstWord": "the",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 33,
+    "text": "My childhood home burned to the ground in 1987 and I am standing inside it right now and nothing is on fire but I can smell the smoke.",
+    "wordCount": 28,
+    "firstWord": "my",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 33,
+    "text": "I count my fingers carefully every single morning and some mornings there are too many and I have stopped counting by the afternoon.",
+    "wordCount": 23,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 33,
+    "text": "I have written warnings across every surface in this room.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 33,
+    "text": "The grocery list magnetted to my fridge ends with a sentence I did not write: it is already inside, please do not come home tonight.",
+    "wordCount": 25,
+    "firstWord": "the",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 33,
+    "text": "I do not remember writing a single word of any of it.",
+    "wordCount": 12,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 33,
+    "text": "Every photograph saved on my phone is of a place I do not recognize and in every single one I am smiling and I do not remember ever being that happy.",
+    "wordCount": 31,
+    "firstWord": "every",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 34,
+    "text": "I remember my daughter's name and her birthday and the exact sound of her laugh but when I try to picture her face it is completely smooth and blank.",
+    "wordCount": 29,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 34,
+    "text": "I have not slept in what feels like nine days but everyone around me calmly insists I have been sleeping perfectly fine each night.",
+    "wordCount": 24,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 34,
+    "text": "Four different coworkers told me this week that I seem more present and focused lately as if something has finally clicked into place for me.",
+    "wordCount": 25,
+    "firstWord": "four",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 34,
+    "text": "Some parts of my life fit it better than they ever fit me.",
+    "wordCount": 13,
+    "firstWord": "some",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 34,
+    "text": "It has been wearing my life long enough now.",
+    "wordCount": 9,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 34,
+    "text": "The handwriting in my journal changed completely three weeks ago and I recognize all the words but the voice behind them is not mine.",
+    "wordCount": 24,
+    "firstWord": "the",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 35,
+    "text": "The hospital has absolutely no record of me ever being admitted but I remember the room and the nurses and signing a form I could not read.",
+    "wordCount": 27,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 35,
+    "text": "The thing wearing my mother's face wept more convincingly at my uncle's funeral than I did and my aunt said she seems so much better lately.",
+    "wordCount": 26,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 35,
+    "text": "The future I was warned about was this.",
+    "wordCount": 8,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 35,
+    "text": "I have been carefully documenting everything for months and when I re-read the very first entry it begins: I have been documenting this for months.",
+    "wordCount": 25,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 35,
+    "text": "I found a note folded inside my coat pocket that read: you have done all of this before and it always ends this same exact way.",
+    "wordCount": 26,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 35,
+    "text": "This is not the future I was warned about.",
+    "wordCount": 9,
+    "firstWord": "this",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 36,
+    "text": "Something moved loudly inside the walls during dinner last night and my entire family kept eating without looking up from their plates.",
+    "wordCount": 22,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 36,
+    "text": "I simply did not realize at the time.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 36,
+    "text": "It told me it has been living here far longer than I have and that this was its apartment before it ever became mine and I moved in uninvited.",
+    "wordCount": 29,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 36,
+    "text": "I surrendered that certainty a long time ago.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 36,
+    "text": "I have listened to the voicemail eleven times and the voice is mine and the fear in it is real but I have never been that frightened of myself before.",
+    "wordCount": 30,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 36,
+    "text": "I asked it directly what it wanted from me and it said it only wants my certainty that I am actually a real person.",
+    "wordCount": 24,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 37,
+    "text": "I discovered my own full name carved into a headstone in a cemetery I have never once visited and the dates engraved on it are completely wrong.",
+    "wordCount": 27,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 37,
+    "text": "It has stopped asking how my day was and the pauses before it answers any question are growing longer as if it is losing interest in the act.",
+    "wordCount": 28,
+    "firstWord": "it",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 37,
+    "text": "I have known what was coming since the very beginning.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 37,
+    "text": "I recorded myself sleeping last night and in the footage I sit upright at exactly 3:17am and turn to face the camera and say your name clearly.",
+    "wordCount": 27,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 37,
+    "text": "I kept hoping I was wrong about it.",
+    "wordCount": 8,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 37,
+    "text": "The children playing outside my building stopped mid-game and formed a silent line facing my window and have not moved in over four hours.",
+    "wordCount": 24,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 38,
+    "text": "The bathroom mirror has stopped reflecting me and now shows a room behind me that is not there and something in that room is watching me back.",
+    "wordCount": 27,
+    "firstWord": "the",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 38,
+    "text": "The thing that follows me home has learned to breathe in perfect sync with me and we have settled into a rhythm I cannot bring myself to break.",
+    "wordCount": 28,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 38,
+    "text": "I have locked myself inside the bathroom and I can hear it moving through my apartment using my things and answering my messages in my voice.",
+    "wordCount": 26,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 38,
+    "text": "I called my mother to warn her and she told me I had already called an hour ago and that I sounded completely like myself and everything seemed fine.",
+    "wordCount": 29,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 38,
+    "text": "I can feel it pressing against the edges of my thoughts.",
+    "wordCount": 11,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 38,
+    "text": "Smoothing everything down.",
+    "wordCount": 3,
+    "firstWord": "smoothing",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 39,
+    "text": "I do not remember now what I was frightened of.",
+    "wordCount": 10,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 39,
+    "text": "Something is trying to communicate a warning through me right now and I can feel the words arriving from somewhere that is not my own mind.",
+    "wordCount": 26,
+    "firstWord": "something",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 39,
+    "text": "The memory of the fear is still here.",
+    "wordCount": 8,
+    "firstWord": "the",
+    "themes": [
+      "psychological",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 39,
+    "text": "I do not remember how this sentence started or what room I am sitting in or how long I have been here writing this.",
+    "wordCount": 24,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 39,
+    "text": "I remember clearly that I was frightened once and that the fear had a very specific shape and texture and belonged entirely to me.",
+    "wordCount": 24,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 39,
+    "text": "I remember that I had a name I answered to and a life that was unmistakably mine and something in a corner watching me from the dark.",
+    "wordCount": 27,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 40,
+    "text": "I am no longer certain if it is the fear ending.",
+    "wordCount": 11,
+    "firstWord": "i",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 40,
+    "text": "Something is almost finished.",
+    "wordCount": 4,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "short"
+  },
+  {
+    "level": 40,
+    "text": "My phone shows one unread notification sent from my own number and the message reads simply: it is already far too late for any of this.",
+    "wordCount": 26,
+    "firstWord": "my",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 40,
+    "text": "An emergency alert broadcast my name on repeat for six full hours across every single device in the building and nobody else seemed to hear it.",
+    "wordCount": 26,
+    "firstWord": "an",
+    "themes": [
+      "technology",
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 40,
+    "text": "I have re-read everything I have written in this journal and it describes a life I have no memory of living and the ending has not been written yet.",
+    "wordCount": 29,
+    "firstWord": "i",
+    "themes": [
+      "psychological",
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 40,
+    "text": "I believed I was the only one who could see it and then I noticed that everyone around me was simply choosing very carefully not to look.",
+    "wordCount": 27,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 41,
+    "text": "Something else has been holding the pen this entire time and I only just noticed.",
+    "wordCount": 15,
+    "firstWord": "something",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 41,
+    "text": "I sat down to write a final goodbye message and halfway through realized I could not remember the name of the person I was writing it to.",
+    "wordCount": 27,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 41,
+    "text": "The thing that replaced my mother held me at my father's funeral and her arms were the right temperature but her heartbeat was completely wrong.",
+    "wordCount": 25,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 41,
+    "text": "The security footage shows me unlocking the front door at 2am, walking calmly outside into the cold, standing perfectly still, then walking back to bed.",
+    "wordCount": 25,
+    "firstWord": "the",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 42,
+    "text": "The thing wearing my face attended my morning meeting today, received a compliment on my work, and laughed at exactly the right moment without hesitation.",
+    "wordCount": 25,
+    "firstWord": "the",
+    "themes": [
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 42,
+    "text": "My name on my front door took me eleven full seconds to recognize as belonging to me this morning.",
+    "wordCount": 19,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 42,
+    "text": "I tried to call someone who would notice I was gone but my phone showed no contacts and no call history and no record I had ever used it.",
+    "wordCount": 29,
+    "firstWord": "i",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 42,
+    "text": "I tried to think of one single private memory that only I could possibly know and I sat there for an hour and could not think of anything.",
+    "wordCount": 28,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 43,
+    "text": "The people who love me have not noticed the difference or they have noticed and stopped caring or they were replaced before me and their noticing no longer counts.",
+    "wordCount": 29,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 43,
+    "text": "I stared at my own hands on the kitchen counter for a long time this morning and after a while they stared back at me.",
+    "wordCount": 25,
+    "firstWord": "i",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 43,
+    "text": "I am genuinely uncertain whether my hands belong to me anymore or whether they ever did or what the word mine is even supposed to mean.",
+    "wordCount": 26,
+    "firstWord": "i",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 43,
+    "text": "My voice came out slightly wrong this morning when I said hello and I felt something click incorrectly on the second syllable deep in my throat.",
+    "wordCount": 26,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 44,
+    "text": "I write my own name on my hand every morning so I will not forget it and this morning there was already a different name written there in my handwriting.",
+    "wordCount": 30,
+    "firstWord": "i",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 44,
+    "text": "There is something standing in the corner of every room I enter and each time I look away I forget completely why I was ever afraid of it.",
+    "wordCount": 28,
+    "firstWord": "there",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 44,
+    "text": "I have its memories now and they are long dark hallways in houses I have never visited and a family watched through a window and a decision being made to go inside.",
+    "wordCount": 32,
+    "firstWord": "i",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 44,
+    "text": "I found photographs in my cloud storage taken from inside my bedroom of myself sleeping every night for thirty years and I am only twenty-five years old.",
+    "wordCount": 27,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 45,
+    "text": "The thing in the basement stopped knocking entirely and now only whispers let me come up using my dead brother's voice with absolute perfect accuracy.",
+    "wordCount": 25,
+    "firstWord": "the",
+    "themes": [
+      "paranormal"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 45,
+    "text": "I looked at the nameplate on my office door this morning and it took me nearly a full minute to understand that the name on it was supposed to be mine.",
+    "wordCount": 31,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 45,
+    "text": "It watches me struggle to remember who I am with what I can only describe as quiet and patient and deeply satisfied curiosity.",
+    "wordCount": 23,
+    "firstWord": "it",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 45,
+    "text": "The voice on the call was mine begging me desperately not to answer if it ever called again and it has now called forty-seven times since that message.",
+    "wordCount": 28,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 46,
+    "text": "There is a version of me that escaped this and I can feel them somewhere far away desperately trying to warn someone and no one is listening to them at all.",
+    "wordCount": 31,
+    "firstWord": "there",
+    "themes": [
+      "psychological",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 46,
+    "text": "I realized this morning while making coffee that I was the one who replaced my partner and that I have been the one making the coffee and kissing them goodbye all along.",
+    "wordCount": 32,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 46,
+    "text": "I am no longer entirely certain that I am the one writing these words or that I was the one writing them when they started.",
+    "wordCount": 25,
+    "firstWord": "i",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 46,
+    "text": "I have been writing this same request for help for hours now and every single time I reach the end I find myself back at the very beginning with no memory of stopping.",
+    "wordCount": 33,
+    "firstWord": "i",
+    "themes": [
+      "psychological",
+      "existential"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 47,
+    "text": "Fear is so much lighter than I ever expected it to be once it no longer belongs to you and once you have let the right thing carry it away for good.",
+    "wordCount": 32,
+    "firstWord": "fear",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 47,
+    "text": "My grandmother called today concerned about me and we buried her three months ago and she said I did not sound like myself at all and she was completely right.",
+    "wordCount": 30,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 47,
+    "text": "It told me once that it had been patient for a very long time and that patience was the only thing it had in quantities I could never hope to match.",
+    "wordCount": 31,
+    "firstWord": "it",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 47,
+    "text": "I remember the experience of being frightened very clearly the way you remember an object you no longer own and I can hold the memory of that fear like something physical.",
+    "wordCount": 31,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 48,
+    "text": "My window has deep gouge marks scored into the inside surface of the glass like fingernails dragged down by something desperately trying to escape from in here.",
+    "wordCount": 27,
+    "firstWord": "my",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 48,
+    "text": "The emergency alert has been broadcasting my name on every device for six straight hours now and I recognize the voice saying it completely and entirely as my own.",
+    "wordCount": 29,
+    "firstWord": "the",
+    "themes": [
+      "technology"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 48,
+    "text": "The last recognizable pieces of who I was before are very small now and I can feel them going quiet one by one like rooms in a house losing their lights.",
+    "wordCount": 31,
+    "firstWord": "the",
+    "themes": [
+      "psychological",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 48,
+    "text": "I stood in front of the bathroom mirror this morning and something looked back at me and we have reached a quiet understanding and I no longer feel the need to fight.",
+    "wordCount": 32,
+    "firstWord": "i",
+    "themes": [
+      "psychological",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 49,
+    "text": "I tried to leave a warning for whoever reads this next and this message is that warning and I do not know your name but something nearby already does.",
+    "wordCount": 29,
+    "firstWord": "i",
+    "themes": [
+      "psychological"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 49,
+    "text": "The thing that hunted me was patient because it knew long before I did that I would eventually become too tired to keep running and would simply let it in.",
+    "wordCount": 30,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 49,
+    "text": "I am not entirely gone yet but the parts of me that remain do not know how to make a sound anymore and the silence where my fear lived is total and complete.",
+    "wordCount": 33,
+    "firstWord": "i",
+    "themes": [
+      "psychological",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 49,
+    "text": "I understand completely now why it wanted this life so badly because it is warm inside a name and inside a body that people recognize and reach for and love.",
+    "wordCount": 30,
+    "firstWord": "i",
+    "themes": [
+      "body_horror"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 50,
+    "text": "It knows what you want and what you are afraid of and where you live and the exact sound of your voice when you think no one is listening.",
+    "wordCount": 29,
+    "firstWord": "it",
+    "themes": [
+      "psychological",
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 50,
+    "text": "If you are reading this then something has been watching you for longer than you realize and it has decided with great patience that you are worth the wait.",
+    "wordCount": 29,
+    "firstWord": "if",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 50,
+    "text": "The thing that replaced me is performing my life with a fluency and ease I never managed myself and the people I loved most are genuinely happier now.",
+    "wordCount": 28,
+    "firstWord": "the",
+    "themes": [
+      "general"
+    ],
+    "lengthCategory": "long"
+  },
+  {
+    "level": 50,
+    "text": "It has been inside your home already and it has touched your things and it has watched you sleep and it has been learning you from the very beginning.",
+    "wordCount": 29,
+    "firstWord": "it",
+    "themes": [
+      "suspense"
+    ],
+    "lengthCategory": "long"
+  }
 ]

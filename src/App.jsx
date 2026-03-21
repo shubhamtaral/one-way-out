@@ -13,7 +13,18 @@ import { initTheme } from './config/themes';
 function App() {
   const sound = useSound();
   const { user, loading: authLoading, signInWithGoogle, signOut } = useAuth();
-  const { stats, newAchievements, recordGame, recordPractice, recordKonami, recordEasterEgg, clearNewAchievements } = useStats(user);
+  const { 
+    stats, 
+    newAchievements, 
+    recordGame, 
+    recordPractice, 
+    recordKonami, 
+    recordEasterEgg, 
+    clearNewAchievements,
+    updatePreference,
+    updatePersonalization,
+    toggleFavoriteTheme,
+  } = useStats(user);
   const [showDeathScreen, setShowDeathScreen] = useState(false);
   const [gameRecorded, setGameRecorded] = useState(false);
   
@@ -64,7 +75,8 @@ function App() {
     endlessLives,
     currentStoryId,
     isStoryComplete,
-  } = useGame(sound);
+    sentencesUsed,
+  } = useGame(sound, stats.recentlyUsedSentences || []);
 
   // Record game stats when game ends
   useEffect(() => {
@@ -79,6 +91,7 @@ function App() {
         gameMode,
         storyId: currentStoryId,
         isStoryComplete,
+        sentencesUsed,
       });
 
       if (level === 40) {
@@ -149,6 +162,9 @@ function App() {
           onRecordPractice={recordPractice}
           onRecordKonami={recordKonami}
           onRecordEasterEgg={recordEasterEgg}
+          updatePreference={updatePreference}
+          updatePersonalization={updatePersonalization}
+          toggleFavoriteTheme={toggleFavoriteTheme}
         />
         <AchievementPopup 
           achievements={newAchievements} 

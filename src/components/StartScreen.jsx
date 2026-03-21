@@ -12,7 +12,7 @@ const KONAMI_CODE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft'
 const SECRET_CREATORS = ['tusharx1143', 'shubhamtaral'];
 const SECRET_JUMPSCARE = 'jumpscare';
 
-export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStory, allStories, stats, user, onSignIn, onSignOut, authLoading, selectedTheme, onThemeChange, onRecordPractice, onRecordKonami, onRecordEasterEgg }) {
+export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStory, allStories, stats, user, onSignIn, onSignOut, authLoading, selectedTheme, onThemeChange, onRecordPractice, onRecordKonami, onRecordEasterEgg, updatePreference, updatePersonalization, toggleFavoriteTheme }) {
   const [selectedDifficulty, setSelectedDifficulty] = useState('normal');
   const [flicker, setFlicker] = useState(false);
   const [ready, setReady] = useState(false);
@@ -422,6 +422,10 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           onClose={() => setShowStats(false)}
           selectedTheme={selectedTheme}
           onThemeChange={onThemeChange}
+          updatePreference={updatePreference}
+          updatePersonalization={updatePersonalization}
+          toggleFavoriteTheme={toggleFavoriteTheme}
+          readOnly={false}
         />
       )}
 

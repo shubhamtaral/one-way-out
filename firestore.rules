@@ -14,7 +14,9 @@ service cloud.firestore {
     // User profiles and stats
     match /users/{userId} {
       allow read: if true; // Public profiles for leaderboards
-      allow write: if isOwner(userId);
+      allow write: if isOwner(userId) && 
+        request.resource.data.displayName is string && 
+        request.resource.data.displayName.size() <= 100;
     }
 
     // Leaderboard scores
@@ -23,12 +25,14 @@ service cloud.firestore {
       // Ensure user can only write their own score and it's valid data
       allow create, update: if isAuthenticated() && 
         request.auth.uid == request.resource.data.userId &&
+        request.resource.data.displayName is string &&
+        request.resource.data.displayName.size() <= 100 &&
         request.resource.data.level is number &&
         request.resource.data.level >= 0 &&
-        request.resource.data.level <= 100 && // Safety cap (can be adjusted)
+        request.resource.data.level <= 500 && // Safety cap (can be adjusted)
         request.resource.data.wpm is number &&
         request.resource.data.wpm >= 0 &&
-        request.resource.data.wpm <= 300 && // Human-realistic WPM cap
+        request.resource.data.wpm <= 350 && // Human-realistic WPM cap
         request.resource.data.difficulty in ['casual', 'normal', 'nightmare'];
       allow delete: if false;
     }
@@ -38,8 +42,11 @@ service cloud.firestore {
       allow read: if true;
       allow create, update: if isAuthenticated() && 
         request.auth.uid == request.resource.data.userId &&
+        request.resource.data.displayName is string &&
+        request.resource.data.displayName.size() <= 100 &&
         request.resource.data.level is number &&
-        request.resource.data.level >= 0;
+        request.resource.data.level >= 0 &&
+        request.resource.data.level <= 500;
       allow delete: if false;
     }
 

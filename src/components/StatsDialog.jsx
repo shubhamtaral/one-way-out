@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { ACHIEVEMENTS } from '../config/achievements';
 
+
 export function StatsDialog({ stats, onClose, user }) {
+
   const [showChart, setShowChart] = useState(true);
 
   // Calculate derived stats
@@ -25,7 +27,7 @@ export function StatsDialog({ stats, onClose, user }) {
       return (
         <div className="flex items-end justify-center gap-1 h-32 bg-[var(--color-bone)]/5 p-4 rounded border border-[var(--color-bone)]/10">
           <div className="text-[var(--color-bone)]/40 text-xs text-center italic">
-            Play more games to see your performance graph...
+            {readOnly ? 'No performance trend available yet...' : 'Play more games to see your performance graph...'}
           </div>
         </div>
       );

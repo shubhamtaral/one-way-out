@@ -2,21 +2,20 @@ name: CI/CD - One Way Out
 
 on:
   push:
-    branches:
-      - '**'
+    branches: ['**']
   pull_request:
-    branches:
-      - master
+    branches: ['master']
   workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-
 jobs:
-  build_and_deploy:
+  ci:
+    name: 🧪 CI Pipeline
     runs-on: ubuntu-latest
+
     steps:
       - name: 🛒 Checkout Code
         uses: actions/checkout@v4
@@ -37,26 +36,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🛡️ Security Audit (npm audit)
+      - name: 🛡️ Security Audit
         run: npm audit --audit-level=high
 
-      - name: 🧹 Lint Code (ESLint)
+      - name: 🧹 Lint
         run: npm run lint
 
-      - name: 🧪 Run Unit Tests
+      - name: 🧪 Unit Tests
         run: npm test
-
-      - name: 🏗️ Scan Filesystem (Grype)
-        uses: anchore/scan-action@v3
-        with:
-          path: "."
-          exclude: "node_modules"
-          fail-build: false
-          severity-cutoff: "critical"
-        env: 
-          GRYPE_DB_AUTO_UPDATE: true
-          GRYPE_DB_VALIDATE_AGE: false
-
 
       - name: 🏗️ Build App
         run: npm run build
@@ -68,13 +55,62 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
 
-      - name: 🚀 Deploy to Firebase
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: |
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_ONE_WAY_OUT }}" > firebase-service-account.json
-          export GOOGLE_APPLICATION_CREDENTIALS=firebase-service-account.json
-          npx firebase-tools deploy --non-interactive --force
+      - name: 🏗️ Grype Scan (Non-blocking)
+        uses: anchore/scan-action@v3
+        with:
+          path: "."
+          exclude: "node_modules"
+          fail-build: false
+          severity-cutoff: "critical"
+          output-format: "sarif"
+          output-file: "grype.sarif"
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          GRYPE_DB_AUTO_UPDATE: true
+          GRYPE_DB_VALIDATE_AGE: false
+
+      - name: 📤 Upload SARIF (Security Tab)
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: grype.sarif
 
 
+  deploy_preview:
+    name: 🌐 Preview Deploy
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🔐 Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ONE_WAY_OUT }}'
+
+      - name: 🚀 Deploy Preview Channel
+        run: |
+          npx firebase-tools hosting:channel:deploy pr-${{ github.event.number }} \
+            --project ${{ secrets.VITE_FIREBASE_PROJECT_ID }} \
+            --expires 7d
+
+
+  deploy_production:
+    name: 🚀 Production Deploy
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 🔐 Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ONE_WAY_OUT }}'
+
+      - name: 🚀 Deploy to Firebase (Production)
+        run: |
+          npx firebase-tools deploy \
+            --project ${{ secrets.VITE_FIREBASE_PROJECT_ID }} \
+            --non-interactive --force

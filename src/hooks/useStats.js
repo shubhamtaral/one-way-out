@@ -63,6 +63,7 @@ export function useStats(user) {
               ...(prev.unlockedAchievements || []),
               ...(cloudStats.achievements || [])
             ])],
+            history: cloudStats.history || prev.history || [],
             lastPlayed: Date.now(),
           };
           saveLocalStats(merged);

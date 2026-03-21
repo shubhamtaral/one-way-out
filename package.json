@@ -34,7 +34,7 @@
     "jsdom": "^28.1.0",
     "lint-staged": "^16.4.0",
     "tailwindcss": "^4.1.18",
-    "vite": "^7.2.4",
+    "vite": "^5.4.21",
     "vite-plugin-pwa": "^0.19.8",
     "vitest": "^4.0.18"
   },

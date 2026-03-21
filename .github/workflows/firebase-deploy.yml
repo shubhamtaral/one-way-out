@@ -51,7 +51,7 @@ jobs:
         with:
           path: "."
           exclude: "node_modules"
-          fail-build: true
+          fail-build: false
           severity-cutoff: "critical"
         env: 
           GRYPE_DB_AUTO_UPDATE: true

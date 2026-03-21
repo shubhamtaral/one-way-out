@@ -55,20 +55,20 @@ jobs:
           VITE_FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
 
-      - name: 🏗️ Install Grype
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+      # - name: 🏗️ Install Grype
+      #   run: |
+      #     curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
 
-      - name: 🏗️ Run Grype Scan (SARIF)
-        run: |
-          grype dir:. \
-            --exclude node_modules \
-            -o sarif > grype.sarif || true
+      # - name: 🏗️ Run Grype Scan (SARIF)
+      #   run: |
+      #     grype dir:. \
+      #       --exclude node_modules \
+      #       -o sarif > grype.sarif || true
 
-      - name: 📤 Upload SARIF
-        uses: github/codeql-action/upload-sarif@v4
-        with:
-          sarif_file: grype.sarif
+      # - name: 📤 Upload SARIF
+      #   uses: github/codeql-action/upload-sarif@v4
+      #   with:
+      #     sarif_file: grype.sarif
 
 
   deploy_preview:

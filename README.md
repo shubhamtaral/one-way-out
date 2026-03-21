@@ -2,7 +2,7 @@
 
 A tense typing survival game. Type fast or die trying.
 
-![One Way Out](https://img.shields.io/badge/React-19-blue) ![Vite](https://img.shields.io/badge/Vite-7-purple) ![Tailwind](https://img.shields.io/badge/Tailwind-4-cyan)
+![CI/CD Build](https://github.com/Tusharx1143/one-way-out/actions/workflows/firebase-deploy.yml/badge.svg) ![React](https://img.shields.io/badge/React-19-blue) ![Vite](https://img.shields.io/badge/Vite-7-purple) ![Tailwind](https://img.shields.io/badge/Tailwind-4-cyan)
 
 ## 🎮 Play Now
 (Live Now)
@@ -54,7 +54,9 @@ Featuring 200+ creepy horror-themed sentences that get progressively more terrif
 - **Build:** Vite 7
 - **Styling:** Tailwind CSS 4
 - **Audio:** Web Audio API (procedural sounds)
-- **Storage:** localStorage
+- **CI/CD:** GitHub Actions + Firebase Hosting
+- **Security:** Gitleaks, Grype, npm audit
+- **Containerization:** Docker (Alpine/Nginx)
 
 ## 🚀 Getting Started
 

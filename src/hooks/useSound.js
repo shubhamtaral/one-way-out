@@ -171,7 +171,6 @@ function playDeath() {
 export function useSound() {
   const heartbeatRef = useRef(null);
   const heartbeatSpeed = useRef(1200);
-  const ambienceRef = useRef(null);
 
   // Subtle key click - softer, creepier
   const playKeystroke = useCallback(() => {

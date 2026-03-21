@@ -1,28 +1,28 @@
-## Build stage
+# Stage 1: Build
 FROM node:20-alpine AS build
 
 WORKDIR /app
 
-ENV NODE_ENV=production
+# Copy package files (for caching)
+COPY package*.json ./
 
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev=false
+# Install dependencies
+RUN npm ci
 
+# Copy the rest of the app
 COPY . .
+
+# Build the project
+# Note: VITE_FIREBASE_* env vars would be needed here for a full prod build
 RUN npm run build
 
-## Runtime stage
-FROM nginx:1.27-alpine AS runtime
+# Stage 2: Serve using Nginx
+FROM nginx:stable-alpine
 
-WORKDIR /usr/share/nginx/html
+# Copy the built files from the build stage
+COPY --from=build /app/dist /usr/share/nginx/html
 
-COPY --from=build /app/dist ./
-
-# Basic security / UX defaults
-RUN rm -f /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
+# Expose port (default for Nginx is 80)
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
-

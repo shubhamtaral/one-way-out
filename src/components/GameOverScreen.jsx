@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { DIFFICULTIES } from '../config/difficulty';
 import { ShareCard } from './ShareCard';
 
-export function GameOverScreen({ level, bestScore, maxCombo, wpm, accuracy, difficulty, gameMode, onRestart, timeSurvived, perfectStreak }) {
+export function GameOverScreen({ level, bestScore, maxCombo, wpm, accuracy, difficulty, gameMode, onRestart, perfectStreak }) {
   const [showShare, setShowShare] = useState(false);
   
   const isNewBest = level >= bestScore;

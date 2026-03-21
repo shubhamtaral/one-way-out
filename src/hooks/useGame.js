@@ -42,8 +42,6 @@ export function useGame(soundHooks = {}) {
   // New: Streak Multiplier
   const [streakMultiplier, setStreakMultiplier] = useState(1);
   
-  // New: Survival Mode
-  const [timeSurvived, setTimeSurvived] = useState(0);
   
   // New: Cosmetics
   const [selectedTheme, setSelectedTheme] = useState(() => {
@@ -71,7 +69,6 @@ export function useGame(soundHooks = {}) {
   const slowMotionRef = useRef(false);
   const doublePointsRef = useRef(false);
   const isPausedRef = useRef(isPaused);
-  const survivalStartTimeRef = useRef(null);
   const gameStateRef = useRef(gameState);
 
   // Sync state to ref for timer interval to access without recreating
@@ -146,7 +143,7 @@ export function useGame(soundHooks = {}) {
         return newTime;
       });
     }, 100);
-  }, [clearTimer, playTick, playWarningTick, gameMode]);
+  }, [clearTimer, playTick, playWarningTick, gameMode, stageWpms]);
 
   // Handle timer expiry
   useEffect(() => {
@@ -589,7 +586,7 @@ export function useGame(soundHooks = {}) {
         }
       }
     }
-  }, [gameState, currentSentence, typed, level, difficulty, gameMode, totalMistakes, combo, maxMistakes, bestScore, wpm, activePowerUps, currentLevelPowerUp, isPaused, endlessLives, playKeystroke, playError, playSuccess, playGameOver, updateHeartbeat, stopHeartbeat, clearTimer, startTimer]);
+  }, [gameState, currentSentence, typed, level, difficulty, gameMode, totalMistakes, combo, maxMistakes, bestScore, wpm, activePowerUps, currentLevelPowerUp, isPaused, endlessLives, stageWpms, totalErrors, playKeystroke, playError, playSuccess, playGameOver, updateHeartbeat, stopHeartbeat, clearTimer, startTimer]);
 
   useEffect(() => {
     return () => {
@@ -630,7 +627,6 @@ export function useGame(soundHooks = {}) {
     activePowerUps,
     currentLevelPowerUp,
     streakMultiplier,
-    timeSurvived,
     selectedTheme,
     setSelectedTheme,
     // New: Pause & Endless

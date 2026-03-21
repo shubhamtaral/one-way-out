@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: 🛒 Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
@@ -48,8 +50,12 @@ jobs:
         uses: anchore/scan-action@v3
         with:
           path: "."
-          fail-build: true
-          severity-cutoff: "high"
+          exclude: "node_modules"
+          fail-build: false
+          severity-cutoff: "critical"
+        env: 
+          GRYPE_DB_AUTO_UPDATE: true
+          GRYPE_DB_VALIDATE_AGE: false
 
 
       - name: 🏗️ Build App

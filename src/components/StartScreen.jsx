@@ -34,10 +34,10 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
 
   useEffect(() => {
     if (!ready) return;
-    
+
     const handleKey = (e) => {
       if (showLeaderboard) return;
-      
+
       if (showMode === 'difficulty') {
         if (e.key === 'Enter' || e.key === ' ') {
           onStart(selectedDifficulty);
@@ -79,26 +79,26 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
       if (showMode === 'main' && !showLeaderboard && !showPractice && !showStats && e.key.length === 1) {
         setTypedBuffer(prev => {
           const newBuffer = (prev + e.key.toLowerCase()).slice(-20); // Keep last 20 chars
-          
+
           if (SECRET_CREATORS.some(creator => newBuffer.includes(creator))) {
             if (onRecordEasterEgg) onRecordEasterEgg('creator');
             setFlicker(true);
             setTimeout(() => setFlicker(false), 800);
             return ''; // Reset buffer
           }
-          
+
           if (newBuffer.includes(SECRET_JUMPSCARE)) {
             if (onRecordEasterEgg) onRecordEasterEgg('jumpscare');
             setFlicker(true);
             setTimeout(() => setFlicker(false), 200);
             return ''; // Reset buffer
           }
-          
+
           return newBuffer;
         });
       }
     };
-    
+
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [onStart, selectedDifficulty, ready, showMode, showLeaderboard, showPractice, showStats, showCredits, konamiIndex, onRecordKonami, onRecordEasterEgg]);
@@ -111,23 +111,49 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
     return () => clearInterval(interval);
   }, []);
 
+  const [capsLockActive, setCapsLockActive] = useState(false);
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.getModifierState) {
+        setCapsLockActive(e.getModifierState('CapsLock'));
+      }
+    };
+    window.addEventListener('keydown', handleKey);
+    window.addEventListener('keyup', handleKey);
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      window.removeEventListener('keyup', handleKey);
+    };
+  }, []);
+
   return (
     <div className={`min-h-screen flex flex-col items-center justify-center p-8 transition-opacity duration-100 ${flicker ? 'opacity-70' : 'opacity-100'}`}>
+      {/* Caps lock warning for start screen */}
+      {capsLockActive && (
+        <div className="fixed top-12 left-1/2 -translate-x-1/2 z-50 animate-pulse">
+          <div className="bg-red-500/20 border border-red-500/50 text-red-500 px-4 py-1 rounded-full text-[10px] uppercase tracking-widest font-bold flex items-center gap-2">
+            <span className="w-2 h-2 bg-red-500 rounded-full"></span>
+            CAPS LOCK ACTIVE
+          </div>
+        </div>
+      )}
+
       {/* Auth button in top right */}
       <div className="absolute top-4 right-4">
-        <AuthButton 
-          user={user} 
-          onSignIn={onSignIn} 
+        <AuthButton
+          user={user}
+          onSignIn={onSignIn}
           onSignOut={onSignOut}
           loading={authLoading}
         />
       </div>
 
-      <h1 className="text-4xl md:text-8xl font-bold tracking-[0.2em] md:tracking-[0.3em] mb-4 text-[var(--color-bone)]">
+      <h1 className="text-4xl md:text-8xl font-bold tracking-[0.2em] md:tracking-[0.3em] mb-4 text-[var(--color-bone)] uppercase">
         ONE WAY OUT
       </h1>
-      
-      <p className="text-[var(--color-bone)]/40 text-lg md:text-xl mb-12 tracking-widest">
+
+      <p className="text-[var(--color-bone)]/40 text-lg md:text-xl mb-12 tracking-widest uppercase">
         TYPE OR DIE
       </p>
 
@@ -135,7 +161,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
         <div className="flex flex-col gap-4 w-full max-w-xs">
           <button
             onClick={() => setShowMode('difficulty')}
-            className="py-4 px-8 border-2 border-[var(--color-bone)] text-[var(--color-bone)] hover:bg-[var(--color-bone)] hover:text-[var(--color-void)] transition-all font-bold tracking-wider text-lg"
+            className="py-4 px-8 border-2 border-[var(--color-bone)] text-[var(--color-bone)] hover:bg-[var(--color-bone)] hover:text-[var(--color-void)] transition-all font-bold tracking-wider text-lg uppercase"
           >
             PLAY
           </button>
@@ -149,22 +175,21 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
 
           <button
             disabled
-            className="py-4 px-8 border-2 border-orange-500/20 text-orange-500/40 relative group cursor-not-allowed font-bold tracking-wider text-lg"
+            className="py-4 px-8 border-2 border-red-500/20 text-red-500/30 relative group cursor-not-allowed font-bold tracking-wider text-lg uppercase bg-red-950/5"
           >
             📖 STORY MODE
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-orange-600 text-white text-[10px] px-2 py-0.5 rounded font-bold tracking-widest opacity-80">
-              COMING SOON
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red-600 text-white text-[8px] px-2 py-1 rounded font-black tracking-widest opacity-90 uppercase animate-pulse whitespace-nowrap">
+              LOCKED: Reach 1000 Likes On LinkedIn Post
             </span>
           </button>
 
           <button
             onClick={() => !dailyPlayed && onStartDaily()}
             disabled={dailyPlayed}
-            className={`py-4 px-8 border-2 transition-all font-bold tracking-wider ${
-              dailyPlayed
+            className={`py-4 px-8 border-2 transition-all font-bold tracking-wider uppercase ${dailyPlayed
                 ? 'border-[var(--color-bone)]/20 text-[var(--color-bone)]/30 cursor-not-allowed'
                 : 'border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-[var(--color-void)]'
-            }`}
+              }`}
           >
             <div>📅 DAILY CHALLENGE</div>
             {dailyPlayed ? (
@@ -181,7 +206,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           {/* Practice Mode button */}
           <button
             onClick={() => setShowPractice(true)}
-            className="py-3 px-8 border border-cyan-500/50 text-cyan-500 hover:bg-cyan-500/10 transition-all text-sm tracking-wider"
+            className="py-3 px-8 border border-cyan-500/50 text-cyan-500 hover:bg-cyan-500/10 transition-all text-sm tracking-wider uppercase"
           >
             📚 PRACTICE MODE
           </button>
@@ -189,7 +214,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           {/* Leaderboard button */}
           <button
             onClick={() => setShowLeaderboard(true)}
-            className="py-3 px-8 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 transition-all text-sm tracking-wider"
+            className="py-3 px-8 border border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10 transition-all text-sm tracking-wider uppercase"
           >
             🏆 LEADERBOARD
           </button>
@@ -197,7 +222,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
           {stats && stats.totalGames > 0 && (
             <button
               onClick={() => setShowStats(true)}
-              className="py-3 px-8 border border-[var(--color-bone)]/30 text-[var(--color-bone)]/60 hover:border-[var(--color-bone)]/60 hover:text-[var(--color-bone)] transition-all text-sm tracking-wider"
+              className="py-3 px-8 border border-[var(--color-bone)]/30 text-[var(--color-bone)]/60 hover:border-[var(--color-bone)]/60 hover:text-[var(--color-bone)] transition-all text-sm tracking-wider uppercase"
             >
               📊 YOUR STATS
             </button>
@@ -222,21 +247,20 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
                   setSelectedDifficulty(diff.id);
                   if (ready) onStart(diff.id);
                 }}
-                className={`px-6 py-4 border-2 transition-all duration-200 min-w-[140px] ${
-                  selectedDifficulty === diff.id
+                className={`px-6 py-4 border-2 transition-all duration-200 min-w-[140px] ${selectedDifficulty === diff.id
                     ? `border-[var(--color-bone)] ${diff.color} scale-105`
                     : 'border-[var(--color-bone)]/20 text-[var(--color-bone)]/40 hover:border-[var(--color-bone)]/40'
-                }`}
+                  }`}
               >
                 <div className="font-bold tracking-wider">{diff.name}</div>
-                <div className="text-xs mt-1 opacity-60">{diff.maxMistakes} lives</div>
+                <div className="text-xs mt-1 opacity-60 uppercase">{diff.maxMistakes} LIVES</div>
               </button>
             ))}
           </div>
 
           <button
             onClick={() => setShowMode('main')}
-            className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)]/60 text-sm"
+            className="text-[var(--color-bone)]/40 hover:text-[var(--color-bone)]/60 text-sm uppercase"
           >
             ← Back
           </button>
@@ -275,8 +299,8 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
       {showMode === 'stories' && (
         <>
           <div className="mb-6 text-center">
-            <h2 className="text-2xl text-orange-500 font-bold mb-2">STORY MODE</h2>
-            <p className="text-[var(--color-bone)]/50 text-sm">
+            <h2 className="text-2xl text-orange-500 font-bold mb-2 uppercase">STORY MODE</h2>
+            <p className="text-[var(--color-bone)]/50 text-sm uppercase tracking-wider">
               Experience the narrative one sentence at a time.
             </p>
           </div>
@@ -291,7 +315,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
                 className="group p-4 border-2 border-orange-500/30 hover:border-orange-500 text-left transition-all"
               >
                 <div className="text-orange-500 font-bold tracking-wider uppercase mb-1">{story.name}</div>
-                <div className="text-xs text-[var(--color-bone)]/60 group-hover:text-[var(--color-bone)]/80">{story.description}</div>
+                <div className="text-xs text-[var(--color-bone)]/60 group-hover:text-[var(--color-bone)]/80 uppercase">{story.description}</div>
               </button>
             ))}
           </div>
@@ -309,7 +333,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
         <div className="w-full max-w-md">
           <div className="bg-[#111] border border-[var(--color-bone)]/20 rounded-lg p-6 mb-4">
             <h2 className="text-[var(--color-bone)] font-bold text-lg mb-4">Your Stats</h2>
-            
+
             <div className="grid grid-cols-2 gap-4 text-center">
               <div>
                 <div className="text-2xl font-bold text-[var(--color-bone)]">{stats.totalGames}</div>
@@ -334,27 +358,28 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
             <h2 className="text-[var(--color-bone)] font-bold text-lg mb-4">
               Achievements ({stats.unlockedAchievements?.length || 0})
             </h2>
-            
-            {stats.unlockedAchievements?.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
-                {stats.unlockedAchievements.map(id => {
-                  const achievement = ACHIEVEMENTS[id];
-                  return achievement ? (
-                    <div 
-                      key={id} 
-                      className="bg-[var(--color-bone)]/10 px-3 py-2 rounded text-sm"
-                      title={achievement.description}
-                    >
-                      {achievement.icon} {achievement.name}
-                    </div>
-                  ) : null;
-                })}
-              </div>
-            ) : (
-              <div className="text-[var(--color-bone)]/40 text-sm">
-                No achievements yet. Keep playing!
-              </div>
-            )}
+
+            <div className="flex flex-wrap gap-2">
+              {Object.values(ACHIEVEMENTS).map((achievement) => {
+                const isUnlocked = stats.unlockedAchievements?.includes(achievement.id);
+                return (
+                  <div
+                    key={achievement.id}
+                    className={`px-3 py-2 rounded text-sm transition-all duration-300 border ${
+                      isUnlocked
+                        ? "bg-[var(--color-bone)]/10 border-[var(--color-bone)]/20 text-[var(--color-bone)] opacity-100"
+                        : "bg-black/40 border-white/5 text-[var(--color-bone)]/20 grayscale opacity-40 hover:opacity-100 hover:grayscale-0"
+                    }`}
+                    title={achievement.description}
+                  >
+                    <span className={isUnlocked ? "" : "opacity-30"}>
+                      {achievement.icon}
+                    </span>{" "}
+                    {achievement.name}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
           <button
@@ -375,7 +400,7 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
 
       {/* Leaderboard modal */}
       {showLeaderboard && (
-        <Leaderboard 
+        <Leaderboard
           onClose={() => setShowLeaderboard(false)}
           currentUserId={user?.uid}
         />
@@ -401,8 +426,8 @@ export function StartScreen({ onStart, onStartDaily, onStartEndless, onStartStor
       )}
 
       {showCredits && (
-        <CreditsDialog 
-          onClose={() => setShowCredits(false)} 
+        <CreditsDialog
+          onClose={() => setShowCredits(false)}
         />
       )}
     </div>

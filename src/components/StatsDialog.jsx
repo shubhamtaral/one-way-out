@@ -16,17 +16,104 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
 
   // Create simple chart
   const renderChart = () => {
-    if (bestLevel === 0) return null;
+    const history = stats.history || [];
+    if (history.length < 2) {
+      if (bestLevel === 0) return null;
+      return (
+        <div className="flex items-end justify-center gap-1 h-32 bg-[var(--color-bone)]/5 p-4 rounded border border-[var(--color-bone)]/10">
+          <div className="text-[var(--color-bone)]/40 text-xs text-center italic">
+            Play more games to see your performance graph...
+          </div>
+        </div>
+      );
+    }
 
-    const height = (bestLevel / 40) * 100; // Normalize to max level 40
+    const width = 300;
+    const height = 120;
+    const maxVal = Math.max(...history, 5); // Minimum height of 5
+    const padding = 10;
+    
+    // Points for SVG
+    const points = history.map((val, idx) => {
+      const x = (idx / (history.length - 1)) * (width - 2 * padding) + padding;
+      const y = height - ((val / maxVal) * (height - 2 * padding) + padding);
+      return { x, y, val };
+    });
+
+    // Create polyline string
+    const pathData = points.map(p => `${p.x},${p.y}`).join(' ');
+
     return (
-      <div className="flex items-end justify-center gap-1 h-32 bg-[var(--color-bone)]/5 p-4 rounded">
-        <div
-          style={{ height: `${height}%` }}
-          className="w-2 bg-gradient-to-t from-[var(--color-blood-bright)] to-[var(--color-bone)] rounded-t opacity-70"
-        />
-        <div className="text-[var(--color-bone)]/40 text-xs text-center absolute bottom-2">
-          Best: Lvl {bestLevel}
+      <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded overflow-hidden pt-4 pb-2 px-2">
+        <div className="relative h-32 flex items-center justify-center">
+          <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-full drop-shadow-[0_0_8px_rgba(220,20,60,0.3)]">
+            {/* Grid lines */}
+            {[0, 0.25, 0.5, 0.75, 1].map((p) => (
+              <line 
+                key={p} 
+                x1="0" y1={height * p} 
+                x2={width} y2={height * p} 
+                stroke="var(--color-bone)" 
+                strokeOpacity="0.05" 
+                strokeWidth="1"
+              />
+            ))}
+            
+            {/* Performance line */}
+            <polyline
+              fill="none"
+              stroke="url(#gradient)"
+              strokeWidth="2.5"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              points={pathData}
+            />
+            
+            {/* Area under line */}
+            <polygon
+              points={`${points[points.length-1].x},${height} ${points[0].x},${height} ${pathData}`}
+              fill="url(#area-gradient)"
+              opacity="0.3"
+            />
+
+            {/* Points with color indicators */}
+            {points.map((p, i) => {
+              const prev = points[i-1];
+              const isUp = !prev || p.val >= prev.val;
+              return (
+                <circle
+                  key={i}
+                  cx={p.x}
+                  cy={p.y}
+                  r="2.5"
+                  fill={isUp ? '#4ade80' : '#f87171'} // Green if up, red if down
+                  className="transition-all hover:r-4 cursor-help"
+                >
+                  <title>Lvl {p.val}</title>
+                </circle>
+              );
+            })}
+
+            {/* Definitions for gradients */}
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#f87171" />
+                <stop offset="100%" stopColor="#4ade80" />
+              </linearGradient>
+              <linearGradient id="area-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="var(--color-bone)" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="var(--color-bone)" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+          
+          <div className="absolute top-0 right-2 text-[10px] text-[var(--color-bone)]/40 uppercase tracking-widest font-bold">
+            Live Trend
+          </div>
+        </div>
+        <div className="flex justify-between px-2 mt-2">
+          <div className="text-[10px] text-[var(--color-bone)]/30 uppercase">Previous Sessions</div>
+          <div className="text-[10px] text-[var(--color-bone)]/30 uppercase">Current</div>
         </div>
       </div>
     );
@@ -59,48 +146,73 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
           </div>
         )}
 
-        {/* Main stats grid */}
+        {/* Fancy Stats Grid */}
         <div className="grid grid-cols-2 gap-3 mb-6">
           {/* Best Level */}
-          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
-            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Best Level</div>
-            <div className="text-2xl font-bold text-[var(--color-blood-bright)]">{bestLevel}</div>
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-[#dc143c]/30 rounded-xl p-4 group hover:border-[#dc143c] transition-all duration-300">
+            <div className="absolute -right-2 -top-2 opacity-10 group-hover:opacity-20 transition-opacity">
+              <span className="text-4xl">🏆</span>
+            </div>
+            <div className="text-[var(--color-bone)]/60 text-[10px] uppercase tracking-widest mb-1 font-bold">Best Level</div>
+            <div className="text-3xl font-bold bg-gradient-to-r from-[#dc143c] to-[#f5f5dc] bg-clip-text text-transparent group-hover:scale-110 origin-left transition-transform duration-300">{bestLevel}</div>
           </div>
 
-          {/* Total Games */}
-          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
-            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Games Played</div>
-            <div className="text-2xl font-bold text-[var(--color-bone)]">{totalGames}</div>
+          {/* Games Played */}
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-blue-500/30 rounded-xl p-4 group hover:border-blue-500 transition-all duration-300">
+            <div className="absolute -right-2 -top-2 opacity-10 group-hover:opacity-20 transition-opacity">
+              <span className="text-4xl">🎮</span>
+            </div>
+            <div className="text-[var(--color-bone)]/60 text-[10px] uppercase tracking-widest mb-1 font-bold">Games Played</div>
+            <div className="text-3xl font-bold text-blue-400 group-hover:scale-110 origin-left transition-transform duration-300">{totalGames}</div>
           </div>
 
           {/* Best WPM */}
-          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
-            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Best WPM</div>
-            <div className="text-2xl font-bold text-yellow-400">{bestWpm}</div>
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-yellow-500/30 rounded-xl p-4 group hover:border-yellow-500 transition-all duration-300">
+            <div className="absolute -right-2 -top-2 opacity-10 group-hover:opacity-20 transition-opacity">
+              <span className="text-4xl">⌨️</span>
+            </div>
+            <div className="text-[var(--color-bone)]/60 text-[10px] uppercase tracking-widest mb-1 font-bold">Best WPM</div>
+            <div className="text-3xl font-bold text-yellow-500 group-hover:scale-110 origin-left transition-transform duration-300">{bestWpm}</div>
           </div>
 
           {/* Best Combo */}
-          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
-            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Best Combo</div>
-            <div className="text-2xl font-bold text-green-400">{bestCombo}</div>
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-orange-500/30 rounded-xl p-4 group hover:border-orange-500 transition-all duration-300">
+            <div className="absolute -right-2 -top-2 opacity-10 group-hover:opacity-20 transition-opacity">
+              <span className="text-4xl">🔥</span>
+            </div>
+            <div className="text-[var(--color-bone)]/60 text-[10px] uppercase tracking-widest mb-1 font-bold">Best Combo</div>
+            <div className="text-3xl font-bold text-orange-500 group-hover:scale-110 origin-left transition-transform duration-300">{bestCombo}</div>
           </div>
 
           {/* Best Accuracy */}
-          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
-            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Best Accuracy</div>
-            <div className="text-2xl font-bold text-cyan-400">{bestAccuracy}%</div>
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-cyan-500/30 rounded-xl p-4 group hover:border-cyan-500 transition-all duration-300">
+            <div className="absolute -right-2 -top-2 opacity-10 group-hover:opacity-20 transition-opacity">
+              <span className="text-4xl">🎯</span>
+            </div>
+            <div className="text-[var(--color-bone)]/60 text-[10px] uppercase tracking-widest mb-1 font-bold">Best Accuracy</div>
+            <div className="text-3xl font-bold text-cyan-400 group-hover:scale-110 origin-left transition-transform duration-300">{bestAccuracy}%</div>
           </div>
 
           {/* Average Level */}
-          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
-            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Avg Level</div>
-            <div className="text-2xl font-bold text-[var(--color-bone)]">{avgLevel}</div>
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-purple-500/30 rounded-xl p-4 group hover:border-purple-500 transition-all duration-300">
+            <div className="absolute -right-2 -top-2 opacity-10 group-hover:opacity-20 transition-opacity">
+              <span className="text-4xl">📊</span>
+            </div>
+            <div className="text-[var(--color-bone)]/60 text-[10px] uppercase tracking-widest mb-1 font-bold">Avg Level</div>
+            <div className="text-3xl font-bold text-purple-400 group-hover:scale-110 origin-left transition-transform duration-300">{avgLevel}</div>
           </div>
 
-          {/* Total Levels */}
-          <div className="bg-[var(--color-bone)]/5 border border-[var(--color-bone)]/10 rounded p-4">
-            <div className="text-[var(--color-bone)]/60 text-xs mb-1">Total Levels</div>
-            <div className="text-2xl font-bold text-[var(--color-bone)]">{stats.totalLevels || 0}</div>
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] border border-[var(--color-bone)]/10 rounded-xl p-4 group col-span-2">
+             <div className="flex justify-between items-center">
+              <div>
+                <div className="text-[var(--color-bone)]/60 text-[10px] uppercase tracking-widest mb-1 font-bold">Total Power Tapped</div>
+                <div className="text-2xl font-bold text-[var(--color-bone)]">{stats.totalLevels || 0} Levels</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[var(--color-bone)]/30 text-[8px] uppercase tracking-[0.2em]">Efficiency</div>
+                <div className="text-sm font-bold text-green-500">{(bestAccuracy * 0.8 + (bestWpm/10)).toFixed(1)} Pts</div>
+              </div>
+             </div>
           </div>
         </div>
 
@@ -113,29 +225,35 @@ export function StatsDialog({ stats, onClose, user, selectedTheme, onThemeChange
         )}
 
         {/* Achievements section */}
-        {stats.unlockedAchievements && stats.unlockedAchievements.length > 0 && (
-          <div className="mb-6">
-            <h3 className="text-[var(--color-bone)]/60 text-sm mb-3">
-              Unlocked ({stats.unlockedAchievements.length})
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {stats.unlockedAchievements.map((achievementId, idx) => {
-                const achievement = ACHIEVEMENTS[achievementId];
-                if (!achievement) return null;
-                
-                return (
-                  <div
-                    key={idx}
-                    className="w-10 h-10 bg-yellow-900/30 rounded flex items-center justify-center text-lg border border-yellow-600/50 cursor-help"
-                    title={`${achievement.name}: ${achievement.description}`}
-                  >
+        <div className="mb-6">
+          <h3 className="text-[var(--color-bone)]/60 text-sm mb-3 uppercase tracking-wider">
+            ACHIEVEMENTS ({stats.unlockedAchievements?.length || 0} / {Object.keys(ACHIEVEMENTS).length})
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {Object.values(ACHIEVEMENTS).map((achievement) => {
+              const isUnlocked = stats.unlockedAchievements?.includes(achievement.id);
+              
+              return (
+                <div
+                  key={achievement.id}
+                  className={`w-10 h-10 rounded flex items-center justify-center text-lg border transition-all duration-300 cursor-help relative group ${
+                    isUnlocked
+                      ? 'bg-yellow-900/30 border-yellow-600/50'
+                      : 'bg-black/40 border-white/5 opacity-40 grayscale hover:opacity-100 hover:grayscale-0'
+                  }`}
+                  title={`${achievement.name}: ${achievement.description}${isUnlocked ? ' (UNLOCKED)' : ' (LOCKED)'}`}
+                >
+                  <span className={isUnlocked ? "" : "opacity-30"}>
                     {achievement.icon}
-                  </div>
-                );
-              })}
-            </div>
+                  </span>
+                  {!isUnlocked && (
+                    <div className="absolute -top-1 -right-1 text-[8px]">🔒</div>
+                  )}
+                </div>
+              );
+            })}
           </div>
-        )}
+        </div>
 
         {/* Theme Selector */}
         <div className="mb-6 pb-6 border-b border-[var(--color-bone)]/20">

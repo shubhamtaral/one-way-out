@@ -55,6 +55,8 @@ export function useGame(soundHooks = {}) {
   
   // New: Endless mode lives (separate from mistakes)
   const [endlessLives, setEndlessLives] = useState(5);
+  const [currentStoryId, setCurrentStoryId] = useState(null);
+  const [isStoryComplete, setIsStoryComplete] = useState(false);
 
   const timerRef = useRef(null);
   const lastTickRef = useRef(0);
@@ -207,11 +209,11 @@ export function useGame(soundHooks = {}) {
         setCurrentSentence(sentence.text);
         
         if (gameMode === 'daily') {
-          startTimer(12);
+          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
         } else if (gameMode === 'survival') {
-          startTimer(getTimerDuration(newLevel, difficulty));
+          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
         } else {
-          startTimer(getTimerDuration(newLevel, difficulty));
+          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
         }
       }
     }
@@ -280,6 +282,7 @@ export function useGame(soundHooks = {}) {
     shieldActiveRef.current = false;
     slowMotionRef.current = false;
     doublePointsRef.current = false;
+    setIsStoryComplete(false);
     setGameState('playing');
     
     const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0);
@@ -287,7 +290,7 @@ export function useGame(soundHooks = {}) {
     setCurrentSentence(sentence.text);
     const powerUp = generateRandomPowerUp();
     setCurrentLevelPowerUp(powerUp);
-    const duration = getTimerDuration(1, selectedDifficulty);
+    const duration = getTimerDuration(1, selectedDifficulty, sentence.text.length);
     startTimer(duration);
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
@@ -304,7 +307,7 @@ export function useGame(soundHooks = {}) {
     setWpm(0);
     setPerfectStreak(0);
     setActivePowerUps([]);
-    setCurrentLevelPowerUp(null);
+    setCurrentLevelPowerUp(generateRandomPowerUp(Math.random, 1));
     setStreakMultiplier(1);
     mistakesThisLevelRef.current = 0;
     wpmStartRef.current = null;
@@ -315,11 +318,12 @@ export function useGame(soundHooks = {}) {
     setTotalErrors(0);
     setAccuracy(100);
     shieldActiveRef.current = false;
+    setIsStoryComplete(false);
     setGameState('playing');
     
     const sentence = sentencePoolRef.current[0];
     setCurrentSentence(sentence.text);
-    startTimer(12); // Fixed timer for daily
+    startTimer(getTimerDuration(1, 'normal', sentence.text.length)); // Adaptive timer for daily
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
 
@@ -349,12 +353,13 @@ export function useGame(soundHooks = {}) {
     lastSentenceTextRef.current = null;
     shieldActiveRef.current = false;
     setIsPaused(false);
+    setIsStoryComplete(false);
     setGameState('playing');
     
     const sentence = getSentenceForLevel(1, selectedDifficulty, null, null, 0);
     lastSentenceTextRef.current = sentence.text;
     setCurrentSentence(sentence.text);
-    const powerUp = generateRandomPowerUp();
+    const powerUp = generateRandomPowerUp(Math.random, 1);
     setCurrentLevelPowerUp(powerUp);
     // No timer for endless mode
     clearTimer();
@@ -367,6 +372,7 @@ export function useGame(soundHooks = {}) {
 
     setGameMode('story');
     setDifficulty('normal');
+    setCurrentStoryId(storyId);
     // Convert text array to sentence objects
     sentencePoolRef.current = story.sentences.map(text => ({ text, level: 1 }));
     
@@ -378,7 +384,7 @@ export function useGame(soundHooks = {}) {
     setWpm(0);
     setPerfectStreak(0);
     setActivePowerUps([]);
-    setCurrentLevelPowerUp(null);
+    setCurrentLevelPowerUp(generateRandomPowerUp(Math.random, 1));
     setStreakMultiplier(1);
     mistakesThisLevelRef.current = 0;
     wpmStartRef.current = null;
@@ -392,11 +398,12 @@ export function useGame(soundHooks = {}) {
     shieldActiveRef.current = false;
     slowMotionRef.current = false;
     doublePointsRef.current = false;
+    setIsStoryComplete(false);
     setGameState('playing');
     
     const firstSentence = sentencePoolRef.current[0];
     setCurrentSentence(firstSentence.text);
-    startTimer(15);
+    startTimer(getTimerDuration(1, 'normal', firstSentence.text.length));
     startHeartbeat?.(0);
   }, [startTimer, startHeartbeat]);
 
@@ -490,7 +497,7 @@ export function useGame(soundHooks = {}) {
         }
         
         // Generate new power-up for next level
-        const newPowerUp = generateRandomPowerUp();
+        const newPowerUp = generateRandomPowerUp(Math.random, newLevel);
         setCurrentLevelPowerUp(newPowerUp);
         
         // Handle timer based on mode
@@ -503,12 +510,13 @@ export function useGame(soundHooks = {}) {
           if (newLevel > sentencePoolRef.current.length) {
             clearTimer();
             stopHeartbeat?.();
+            setIsStoryComplete(true);
             setGameState('gameover');
             return;
           }
-          startTimer(15);
+          startTimer(getTimerDuration(newLevel, 'normal', sentence.text.length));
         } else {
-          startTimer(getTimerDuration(newLevel, difficulty));
+          startTimer(getTimerDuration(newLevel, difficulty, sentence.text.length));
         }
         
         if (newLevel > bestScore) {
@@ -629,5 +637,7 @@ export function useGame(soundHooks = {}) {
     isPaused,
     togglePause,
     endlessLives,
+    currentStoryId,
+    isStoryComplete,
   };
 }

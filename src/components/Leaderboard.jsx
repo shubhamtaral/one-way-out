@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
-import { getLeaderboard, getDailyLeaderboard } from '../services/leaderboard';
+import { getLeaderboard, getDailyLeaderboard, getUserProfile } from '../services/leaderboard';
 import { getDailyChallengeId } from '../config/dailyChallenge';
+import { StatsDialog } from './StatsDialog';
 
 export function Leaderboard({ onClose, currentUserId }) {
   const [tab, setTab] = useState('normal'); // normal, nightmare, daily
   const [timeFilter, setTimeFilter] = useState('global'); // global, daily, weekly, monthly
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
-   const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [selectedUserStats, setSelectedUserStats] = useState(null);
+  const [loadingStats, setLoadingStats] = useState(false);
 
   useEffect(() => {
     async function fetchScores() {
@@ -34,21 +38,54 @@ export function Leaderboard({ onClose, currentUserId }) {
     fetchScores();
   }, [tab, timeFilter]);
 
+  const handleUserClick = async (score) => {
+    if (loadingStats) return;
+    
+    setSelectedUser(score);
+    setLoadingStats(true);
+    
+    try {
+      const profile = await getUserProfile(score.userId);
+      if (profile) {
+        // Normalize the profile to match what StatsDialog expects
+        const normalizedStats = {
+          ...profile,
+          unlockedAchievements: profile.achievements || []
+        };
+        setSelectedUserStats(normalizedStats);
+      } else {
+        // Fallback to basic stats from leaderboard if profile fetch fails
+        setSelectedUserStats({
+          bestLevel: score.level,
+          bestWpm: score.wpm,
+          bestCombo: score.maxCombo,
+          totalGames: 1,
+          totalLevels: score.level,
+          unlockedAchievements: []
+        });
+      }
+    } catch (err) {
+      console.error('Error fetching user profile:', err);
+    } finally {
+      setLoadingStats(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4" onClick={onClose}>
       <div 
-        className="bg-[#111] border border-[var(--color-bone)]/20 w-full max-w-md max-h-[80vh] rounded-lg overflow-hidden"
+        className="bg-[#111] border border-[var(--color-bone)]/20 w-full max-w-md max-h-[80vh] rounded-lg overflow-hidden flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-6 border-b border-[var(--color-bone)]/10 bg-gradient-to-r from-transparent via-[var(--color-bone)]/5 to-transparent">
+        <div className="p-6 border-b border-[var(--color-bone)]/10 bg-gradient-to-r from-transparent via-[var(--color-bone)]/5 to-transparent flex-shrink-0">
           <h2 className="text-2xl font-bold text-[var(--color-bone)] text-center tracking-widest uppercase italic">
             🏆 Global Hall of Fame
           </h2>
         </div>
 
         {/* Difficulty Tabs */}
-        <div className="flex bg-[#0a0a0a]/50 p-1 mx-4 mt-4 rounded-lg border border-[var(--color-bone)]/10">
+        <div className="flex bg-[#0a0a0a]/50 p-1 mx-4 mt-4 rounded-lg border border-[var(--color-bone)]/10 flex-shrink-0">
           {['normal', 'nightmare', 'daily'].map((t) => (
             <button
               key={t}
@@ -69,7 +106,7 @@ export function Leaderboard({ onClose, currentUserId }) {
 
         {/* Time Filter Tabs */}
         {tab !== 'daily' && (
-          <div className="flex px-4 mt-2 gap-2">
+          <div className="flex px-4 mt-2 gap-2 flex-shrink-0">
             {['global', 'monthly', 'weekly', 'daily'].map((tf) => (
               <button
                 key={tf}
@@ -88,13 +125,13 @@ export function Leaderboard({ onClose, currentUserId }) {
 
         {/* Error banner */}
         {error && (
-          <div className="mx-4 mt-4 p-3 text-[10px] text-red-500 bg-red-900/10 border border-red-500/20 rounded uppercase tracking-widest">
+          <div className="mx-4 mt-4 p-3 text-[10px] text-red-500 bg-red-900/10 border border-red-500/20 rounded uppercase tracking-widest flex-shrink-0">
             ⚠️ {error}
           </div>
         )}
 
         {/* Scores */}
-        <div className="overflow-y-auto max-h-[45vh] p-4 custom-scrollbar">
+        <div className="overflow-y-auto flex-1 p-4 custom-scrollbar">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-12 gap-4">
               <div className="w-8 h-8 border-2 border-[var(--color-bone)]/20 border-t-[var(--color-bone)] rounded-full animate-spin"></div>
@@ -116,12 +153,13 @@ export function Leaderboard({ onClose, currentUserId }) {
                 return (
                   <div
                     key={score.id}
-                    className={`group relative flex items-center gap-4 p-4 rounded-xl transition-all duration-300 border ${
+                    onClick={() => handleUserClick(score)}
+                    className={`group relative flex items-center gap-4 p-4 rounded-xl transition-all duration-300 border cursor-pointer ${
                       isUser 
                         ? 'bg-yellow-500/10 border-yellow-500/40 shadow-[0_0_20px_rgba(234,179,8,0.1)]' 
                         : isTop3 
-                          ? 'bg-gradient-to-r from-[var(--color-bone)]/5 to-transparent border-[var(--color-bone)]/10 hover:border-[var(--color-bone)]/30'
-                          : 'bg-transparent border-transparent hover:bg-[var(--color-bone)]/5'
+                          ? 'bg-gradient-to-r from-[var(--color-bone)]/5 to-transparent border-[var(--color-bone)]/10 hover:border-[var(--color-bone)]/30 hover:bg-[var(--color-bone)]/5'
+                          : 'bg-transparent border-transparent hover:bg-[var(--color-bone)]/5 hover:border-[var(--color-bone)]/10'
                     }`}
                   >
                     {/* Rank Indicator */}
@@ -145,7 +183,7 @@ export function Leaderboard({ onClose, currentUserId }) {
                           }`}
                         />
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-[var(--color-bone)]/10 flex items-center justify-center text-lg border border-[var(--color-bone)]/20">
+                        <div className="w-10 h-10 rounded-full bg-[var(--color-bone)]/10 flex items-center justify-center text-lg border border-[var(--color-bone)]/20 group-hover:scale-110 transition-transform">
                           {index === 0 ? '👑' : '👤'}
                         </div>
                       )}
@@ -154,9 +192,10 @@ export function Leaderboard({ onClose, currentUserId }) {
   
                     {/* Name & Title */}
                     <div className="flex-1 min-w-0">
-                      <div className={`text-sm font-bold truncate tracking-wide ${isUser ? 'text-yellow-400' : 'text-[var(--color-bone)]'}`}>
+                      <div className={`text-sm font-bold truncate tracking-wide flex items-center gap-2 ${isUser ? 'text-yellow-400' : 'text-[var(--color-bone)]'}`}>
                         {score.displayName}
-                        {isTop3 && index === 0 && <span className="ml-2 text-[8px] bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded uppercase font-black">Undefeated</span>}
+                        {isTop3 && index === 0 && <span className="text-[8px] bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded uppercase font-black">Undefeated</span>}
+                        <span className="opacity-0 group-hover:opacity-40 transition-opacity text-[10px]">👁️</span>
                       </div>
                       <div className="text-[10px] text-[var(--color-bone)]/30 uppercase tracking-tighter">
                         {score.wpm} WPM • {score.maxCombo || 0} Combo
@@ -178,7 +217,7 @@ export function Leaderboard({ onClose, currentUserId }) {
         </div>
   
         {/* Footer */}
-        <div className="p-6 bg-gradient-to-t from-[var(--color-bone)]/5 to-transparent border-t border-[var(--color-bone)]/10">
+        <div className="p-6 bg-gradient-to-t from-[var(--color-bone)]/5 to-transparent border-t border-[var(--color-bone)]/10 flex-shrink-0">
           <button
             onClick={onClose}
             className="w-full py-3 bg-[var(--color-bone)] text-[var(--color-void)] font-black uppercase text-xs tracking-[0.4em] hover:bg-white transition-all active:scale-95"
@@ -187,6 +226,30 @@ export function Leaderboard({ onClose, currentUserId }) {
           </button>
         </div>
       </div>
+
+      {/* User Stats Overlay */}
+      {selectedUserStats && (
+        <StatsDialog
+          stats={selectedUserStats}
+          user={selectedUser}
+          readOnly={true}
+          onClose={() => {
+            setSelectedUser(null);
+            setSelectedUserStats(null);
+          }}
+        />
+      )}
+
+      {/* Loading overlay for stats */}
+      {loadingStats && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[70] backdrop-blur-[2px]">
+           <div className="flex flex-col items-center gap-3">
+              <div className="w-10 h-10 border-4 border-yellow-500/20 border-t-yellow-500 rounded-full animate-spin"></div>
+              <div className="text-[10px] uppercase tracking-[0.3em] text-yellow-500 font-bold">Scanning Protocol...</div>
+           </div>
+        </div>
+      )}
     </div>
   );
 }
+
